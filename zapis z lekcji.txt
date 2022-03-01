@@ -1,0 +1,15 @@
+Firma produkująca pociągi. 
+-pracownicy
+-działy
+-zamowienia
+-magazyn
+-wspólnicy /zarejestrowani
+-modele pociągów 
+Bezpieczeństwo, dział testowy(wyniki testów, usterki)
+
+Gdzie najwięcej było usterek, 
+PHP framework ogarnij jakiś fajny - Laravel
+Przygotuj diagram
+Możliwe że na nast. Zajęciach będzie jakieś test, jedno pytanie 
+
+Zrób jakiś wstęp, tytuł roboczy, cel, zakres.
