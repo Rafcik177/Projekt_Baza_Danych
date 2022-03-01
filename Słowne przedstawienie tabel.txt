@@ -1,0 +1,18 @@
+Firma produkująca pociągi. 
+-pracownicy
+	id, imie, nazwisko, pesel, wydział, 
+-działy
+	id, nazwa, 
+-zamowienia
+	id, id_zamawiajacego, id_modelu, ilosc, 
+-magazyn
+	nazwa_części(ona będzie jako id), opis, długość, szerokość, wysokość, waga, ilosc
+-wspólnicy /zarejestrowani
+	id_wpólnika, Imie, Nazwisko, Firma, adres, 
+-modele pociągów 
+	id_modelu, Nazwa, Kategoria, moc, ilosc_miejsc, max_prędkość, waga, cena
+	
+	
+Bezpieczeństwo, 
+dział testowy(wyniki testów, usterki)
+Każda część, która ulegnie usterce zostanie zapisana w osobnej tabeli, na podstawie której będą tworzone analizy (ile części zniszczonych więcej w porównaniu z poprzednim miesiącem, jaki dział ma najwięcej usterek)
