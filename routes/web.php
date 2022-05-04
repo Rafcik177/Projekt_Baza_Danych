@@ -17,14 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/edytuj', function () {
-    return view('editUser');
-});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/edytuj', [App\Http\Controllers\HomeController::class, 'edytuj'])->name('edytuj');
+//żeby mieć id usera wystarczy Auth::user()->id; lub po prostu Auth::id();
+//Tak samo możesz mieć rangę Auth::user()->ranga;
+Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika'])->name('szukajpracownika');
+Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
