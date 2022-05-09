@@ -19,9 +19,16 @@ Route::get('/', function () {
 
 
 Auth::routes();
+//poniższa grupa jest dla wszystkich zalogowanych
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    //poniższa grupa jest tylko dla tych, którzy są w dziale HR
+    Route::middleware(['can:czyHR'])->group(function(){
+        Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika'])->name('szukajpracownika');
+        Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//żeby mieć id usera wystarczy Auth::user()->id; lub po prostu Auth::id();
-//Tak samo możesz mieć rangę Auth::user()->ranga;
-Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika'])->name('szukajpracownika');
-Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
+    });
+    
+});
+
+
