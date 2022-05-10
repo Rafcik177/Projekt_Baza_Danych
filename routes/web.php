@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MagazynController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Dla magazynu
+Route::get('/magazynu', [MagazynController::class, 'index']);
+Route::resource('magazyn', MagazynController::class);
 
 Auth::routes();
 //poniższa grupa jest dla wszystkich zalogowanych

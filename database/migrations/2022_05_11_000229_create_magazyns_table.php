@@ -20,7 +20,8 @@ return new class extends Migration
             $table->integer('szerokosc');
             $table->integer('wysokosc');
             $table->integer('waga');
-            $table->integer('dostepna_ilosc');
+            $table->integer('ilosc');
+            $table->integer('prog_niskiego_stanu');
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('magazyn');
     }
 };
