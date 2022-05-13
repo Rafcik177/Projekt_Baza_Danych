@@ -18,8 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //Dla magazynu
-Route::get('/magazynu', [MagazynController::class, 'index']);
+Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
 Auth::routes();
