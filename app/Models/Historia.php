@@ -20,4 +20,5 @@ class Historia extends Model
 
     protected $table = 'historia';
     public $timestamps = false;
+
 }

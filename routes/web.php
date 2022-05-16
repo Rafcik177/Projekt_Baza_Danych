@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\PracownicyController;
+use App\Http\Controllers\HistoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/historia', [HistoriaController::class, 'index']);
+Route::resource('historia', HistoriaController::class);
 
 //Dla magazynu
 Route::get('/magazyn', [MagazynController::class, 'index']);
@@ -39,6 +43,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
     //Route::middleware(['can:czyHR'])->group(function(){
         //Route::get('/pracownicy', [PracownicyController::class, 'index']);
         //Route::resource('pracownicy', PracownicyController::class);
+
+    //Route::middleware(['can:czyHR'])->group(function(){
+        //Route::get('/historia', [HistoriaController::class, 'index']);
+        //Route::resource('historia', HistoriaController::class);
 
     //Route::middleware(['can:czyMAGAZYN'])->group(function(){
         //Route::get('/magazyn', [MagazynController::class, 'index']);
