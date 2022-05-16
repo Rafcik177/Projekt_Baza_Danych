@@ -17,13 +17,14 @@ return new class extends Migration
             $table->increments('id');
             $table->string('nazwa_czesci');
             $table->string('opis');
-            $table->integer('dlugosc');
-            $table->integer('szerokosc');
-            $table->integer('wysokosc');
-            $table->integer('waga');
+            $table->float('dlugosc');
+            $table->float('szerokosc');
+            $table->float('wysokosc');
+            $table->float('waga');
             $table->integer('ilosc');
             $table->integer('prog_niskiego_stanu');
         });
+        
 
         DB::table('magazyn')->insert(
             array(
@@ -37,7 +38,8 @@ return new class extends Migration
                 'prog_niskiego_stanu' => 2,
             )
             );
-            DB::table('magazyn')->insert(
+
+        DB::table('magazyn')->insert(
             array(
                 'nazwa_czesci' => 'sprężarka',
                 'opis' => 'origin',
@@ -47,34 +49,34 @@ return new class extends Migration
                 'waga' => 5,
                 'ilosc' => 7,
                 'prog_niskiego_stanu' => 3,
-                 )
+            )
             );
 
-            DB::table('magazyn')->insert(
-                array(
-                    'nazwa_czesci' => 'zboirnik',
-                    'opis' => 'endure',
-                    'dlugosc' => 6,
-                    'szerokosc' => 7,
-                    'wysokosc' => 3,
-                    'waga' => 4,
-                    'ilosc' => 3,
-                    'prog_niskiego_stanu' => 1,
-                     )
-                );
+        DB::table('magazyn')->insert(
+            array(
+                'nazwa_czesci' => 'zboirnik',
+                'opis' => 'endure',
+                'dlugosc' => 6,
+                'szerokosc' => 7,
+                'wysokosc' => 3,
+                'waga' => 4,
+                'ilosc' => 3,
+                'prog_niskiego_stanu' => 1,
+            )
+            );
 
-                DB::table('magazyn')->insert(
-                    array(
-                        'nazwa_czesci' => 'tłumik',
-                        'opis' => 'silence',
-                        'dlugosc' => 2,
-                        'szerokosc' => 1,
-                        'wysokosc' => 2,
-                        'waga' => 2,
-                        'ilosc' => 11,
-                        'prog_niskiego_stanu' => 5,
-                         )
-                    );
+        DB::table('magazyn')->insert(
+            array(
+                'nazwa_czesci' => 'tłumik',
+                'opis' => 'silence',
+                'dlugosc' => 2,
+                'szerokosc' => 1,
+                'wysokosc' => 2,
+                'waga' => 2,
+                'ilosc' => 11,
+                'prog_niskiego_stanu' => 5,
+            )
+            );
 
 
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MagazynController;
+use App\Http\Controllers\PracownicyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/', function () {
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
+Route::get('/pracownicy', [PracownicyController::class, 'index']);
+Route::resource('pracownicy', PracownicyController::class);
+
 Auth::routes();
 //poniższa grupa jest dla wszystkich zalogowanych
 Route::middleware(['auth', 'verified'])->group(function(){
@@ -31,6 +35,14 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::middleware(['can:czyHR'])->group(function(){
         Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika'])->name('szukajpracownika');
         Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
+
+    //Route::middleware(['can:czyHR'])->group(function(){
+        //Route::get('/pracownicy', [PracownicyController::class, 'index']);
+        //Route::resource('pracownicy', PracownicyController::class);
+
+    //Route::middleware(['can:czyMAGAZYN'])->group(function(){
+        //Route::get('/magazyn', [MagazynController::class, 'index']);
+        //Route::resource('magazyn', MagazynController::class);
 
     });
     
