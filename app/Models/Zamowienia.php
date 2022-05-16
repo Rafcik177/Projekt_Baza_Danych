@@ -10,6 +10,7 @@ class Zamowienia extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_zamawiajacego',
         'id_modelu',
         'ilosc',
         'status',

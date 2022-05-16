@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MagazynController;
+use App\Http\Controllers\ZamowieniaKlientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ Route::get('/', function () {
 //Dla magazynu
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
+
+
+Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
+Route::resource('zamowienia', ZamowieniaKlientController::class);
 
 Auth::routes();
 //poniższa grupa jest dla wszystkich zalogowanych
