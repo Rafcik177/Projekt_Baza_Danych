@@ -27,8 +27,14 @@ class HomeController extends Controller
     }
     public function szukajpracownika()
     {
-        return view('pracownicy/szukajpracownika');
+        return view('/pracownicy/szukajpracownika');
     }
+    public function dodaj123()
+    {
+        return view('/zamowieniaKlient/dodajZamowienie');
+    }
+
+
     public function pracownik(Request $request)
     {
         

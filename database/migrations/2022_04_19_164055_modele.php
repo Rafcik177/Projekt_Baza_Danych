@@ -45,6 +45,17 @@ return new class extends Migration
                 'cena' => 31580000,
                  )
             );
+            DB::table('modele')->insert(
+            array(
+                'nazwa' => '168A',
+                'kategoria' => 'Wagon Pasażerski',
+                'moc' => 0,
+                'ilosc_miejsc' => 56,
+                'max_predkosc' => 160,
+                'waga' => 38,
+                'cena' => 500000,
+                 )
+            );
     }
 
     /**

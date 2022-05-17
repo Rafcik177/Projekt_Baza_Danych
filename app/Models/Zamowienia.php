@@ -16,6 +16,8 @@ class Zamowienia extends Model
         'status',
         'data_zlozenia',
         'realizacja',
+        'cena',
+        'id_zamowienia'
               
     ];
 
