@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\PracownicyController;
+use App\Http\Controllers\Produkcja\ProdukcjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,9 @@ Route::resource('magazyn', MagazynController::class);
 
 Route::get('/pracownicy', [PracownicyController::class, 'index']);
 Route::resource('pracownicy', PracownicyController::class);
+
+Route::get('/produkcja', [ProdukcjaController::class, 'index']);
+Route::resource('produkcja', ProdukcjaController::class);
 
 Auth::routes();
 //poniższa grupa jest dla wszystkich zalogowanych
