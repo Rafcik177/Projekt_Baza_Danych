@@ -68,9 +68,10 @@ class MagazynController extends Controller
      * @param  \App\Models\Magazyn  $magazyn
      * @return \Illuminate\Http\Response
      */
-    public function show(Magazyn $magazyn)
+    public function show($id)
     {
-        //
+        $magazyn = Magazyn::findOrFail($id);
+        return view('magazyn.show', compact('magazyn'));
     }
 
     /**
@@ -79,9 +80,9 @@ class MagazynController extends Controller
      * @param  \App\Models\Magazyn  $magazyn
      * @return \Illuminate\Http\Response
      */
-    public function edit($nazwa_czesci)
+    public function edit($id)
     {
-        $magazyn = Magazyn::find($nazwa_czesci);
+        $magazyn = Magazyn::find($id);
         return view('magazyn.edit', compact('magazyn'));
     }
 
@@ -92,7 +93,7 @@ class MagazynController extends Controller
      * @param  \App\Models\Magazyn  $magazyn
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $nazwa_czesci)
+    public function update(Request $request, $id)
     {
         $this->validate($request,[
             'nazwa_czesci' => 'required',
@@ -104,7 +105,7 @@ class MagazynController extends Controller
             'ilosc' => 'required',
             'prog_niskiego_stanu' => 'required',
             ]);
-        $magazyn = Magazyn::find($nazwa_czesci);
+        $magazyn = Magazyn::find($id);
         $magazyn->nazwa_czesci = $request->nazwa_czesci;
         $magazyn->opis = $request->opis;
         $magazyn->dlugosc = $request->dlugosc;
@@ -123,8 +124,9 @@ class MagazynController extends Controller
      * @param  \App\Models\Magazyn  $magazyn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Magazyn $magazyn)
+    public function destroy($id)
     {
-        //
+        Magazyn::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

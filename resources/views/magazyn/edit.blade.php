@@ -1,27 +1,150 @@
 @extends('layouts.app')
 
 @section('content')
-<h3>Edytuj</h3>
-    <form action="{{ route('magazyn.update', $magazyn->nazwa_czesci) }}" method="post" role="form" class="form-horizontal">
-    {{ csrf_field() }}
-    {{ method_field('PATCH') }}
-    <label for="nazwa_czesci">Nazwa Części </label>
-    <input type="text" name="nazwa_czesci" value="{{ $magazyn->nazwa_czesci }}">
-    <label for="opis">Opis </label>
-    <input type="text" name="opis" value="{{ $magazyn->opis }}">
-    <label for="dlugosc">Długość </label>
-    <input type="text" name="dlugosc" value="{{ $magazyn->dlugosc }}">
-    <label for="szerokosc">Szerokość </label>
-    <input type="text" name="szerokosc" value="{{ $magazyn->szerokosc }}">
-    <label for="wysokosc">Wysokość </label>
-    <input type="text" name="wysokosc" value="{{ $magazyn->wysokosc }}">
-    <label for="waga">Waga </label>
-    <input type="text" name="waga" value="{{ $magazyn->waga }}">
-    <label for="ilosc">Ilość </label>
-    <input type="text" name="ilosc" value="{{ $magazyn->ilosc }}">
-    <label for="prog_niskiego_stanu">Prog niskiego stanu </label>
-    <input type="text" name="prog_niskiego_stanu" value="{{ $magazyn->prog_niskiego_stanu }}">
-<button type="submit" class="btn btn-success">Zapisz</button>
-<a href="{{ route('magazyn.index') }}" class="btn btn-primary">Powrót</a>
-<form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Edytuj') }}</div>
+
+                <div class="card-body">
+                    <form action="{{ route('magazyn.update', $magazyn->id) }}" method="post" role="form">
+                        {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
+
+                        <div class="row mb-3">
+                            <label for="nazwa_czesci" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa części') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nazwa_czesci" type="text" class="form-control @error('nazwa_czesci') is-invalid @enderror" name="nazwa_czesci" value="{{ $magazyn->nazwa_czesci }}" required autocomplete="nazwa_czesci" autofocus>
+
+                                @error('nazwa_czesci')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Opis') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="opis" type="text" class="form-control @error('opis') is-invalid @enderror" name="opis" value="{{ $magazyn->opis }}" required autocomplete="opis" autofocus>
+
+                                @error('opis')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="dlugosc" class="col-md-4 col-form-label text-md-end">{{ __('Długość') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="dlugosc" type="text" class="form-control @error('dlugosc') is-invalid @enderror" name="dlugosc" value="{{ $magazyn->dlugosc }}" required autocomplete="dlugosc" autofocus>
+
+                                @error('dlugosc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="szerokosc" class="col-md-4 col-form-label text-md-end">{{ __('Szerokość') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="szerokosc" type="text" class="form-control @error('szerokosc') is-invalid @enderror" name="szerokosc" value="{{ $magazyn->szerokosc }}" required autocomplete="szerokosc" autofocus>
+
+                                @error('szerokosc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="wysokosc" class="col-md-4 col-form-label text-md-end">{{ __('Wysokość') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="wysokosc" type="text" class="form-control @error('wysokosc') is-invalid @enderror" name="wysokosc" value="{{ $magazyn->wysokosc }}" required autocomplete="wysokosc" autofocus>
+
+                                @error('wysokosc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="waga" class="col-md-4 col-form-label text-md-end">{{ __('Waga') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="waga" type="text" class="form-control @error('waga') is-invalid @enderror" name="waga" value="{{ $magazyn->waga }}" required autocomplete="waga" autofocus>
+
+                                @error('waga')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="ilosc" class="col-md-4 col-form-label text-md-end">{{ __('Ilość') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="ilosc" type="text" class="form-control @error('ilosc') is-invalid @enderror" name="ilosc" value="{{ $magazyn->ilosc }}" required autocomplete="ilosc" autofocus>
+
+                                @error('ilosc')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="prog_niskiego_stanu" class="col-md-4 col-form-label text-md-end">{{ __('Próg niskiego stanu') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="prog_niskiego_stanu" type="text" class="form-control @error('prog_niskiego_stanu') is-invalid @enderror" name="prog_niskiego_stanu" value="{{ $magazyn->prog_niskiego_stanu }}" required autocomplete="prog_niskiego_stanu" autofocus>
+
+                                @error('prog_niskiego_stanu')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-success">
+                                    {{ __('Zapisz') }}
+                                </button>
+                                <a href="{{ route('magazyn.index') }}" class="btn btn-primary">Powrót</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

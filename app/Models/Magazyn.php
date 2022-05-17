@@ -21,7 +21,5 @@ class Magazyn extends Model
     ];
 
     protected $table = 'magazyn';
-    protected $PrimaryKey = 'nazwa_czesci';
-    protected $keytype = 'string';
     public $timestamps = false;
 }
