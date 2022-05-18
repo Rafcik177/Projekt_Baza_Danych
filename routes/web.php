@@ -49,3 +49,8 @@ Route::middleware(['auth', 'verified'])->group(function(){
 });
 
 
+//Powiadomienia o stanie + email
+
+Route::get('/send-testenrollment',[NiskiStan::class, 'sentTestNotification']);
+
+
