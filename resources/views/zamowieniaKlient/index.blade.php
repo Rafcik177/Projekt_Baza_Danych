@@ -16,7 +16,7 @@
                             <th class="text-center">Kwota</th>
                             <th class="text-center">Edytuj</th>
                             <th class="text-center">Anuluj</th>
-                            <th class="text-center">Pokaż</th>
+                            <th class="text-center">Szczegóły</th>
                     </thead>
                     <tbody>
                     @foreach($zamowienia as $zam)
@@ -25,10 +25,9 @@
                             <td class="text-center">{{$zam->status}}</td>
                             <td class="text-center">{{$zam->data_zlozenia}}</td>
                             <td class="text-center">{{$zam->cena}} zł</td>
-                            <td class="text-center"><a href="{{ route('zamowienia.edit', $zam->id) }}">Edytuj</a></td>
+                            <td class="text-center"><a href="{{ route('zamowienia.edit', $zam->id_zamowienia) }}">Edytuj</a></td>
                             <td></td>
-                            <td>
-                            </td>
+                            <td><a href="{{ route('zamowienia.show', $zam->id_zamowienia) }}">Pokaż</a></td>
                             <td class="text-center"></td>
                         </tr>
                     @endforeach

@@ -26,17 +26,17 @@ Route::get('/', function () {
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
-
+Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
+        Route::resource('zamowienia', ZamowieniaKlientController::class);
 
 
 Auth::routes();
-//poniższa grupa jest dla wszystkich zalogowanych
+ //poniższa grupa jest dla wszystkich zalogowanych
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
     Route::middleware(['can:czyKlient'])->group(function(){
-        Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
-        Route::resource('zamowienia', ZamowieniaKlientController::class);
+        
 
     });
     //poniższa grupa jest tylko dla tych, którzy są w dziale HR

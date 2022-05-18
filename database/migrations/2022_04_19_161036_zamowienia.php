@@ -16,39 +16,15 @@ return new class extends Migration
         Schema::create('zamowienia', function (Blueprint $table) {
             $table->id();
             $table->integer('id_zamawiajacego')->references('id')->on('users');
-            $table->integer('id_modelu')->references('id')->on('modele');
-            $table->integer('ilosc');
-            $table->string('status');
-            $table->date('data_zlozenia');
-            $table->boolean('realizacja');
-            $table->string('cena');
-            $table->integer('id_zamowienia');
+            $table->string('id_zamowienia')->nullable();
+            $table->integer('id_modelu')->references('id')->on('modele')->nullable();
+            $table->integer('ilosc')->nullable();
+            $table->string('status')->default(NULL);
+            $table->datetime('data_zlozenia');
+            $table->boolean('realizacja')->nullable();
+            $table->string('cena')->nullable();
+            $table->string('odnosnie_id_zamowienia')->nullable();
         });
-
-        DB::table('zamowienia')->insert(
-            array(
-                'id_zamawiajacego' => '1',
-                'id_modelu' => '1',
-                'ilosc' => 1,
-                'status' => "Przyjęto",
-                'data_zlozenia' => now(),
-                'realizacja' => 1,
-                'cena' => 25980000,
-                'id_zamowienia'=>1
-            )
-            );
-            DB::table('zamowienia')->insert(
-                array(
-                    'id_zamawiajacego' => '1',
-                    'id_modelu' => '2',
-                    'ilosc' => 2,
-                    'status' => "Odrzucono",
-                    'data_zlozenia' => now(),
-                    'realizacja' => 0,
-                    'cena' => 11233000,
-                    'id_zamowienia'=>1
-                )
-                );
 
     }
 
