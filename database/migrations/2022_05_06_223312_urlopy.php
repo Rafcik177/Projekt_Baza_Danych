@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('urlopy', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_pracownika')->references('id')->on('pracownicy');
+            $table->integer('id_pracownika')->references('id')->on('users');
             $table->string('rok');
             $table->integer('dni_wykorzystane');
             $table->integer('dni_max');

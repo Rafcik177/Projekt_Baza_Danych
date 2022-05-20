@@ -50,7 +50,19 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="firma" class="col-md-4 col-form-label text-md-end">{{ __('Firma') }}</label>
 
+                            <div class="col-md-6">
+                                <input id="firma" type="text" class="form-control @error('firma') is-invalid @enderror" name="firma" value="{{ old('firma') }}" required autocomplete="firma">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Hasło') }}</label>
 
