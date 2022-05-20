@@ -10,11 +10,14 @@ class Zamowienia extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_zamawiajacego',
         'id_modelu',
         'ilosc',
         'status',
         'data_zlozenia',
         'realizacja',
+        'cena',
+        'id_zamowienia'
               
     ];
 

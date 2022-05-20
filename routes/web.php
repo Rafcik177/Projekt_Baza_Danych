@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\PracownicyController;
 use App\Http\Controllers\Produkcja\ProdukcjaController;
+use App\Http\Controllers\ZamowieniaKlientController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,7 @@ Route::get('/', function () {
 });
 
 
+
 //Dla magazynu
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
@@ -30,14 +33,22 @@ Route::resource('pracownicy', PracownicyController::class);
 
 Route::get('/produkcja', [ProdukcjaController::class, 'index']);
 Route::resource('produkcja', ProdukcjaController::class);
+Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
+Route::resource('zamowienia', ZamowieniaKlientController::class);
+
 
 Auth::routes();
-//poniższa grupa jest dla wszystkich zalogowanych
+ //poniższa grupa jest dla wszystkich zalogowanych
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::middleware(['can:czyKlient'])->group(function(){
+        
+
+    });
     //poniższa grupa jest tylko dla tych, którzy są w dziale HR
     Route::middleware(['can:czyHR'])->group(function(){
-        Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika'])->name('szukajpracownika');
+        Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika']);
         Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
 
     //Route::middleware(['can:czyHR'])->group(function(){
