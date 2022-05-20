@@ -17,6 +17,37 @@ return new class extends Migration
             $table->id();
             $table->string('nazwa');
         });
+
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Dział administracji',
+            )
+            );
+
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Dział zamówień',
+            )
+            );
+
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Dział HR',
+            )
+            );
+
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Dział produkcji',
+            )
+            );
+
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Magazyn',
+            )
+            );
+
     }
 
     /**

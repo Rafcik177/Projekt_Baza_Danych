@@ -44,7 +44,7 @@ return new class extends Migration
                 'stanowisko' => 'magazynier',
                 'czy_kierownik' => 0,
                 'wynagrodzenie_miesieczne' => 3700.00,
-                'id_wydzialu' => 2,
+                'id_wydzialu' => 5,
                 'email' => "jankowalski@gmail.com",
                 'password' => Hash::make('12345'),
                  'role'=>'dzial_magazyn'
@@ -60,7 +60,7 @@ return new class extends Migration
                 'stanowisko' => 'magazynier',
                 'czy_kierownik' => 1,
                 'wynagrodzenie_miesieczne' => 13500.00,
-                'id_wydzialu' => 2,
+                'id_wydzialu' => 5,
                 'email' => "jakubnowak@gmail.com",
                 'password' => Hash::make('12345'),
                 'role'=>'dzial_magazyn'
@@ -73,13 +73,13 @@ return new class extends Migration
                 'nazwisko' => 'Morski',
                 'pesel' => '66112267481',
                 'data_urodzenia' => '1966-11-22',
-                'stanowisko' => 'księgowy',
+                'stanowisko' => 'robotnik',
                 'czy_kierownik' => 0,
                 'wynagrodzenie_miesieczne' => 4500.00,
                 'id_wydzialu' => 4,
                 'email' => "andrzejmorski@gmail.com",
                 'password' => Hash::make('12345'),
-                'role'=>'dzial_magazyn'
+                'role'=>'dzial_produkcji'
             )
             );
 
@@ -92,10 +92,10 @@ return new class extends Migration
                 'stanowisko' => 'rekruter',
                 'czy_kierownik' => 0,
                 'wynagrodzenie_miesieczne' => 5200.00,
-                'id_wydzialu' => 4,
+                'id_wydzialu' => 3,
                 'email' => "konradwolski@gmail.com",
                 'password' => Hash::make('12345'),
-                'role'=>'dzial_magazyn'
+                'role'=>'dzial_hr'
             )
             );
         

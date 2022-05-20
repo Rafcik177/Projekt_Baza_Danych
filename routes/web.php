@@ -5,6 +5,7 @@ use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\PracownicyController;
 use App\Http\Controllers\Produkcja\ProdukcjaController;
 use App\Http\Controllers\ZamowieniaKlientController;
+use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -35,6 +36,9 @@ Route::get('/php', [ProdukcjaController::class, 'index']);
 Route::resource('produkcja', ProdukcjaController::class);
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);
+
+Route::get('/historia', [HistoriaController::class, 'index']);
+Route::resource('historia', HistoriaController::class);
 
 
 Auth::routes();
