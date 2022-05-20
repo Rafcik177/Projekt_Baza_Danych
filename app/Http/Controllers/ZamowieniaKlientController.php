@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ZamowieniaKlientController extends Controller
 {
     /**
@@ -31,7 +33,7 @@ class ZamowieniaKlientController extends Controller
     {
         $modele = DB::table('modele')->orderBy('kategoria')->paginate(30);
         return view('/zamowieniaKlient/dodajZamowienie', ['modele' => $modele]);
-        
+        //do składania zamówienia musi być dołączony moduł srawdzający zasoby magazynu do danego modelu. Jeśli nie ma części, klient nie może zamówić pojazdu, w innym wypadku obliczana jest maksymalna ilość pojazdów z dostępnych części. 
     }
     
     /**
@@ -42,10 +44,7 @@ class ZamowieniaKlientController extends Controller
      */
     public function store(Request $request)
     {
-        //tutaj utwórz numer zamówienia. Możesz zmiksować id zamawiającego,
-        // datę i czas i rakiegoś randa i potem wg tego numeru zamówienia
-         // będzie się robiło wyszukiwania
-         
+        //Tutaj też trzeba powtórzyć moduł do sprawdzania zasobów magazynu do wybranych modeli - to jest w celach bezpieczeństwa - walidacja formularza. Jeśli klient wybierze więcej pojazdów niż jest dostępnych części w magazynie, to wówczas tutaj ta akcja musi być zablokowana i klient zostanie cofnięty do formularza. 
         $userID=Auth::user()->id;
         $datatime=date("Y-m-d H:i:s");
         $teraz = strtotime($datatime);
@@ -91,13 +90,22 @@ class ZamowieniaKlientController extends Controller
      */
     public function show($id)
     {
+        $glowne = DB::table('zamowienia')->where('id_zamawiajacego', Auth::user()->id)->where('id_zamowienia', '=', $id)->get();
+        if ($glowne->isEmpty()) {
+           
+            return redirect()->action([ZamowieniaKlientController::class, 'index']);
+         }
+         else
+         {
+            $pokaz = DB::table('zamowienia')
+            ->join('modele', 'modele.id','=','zamowienia.id_modelu')
+            ->select('modele.nazwa','modele.cena as pojedyncza_cena','zamowienia.ilosc','zamowienia.cena as laczna_cena')
+            ->where('id_zamawiajacego', Auth::user()->id)
+            ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
+            
+            return view('zamowieniaKlient/show', compact('pokaz', 'id','glowne'));
+         }
         
-        $pokaz = DB::table('zamowienia')
-        ->join('modele', 'modele.id','=','zamowienia.id_modelu')
-        ->select('modele.nazwa','modele.cena as pojedyncza_cena','zamowienia.ilosc','zamowienia.cena as laczna_cena')
-        ->where('id_zamawiajacego', Auth::user()->id)
-        ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
-        return view('zamowieniaKlient/show', compact('pokaz','id'));
         
     }
 
@@ -109,12 +117,26 @@ class ZamowieniaKlientController extends Controller
      */
     public function edit($id)
     {
+        
         $edycja = DB::table('zamowienia')
         ->join('modele', 'modele.id','=','zamowienia.id_modelu')
         ->select('modele.nazwa','modele.cena as pojedyncza_cena','zamowienia.id','zamowienia.ilosc','zamowienia.cena as laczna_cena')
         ->where('id_zamawiajacego', Auth::user()->id)
         ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
-        return view('zamowieniaKlient/edytujZamowienie', compact('edycja','id'));
+        if ($edycja === null) {
+            $error="Nie ma takiego zamówienia";
+            return redirect()->action([ZamowieniaKlientController::class, 'index']);
+         }
+        $g_data = DB::table('zamowienia')->where('id_zamowienia', $id)->first();
+        $data=$g_data->data_zlozenia;
+        
+        $nowa=new \DateTime();
+        $zamow=new \DateTime($data);
+        $zamow->modify('+3 day');
+        if($zamow<$nowa)
+        return redirect()->action([ZamowieniaKlientController::class, 'index']);
+        else
+        return view('zamowieniaKlient/edytujZamowienie', compact('edycja','id','data'));
         
     }
 
@@ -128,14 +150,42 @@ class ZamowieniaKlientController extends Controller
     public function update(Request $request, $id) //ten id to numer zamówienia do którego się odnosi
     {
         //to będzie proste, sam wiesz
-            $zamowienie = new Zamowienia($request->all());
-            $count = count( $request->zmien);
+             if(isset($request->zmien))
+             {$id_user = Auth::user()->id;
+                $count = count( $request->zmien);
+                for($i=0; $i<=$count-1; $i++)
+                {
+                    if($request->ilosc[$i]=='0')
+                    {
+                        DB::statement("DELETE FROM zamowienia  where id = ".$request->zmien[$i]." AND id_zamawiajacego = '$id_user'"); 
+                    }
+                    $edycja = Zamowienia::find($request->zmien[$i]);
+                    $edycja->ilosc=$request->ilosc[$i];
+                    $edycja->id=$request->zmien[$i];
 
-            for($i=0; $i<=$count-1; $i++)
-            {
 
-            }
-           // $zamowienie->update();
+                    $cenazam = DB::table('zamowienia')->where('id', $request->zmien[$i])->first();
+                    $nowacena=(($cenazam->cena)/($cenazam->ilosc))*$request->ilosc[$i];
+                    $edycja->cena=$nowacena;
+                    
+                    $roznica_cen=$cenazam->cena-$nowacena;
+
+                    $cenacalosci = DB::table('zamowienia')->where('id_zamowienia', $id)->first();
+                    $nowacenacalosci=($cenacalosci->cena)-($roznica_cen);
+
+                    $edycja->update();
+                    
+                    DB::statement("UPDATE zamowienia SET cena = '$nowacenacalosci' where id_zamowienia = '$id' AND id_zamawiajacego = '$id_user'");
+                    return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
+                
+                }
+                
+                
+             }
+             
+              
+            
+            
             
     }
 
