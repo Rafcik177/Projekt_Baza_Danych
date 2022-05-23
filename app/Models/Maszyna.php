@@ -17,7 +17,8 @@ class Maszyna extends Model
         'ilosc_miejsc',
         'max_predkosc',
         'waga',
-        'cena'
+        'cena',
+        'czy_ukonczona'
     ];
 
     protected $table = 'modele';

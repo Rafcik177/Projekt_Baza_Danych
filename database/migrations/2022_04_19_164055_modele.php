@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('max_predkosc')->NULL;
             $table->integer('waga');
             $table->string('cena', 20);
+            $table->boolean('czy_ukonczona');
         });
         DB::table('modele')->insert(
             array(
@@ -32,6 +33,7 @@ return new class extends Migration
                 'max_predkosc' => 160,
                 'waga' => 130,
                 'cena' => 25980000,
+                'czy_ukonczona' => false
             )
             );
             DB::table('modele')->insert(
@@ -43,7 +45,8 @@ return new class extends Migration
                 'max_predkosc' => 190,
                 'waga' => 160,
                 'cena' => 31580000,
-                 )
+                'czy_ukonczona' => false
+            )
             );
     }
 
