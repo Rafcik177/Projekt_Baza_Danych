@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
                                 @foreach($pracownicy as $pra)
-                                <tr>
+                                <tr >
                                     <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$pra->id}}</td> -->
                                     <td class="text-center">{{$pra->imie}}</td> <!-- <td class="text-center"><a href="{{ route('pracownicy.show', $pra->id) }}">{{ $pra->nazwa_czesci }}</a></td> -->
                                     <td class="text-center">{{$pra->nazwisko}}</td>
@@ -64,8 +64,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <a href="{{route('pracownicy.create') }}" class="btn btn-primary col-3">Dodaj nowego pracownika</a>
                     </div>
-                    <a href="{{route('pracownicy.create') }}" class="btn btn-primary col-3">Dodaj nowego pracownika</a>
+                   
 
                     @if(isset($error))
                     {{$error}}

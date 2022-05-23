@@ -34,6 +34,7 @@ Route::resource('pracownicy', PracownicyController::class);
 
 Route::get('/php', [ProdukcjaController::class, 'index']);
 Route::resource('produkcja', ProdukcjaController::class);
+
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);
 
@@ -52,8 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     });
     //poniższa grupa jest tylko dla tych, którzy są w dziale HR
     Route::middleware(['can:czyHR'])->group(function(){
-        Route::get('/szukajpracownika', [App\Http\Controllers\HomeController::class, 'szukajpracownika']);
-        Route::post('/pracownik', [App\Http\Controllers\HomeController::class, 'pracownik'])->name('pracownik');
+
 
     //Route::middleware(['can:czyHR'])->group(function(){
         //Route::get('/pracownicy', [PracownicyController::class, 'index']);
