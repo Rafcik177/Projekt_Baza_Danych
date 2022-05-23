@@ -18,6 +18,10 @@
                             <th class="text-center">Maksymalna prędkość (km/h)</th>
                             <th class="text-center">Waga (tony)</th>
                             <th class="text-center">Cena (zł)</th>
+                            <th class="text-center">Czy ukończona?</th>
+                            <th class="text-center">Edytuj</th>
+                            <th class="text-center">Usuń</th>
+                            <th class="text-center">Pokaż</th>
                     </thead>
                     <tbody>
                     @foreach($maszyna as $m)
@@ -30,13 +34,30 @@
                             <td class="text-center">{{$m->max_predkosc}}</td>
                             <td class="text-center">{{$m->waga}}</td>
                             <td class="text-center">{{$m->cena}}</td>
+                            <td class="text-center">{{$m->czy_ukonczona ? 'Tak' : 'Nie'}}</td>
+                            <td><a href="{{ route('produkcja.edit', $m->id) }}">Edytuj</a></td>
+                            <td>
+                                <form action="{{ route('produkcja.destroy', $m->id) }}" method="post" id="delete-form-{{$m->id}}" style="display: none;">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                </form>
+                                <a href="" onclick="
+                                    if(confirm('Czy na pewno chesz usunąć?')) {
+                                        event.preventDefault();
+                                        document.getElementById('delete-form-{{$m->id}}').submit();
+                                    } else {
+                                        event.preventDefault();
+                                        }">
+                                    Usuń
+                                </a>
+                            </td>
+                            <td class="text-center"><a href="{{ route('produkcja.show', $m->id) }}">Pokaż</a></td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
         </div>
-            <!-- {{route('magazyn.create') }} -->
-            <a href="" class="btn btn-primary">Dodaj nową maszynę</a>
+            <a href="{{ route('produkcja.create') }}" class="btn btn-primary">Dodaj nową maszynę</a>
         </div>
     </div>
 
