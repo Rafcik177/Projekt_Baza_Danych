@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('max_predkosc')->NULL;
             $table->integer('waga');
             $table->string('cena', 20);
-            $table->boolean('czy_ukonczona');
+            $table->boolean('czy_ukonczona')->default(false);
         });
         DB::table('modele')->insert(
             array(
