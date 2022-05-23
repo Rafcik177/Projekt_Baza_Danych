@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\PracownicyController;
 use App\Http\Controllers\Produkcja\ProdukcjaController;
@@ -40,6 +41,10 @@ Route::resource('zamowienia', ZamowieniaKlientController::class);
 
 Route::get('/historia', [HistoriaController::class, 'index']);
 Route::resource('historia', HistoriaController::class);
+
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::resource('admin', AdminController::class);
 
 
 Auth::routes();
