@@ -15,7 +15,7 @@ class PracownicyController extends Controller
      */
     public function index()
     {
-        $pracownicy = User::all();
+        $pracownicy = User::all()->where('role','<>', 'klient');
         return view('pracownicy.index', compact('pracownicy'));
     }
 
