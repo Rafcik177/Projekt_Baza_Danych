@@ -113,7 +113,7 @@ class ProdukcjaController extends Controller
             'cena' => 'required',
             'czy_ukonczona' => 'required'
             ]);
-        $maszyna = Magazyn::find($id);
+        $maszyna = Maszyna::find($id);
         $maszyna->nazwa = $request->nazwa;
         $maszyna->kategoria = $request->kategoria;
         $maszyna->moc = $request->moc;
