@@ -9,12 +9,7 @@
                 <div class="row text center">
 
                     <div class="table-responsive">
-                        <style>
-                            td,
-                            th {
-                                border: 1px solid black;
-                            }
-                        </style>
+                    <style>td {border: 0.5px solid black;}</style>
                         <table class="table table-striped">
                             <thead>
                                 <tr class="success">
