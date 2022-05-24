@@ -8,7 +8,9 @@ use App\Http\Controllers\Produkcja\ProdukcjaController;
 use App\Http\Controllers\ZamowieniaKlientController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\NiskiStan;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,11 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/email', function (){
+    Mail::to('tocarra.2@mufollowsa.com')->send(new WelcomeMail());
+    return new WelcomeMail();
 });
 
 
@@ -75,6 +82,6 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //Powiadomienia o stanie + email
 
-Route::get('/send-testenrollment',[NiskiStan::class, 'sentTestNotification']);
+Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
 
 

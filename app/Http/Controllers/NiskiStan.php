@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Notifications\TestStanu;
 
 class NiskiStan extends Controller
 {
     public function sendTestNotification()
     {
-        $user = User::first();
+       $user = User::first();
 
         $enrollmentData = [
             'body'=>'Email testowy ',
@@ -20,5 +22,6 @@ class NiskiStan extends Controller
         ];
 
         $user->notify(new TestStanu($enrollmentData));
+        
     }
 }

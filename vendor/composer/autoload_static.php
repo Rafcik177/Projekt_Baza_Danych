@@ -11,7 +11,6 @@ class ComposerStaticInit9be7dce4a34886525451b639f8219371
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-<<<<<<< HEAD
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
@@ -19,23 +18,18 @@ class ComposerStaticInit9be7dce4a34886525451b639f8219371
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
-=======
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
         '23c18046f52bef3eea034657bafda50f' => __DIR__ . '/..' . '/symfony/polyfill-php81/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-<<<<<<< HEAD
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-=======
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
@@ -538,14 +532,11 @@ class ComposerStaticInit9be7dce4a34886525451b639f8219371
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MagazynController' => __DIR__ . '/../..' . '/app/Http/Controllers/MagazynController.php',
-<<<<<<< HEAD
         'App\\Http\\Controllers\\NiskiStan' => __DIR__ . '/../..' . '/app/Http/Controllers/NiskiStan.php',
         'App\\Http\\Controllers\\PracownicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/PracownicyController.php',
-=======
         'App\\Http\\Controllers\\PracownicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/PracownicyController.php',
         'App\\Http\\Controllers\\Produkcja\\ProdukcjaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Produkcja/ProdukcjaController.php',
         'App\\Http\\Controllers\\ZamowieniaKlientController' => __DIR__ . '/../..' . '/app/Http/Controllers/ZamowieniaKlientController.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -563,11 +554,8 @@ class ComposerStaticInit9be7dce4a34886525451b639f8219371
         'App\\Models\\SpisCzesci' => __DIR__ . '/../..' . '/app/Models/SpisCzesci.php',
         'App\\Models\\Urlopy' => __DIR__ . '/../..' . '/app/Models/Urlopy.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-<<<<<<< HEAD
         'App\\Notifications\\TestStanu' => __DIR__ . '/../..' . '/app/Notifications/TestStanu.php',
-=======
         'App\\Models\\Zamowienia' => __DIR__ . '/../..' . '/app/Models/Zamowienia.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
