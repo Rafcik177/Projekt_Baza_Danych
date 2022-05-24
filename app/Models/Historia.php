@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pracownicy extends Model
+class Historia extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'imie',
-        'nazwisko',
-        'pesel',
-        'id_wydzialu',
-        'data_urodzenia',
+        'id_pracownika',
+        'data_start',
+        'data_koniec',
+        'wydzial',
         'stanowisko',
-        'czy_kierownik',
-        'wynagrodzenie_miesieczne',        
+              
     ];
 
-    protected $table = 'pracownicy';
+    protected $table = 'historia';
     public $timestamps = false;
 
 }

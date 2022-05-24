@@ -27,8 +27,10 @@ class HomeController extends Controller
     }
     public function szukajpracownika()
     {
-        return view('pracownicy/szukajpracownika');
+        return view('/pracownicy/szukajpracownika');
     }
+
+
     public function pracownik(Request $request)
     {
         

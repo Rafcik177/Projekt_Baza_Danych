@@ -67,8 +67,21 @@
                                 <a class="dropdown-item" href="{{ url('/szukajpracownika') }}">
                                     {{ __('Edytuj info') }}
                                 </a>
-
                                 @endcan
+                                <!-- TRZEBA DOPISAĆ UPRAWNIENIA DLA POSZCZEGÓLNYCH ROLI NA STRONIE -->
+                                <a class="dropdown-item" href="{{ url('/magazyn') }}">
+                                    {{ __('Magazyn') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/pracownicy') }}">
+                                    {{ __('Pracownicy') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/produkcja') }}">
+                                    {{ __('Produkcja') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/zamowienia') }}">
+                                    {{ __('Zamowienia') }}
+                                </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Wyloguj się') }}

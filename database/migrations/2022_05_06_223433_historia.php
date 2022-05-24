@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
-{
+{ 
     /**
      * Run the migrations.
      *
@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('historia', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_pracownika')->references('id')->on('pracownicy');
+            $table->integer('id_pracownika')->references('id')->on('users');
             $table->date('data_start');
             $table->date('data_koniec');
             $table->string('wydzial');

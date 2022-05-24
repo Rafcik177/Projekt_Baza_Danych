@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pracownicy;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class PracownicyController extends Controller
      */
     public function index()
     {
-        $pracownicy = Pracownicy::all();
+        $pracownicy = User::all()->where('role','<>', 'klient');
         return view('pracownicy.index', compact('pracownicy'));
     }
 
@@ -48,7 +48,7 @@ class PracownicyController extends Controller
             'wynagrodzenie_miesieczne' => 'required',
         ]);
 
-        $pracownicy = new Pracownicy;
+        $pracownicy = new User;
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
         $pracownicy->pesel = $request->pesel;
@@ -70,7 +70,7 @@ class PracownicyController extends Controller
      */
     public function show($id)
     {
-        $pracownicy = Pracownicy::findOrFail($id);
+        $pracownicy = User::findOrFail($id);
         return view('pracownicy.show', compact('pracownicy'));
     }
 
@@ -82,7 +82,7 @@ class PracownicyController extends Controller
      */
     public function edit($id)
     {
-        $pracownicy = Pracownicy::find($id);
+        $pracownicy = User::find($id);
         return view('pracownicy.edit', compact('pracownicy'));
     }
 
@@ -105,7 +105,7 @@ class PracownicyController extends Controller
             'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required',
             ]);
-        $pracownicy = Pracownicy::find($id);
+        $pracownicy = User::find($id);
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
         $pracownicy->pesel = $request->pesel;
@@ -126,7 +126,7 @@ class PracownicyController extends Controller
      */
     public function destroy($id)
     {
-        Pracownicy::where('id', $id)->delete();
+        User::where('id', $id)->delete();
         return redirect()->back();
     }
 }

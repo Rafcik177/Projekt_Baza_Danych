@@ -19,6 +19,24 @@ return new class extends Migration
             $table->integer('id_modelu')->references('id')->on('modele');
             $table->string('ilosc_do_wykonania');
         });
+
+        //Theoretical insertions
+        /*
+        DB::table('modele')->insert(
+            array(
+                'nazwa_czesci' => 'Ko³o',
+                'id_modelu' => 1,
+                'ilosc_do_wykonania' => 6,
+            )
+        );
+        DB::table('modele')->insert(
+            array(
+                'nazwa_czesci' => 'Wa³ napêdowy',
+                'id_modelu' => 1,
+                'ilosc_do_wykonania' => 3,
+            )
+        );
+        */
     }
 
     /**
