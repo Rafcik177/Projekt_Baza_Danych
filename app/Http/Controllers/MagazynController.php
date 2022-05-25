@@ -129,4 +129,6 @@ class MagazynController extends Controller
         Magazyn::where('id', $id)->delete();
         return redirect()->back();
     }
+
+    
 }
