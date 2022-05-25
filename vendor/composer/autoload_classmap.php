@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -15,16 +16,14 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\HistoriaController' => $baseDir . '/app/Http/Controllers/HistoriaController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MagazynController' => $baseDir . '/app/Http/Controllers/MagazynController.php',
-<<<<<<< HEAD
     'App\\Http\\Controllers\\NiskiStan' => $baseDir . '/app/Http/Controllers/NiskiStan.php',
     'App\\Http\\Controllers\\PracownicyController' => $baseDir . '/app/Http/Controllers/PracownicyController.php',
-=======
-    'App\\Http\\Controllers\\PracownicyController' => $baseDir . '/app/Http/Controllers/PracownicyController.php',
     'App\\Http\\Controllers\\Produkcja\\ProdukcjaController' => $baseDir . '/app/Http/Controllers/Produkcja/ProdukcjaController.php',
+    'App\\Http\\Controllers\\ZamAdminController' => $baseDir . '/app/Http/Controllers/ZamAdminController.php',
     'App\\Http\\Controllers\\ZamowieniaKlientController' => $baseDir . '/app/Http/Controllers/ZamowieniaKlientController.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -34,6 +33,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Mail\\WelcomeMail' => $baseDir . '/app/Mail/WelcomeMail.php',
     'App\\Models\\Dzialy' => $baseDir . '/app/Models/Dzialy.php',
     'App\\Models\\Historia' => $baseDir . '/app/Models/Historia.php',
     'App\\Models\\Magazyn' => $baseDir . '/app/Models/Magazyn.php',
@@ -42,11 +42,9 @@ return array(
     'App\\Models\\SpisCzesci' => $baseDir . '/app/Models/SpisCzesci.php',
     'App\\Models\\Urlopy' => $baseDir . '/app/Models/Urlopy.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
-<<<<<<< HEAD
-    'App\\Notifications\\TestStanu' => $baseDir . '/app/Notifications/TestStanu.php',
-=======
+    'App\\Models\\ZamAdmin' => $baseDir . '/app/Models/ZamAdmin.php',
     'App\\Models\\Zamowienia' => $baseDir . '/app/Models/Zamowienia.php',
->>>>>>> 9ea1259ae568bba3f0496d76ca0b4066a4f81352
+    'App\\Notifications\\TestStanu' => $baseDir . '/app/Notifications/TestStanu.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
@@ -159,6 +157,7 @@ return array(
     'Cron\\MinutesField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
     'Cron\\MonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',
+    'Database\\Factories\\ZamAdminFactory' => $baseDir . '/database/factories/ZamAdminFactory.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
     'Database\\Seeders\\UserSeeder' => $baseDir . '/database/seeders/UserSeeder.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',

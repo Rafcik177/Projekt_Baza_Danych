@@ -1,7 +1,7 @@
 @component('mail::message')
-# nosz kurwa dzialaj 
+# nosz krw dzialaj
 
-nic nie dziala super 
+nic nie dziala - juz działa
 
 @component('mail::button', ['url' => ''])
 Button Text
