@@ -82,6 +82,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //Powiadomienia o stanie + email
 
+
+Route::get('/niskistan',[NiskiStan::class, 'wypisz']);
+
 Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
 
 

@@ -41,7 +41,7 @@
                                     <td class="text-center">{{$mag->wysokosc}}</td>
                                     <td class="text-center">{{$mag->waga}}</td>
                                     <td class="text-center">{{$mag->ilosc}}</td>
-                                    <td class="text-center">{{$mag->prog_niskiego_stanu}}</td><div>In Stock</div>
+                                    <td class="text-center">{{$mag->prog_niskiego_stanu}}</td>
                                     <td><a href="{{ route('magazyn.edit', $mag->id) }}">Edytuj</a></td>
                                     <td>
                                         <form action="{{ route('magazyn.destroy', $mag->id) }}" method="post" id="delete-form-{{$mag->id}}" style="display: none;">
