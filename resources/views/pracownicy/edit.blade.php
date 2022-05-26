@@ -41,6 +41,19 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="data_urodzenia" class="col-md-4 col-form-label text-md-end">{{ __('Data urodzenia') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="data_urodzenia" type="text" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ $pracownicy->data_urodzenia }}" required autocomplete="data_urodzenia" autofocus>
+
+                                @error('data_urodzenia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="pesel" class="col-md-4 col-form-label text-md-end">{{ __('Pesel') }}</label>
@@ -56,12 +69,33 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-3">
-                            <label for="id_wydzialu" class="col-md-4 col-form-label text-md-end">{{ __('Id wydziału') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="id_wydzialu" type="text" class="form-control @error('id_wydzialu') is-invalid @enderror" name="id_wydzialu" value="{{ $pracownicy->id_wydzialu }}" required autocomplete="id_wydzialu" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $pracownicy->email }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        <div class="row mb-3">
+                            <label for="id_wydzialu" class="col-md-4 col-form-label text-md-end">{{ __('Wydział') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="id_wydzialu" name="id_wydzialu" style="width: 100%" class="form-control @error('id_wydzialu') is-invalid @enderror">
+                                    <option value='6'<?php if($pracownicy->id_wydzialu == 6) { ?> selected="selected"<?php } ?>>-</option>
+                                    <option value='1'<?php if($pracownicy->id_wydzialu == 1) { ?> selected="selected"<?php } ?>>Dział administracji</option>
+                                    <option value='2'<?php if($pracownicy->id_wydzialu == 2) { ?> selected="selected"<?php } ?>>Dział zamówień</option>
+                                    <option value='3'<?php if($pracownicy->id_wydzialu == 3) { ?> selected="selected"<?php } ?>>Dział HR</option>
+                                    <option value="4"<?php if($pracownicy->id_wydzialu == 4) { ?> selected="selected"<?php } ?>>Dział produkcji</option>
+                                    <option value='5'<?php if($pracownicy->id_wydzialu == 5) { ?> selected="selected"<?php } ?>>Dział magazyn</option>
+                                </select>
 
                                 @error('id_wydzialu')
                                     <span class="invalid-feedback" role="alert">
@@ -70,22 +104,23 @@
                                 @enderror
                             </div>
                         </div>
-
-
+                        
                         <div class="row mb-3">
-                            <label for="data_urodzenia" class="col-md-4 col-form-label text-md-end">{{ __('Data urodzenia') }}</label>
+                            <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Kierownik?') }}</label>
 
                             <div class="col-md-6">
-                                <input id="data_urodzenia" type="text" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ $pracownicy->data_urodzenia }}" required autocomplete="data_urodzenia" autofocus>
+                                <select id="czy_kierownik" name="czy_kierownik" style="width: 100%" class="form-control @error('czy_kierownik') is-invalid @enderror">
+                                    <option value='0'<?php if($pracownicy->czy_kierownik == 0) { ?> selected="selected"<?php } ?>>NIE</option>
+                                    <option value='1'<?php if($pracownicy->czy_kierownik == 1) { ?> selected="selected"<?php } ?>>TAK</option>
+                                </select>
 
-                                @error('data_urodzenia')
+                                @error('czy_kierownik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
-
 
                         <div class="row mb-3">
                             <label for="stanowisko" class="col-md-4 col-form-label text-md-end">{{ __('Stanowisko') }}</label>
@@ -101,24 +136,8 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-3">
-                            <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Czy kierownik') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="czy_kierownik" type="text" class="form-control @error('czy_kierownik') is-invalid @enderror" name="czy_kierownik" value="{{ $pracownicy->czy_kierownik }}" required autocomplete="czy_kierownik" autofocus>
-
-                                @error('czy_kierownik')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        <div class="row mb-3">
-                            <label for="wynagrodzenie_miesieczne" class="col-md-4 col-form-label text-md-end">{{ __('Wynagrodzenie miesięczne') }}</label>
+                            <label for="wynagrodzenie_miesieczne" class="col-md-4 col-form-label text-md-end">{{ __('Wynagrodzenie miesięczne (zł)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="wynagrodzenie_miesieczne" type="text" class="form-control @error('wynagrodzenie_miesieczne') is-invalid @enderror" name="wynagrodzenie_miesieczne" value="{{ $pracownicy->wynagrodzenie_miesieczne }}" required autocomplete="wynagrodzenie_miesieczne" autofocus>
@@ -130,8 +149,6 @@
                                 @enderror
                             </div>
                         </div>
-                        
-
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
