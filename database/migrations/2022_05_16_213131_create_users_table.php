@@ -30,9 +30,10 @@ return new class extends Migration
             $table->integer('id_wydzialu')->references('id')->on('dzialy')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default(Hash::make('12345'));
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
             $table->enum('role', allowed: RoleNZTK::TYPES)->default(RoleNZTK::KLIENT);
         });
         DB::table('users')->insert(
@@ -57,7 +58,7 @@ return new class extends Migration
                 'nazwisko' => 'Nowak',
                 'pesel' => '94120592132',
                 'data_urodzenia' => '1994-12-05',
-                'stanowisko' => 'magazynier',
+                'stanowisko' => 'kierownik',
                 'czy_kierownik' => 1,
                 'wynagrodzenie_miesieczne' => 13500.00,
                 'id_wydzialu' => 5,

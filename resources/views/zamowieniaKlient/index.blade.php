@@ -9,7 +9,7 @@
                 
                 <table class="table table-striped table-hover ">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr >
                             <th class="text-center">Lp.</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Data złożenia</th>

@@ -55,12 +55,32 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-3">
-                            <label for="id_wydzialu" class="col-md-4 col-form-label text-md-end">{{ __('Id wydzialu') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="id_wydzialu" type="text" class="form-control @error('id_wydzialu') is-invalid @enderror" name="id_wydzialu" value="{{ old('id_wydzialu') }}" required autocomplete="id_wydzialu" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="id_wydzialu" class="col-md-4 col-form-label text-md-end">{{ __('Wydział') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="id_wydzialu" name="id_wydzialu" class="form-control @error('id_wydzialu') is-invalid @enderror">
+                                    <option value='6'>-</option>
+                                    <option value='1'>Dział administracji</option>
+                                    <option value='2'>Dział zamówień</option>
+                                    <option value='3'>Dział HR</option>
+                                    <option value='4'>Dział produkcji</option>
+                                    <option value='5'>Dział magazyn</option>
+                                </select>
 
                                 @error('id_wydzialu')
                                     <span class="invalid-feedback" role="alert">
@@ -70,12 +90,11 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-3">
                             <label for="data_urodzenia" class="col-md-4 col-form-label text-md-end">{{ __('Data urodzenia') }}</label>
 
                             <div class="col-md-6">
-                                <input id="data_urodzenia" type="text" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ old('data_urodzenia') }}" required autocomplete="data_urodzenia" autofocus>
+                                <input id="data_urodzenia" type="date" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ old('data_urodzenia') }}" required autocomplete="data_urodzenia" autofocus>
 
                                 @error('data_urodzenia')
                                     <span class="invalid-feedback" role="alert">
@@ -105,7 +124,10 @@
                             <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Czy kierownik') }}</label>
 
                             <div class="col-md-6">
-                                <input id="czy_kierownik" type="text" class="form-control @error('czy_kierownik') is-invalid @enderror" name="czy_kierownik" value="{{ old('czy_kierownik') }}" required autocomplete="czy_kierownik" autofocus>
+                                <select id="czy_kierownik" name="czy_kierownik" class="form-control @error('czy_kierownik') is-invalid @enderror">
+                                    <option value='0'>NIE</option>
+                                    <option value='1'>TAK</option>
+                                </select>
 
                                 @error('czy_kierownik')
                                     <span class="invalid-feedback" role="alert">
@@ -117,7 +139,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="wynagrodzenie_miesieczne" class="col-md-4 col-form-label text-md-end">{{ __('Wynagrodzenie miesięczne') }}</label>
+                            <label for="wynagrodzenie_miesieczne" class="col-md-4 col-form-label text-md-end">{{ __('Wynagrodzenie miesięczne (zł)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="wynagrodzenie_miesieczne" type="text" class="form-control @error('wynagrodzenie_miesieczne') is-invalid @enderror" name="wynagrodzenie_miesieczne" value="{{ old('wynagrodzenie_miesieczne') }}" required autocomplete="wynagrodzenie_miesieczne" autofocus>

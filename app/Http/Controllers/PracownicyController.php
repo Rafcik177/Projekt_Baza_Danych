@@ -41,6 +41,7 @@ class PracownicyController extends Controller
             'imie' => 'required',
             'nazwisko' => 'required',
             'pesel' => 'required',
+            'email' => 'required',
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
             'stanowisko' => 'required',
@@ -52,11 +53,36 @@ class PracownicyController extends Controller
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
         $pracownicy->pesel = $request->pesel;
+        $pracownicy->email = $request->email;
         $pracownicy->id_wydzialu = $request->id_wydzialu;
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
+        if($pracownicy->id_wydzialu==1)
+            {
+               $pracownicy->role = 'admin';
+            } 
+        elseif($pracownicy->id_wydzialu==2)
+            {
+               $pracownicy->role = 'dzial_zamowien';
+            }
+        elseif($pracownicy->id_wydzialu==3)
+            {
+               $pracownicy->role = 'dzial_hr';
+            }
+        elseif($pracownicy->id_wydzialu==4)
+            {
+               $pracownicy->role = 'dzial_produkcji';
+            }
+        elseif($pracownicy->id_wydzialu==5)
+            {
+               $pracownicy->role = 'dzial_magazyn';
+            }
+        elseif($pracownicy->id_wydzialu==6)
+            {
+               $pracownicy->role = 'pracownik bez dzialu';
+            }
         $pracownicy->save();
 
         return redirect(route('pracownicy.index'));
@@ -99,6 +125,7 @@ class PracownicyController extends Controller
             'imie' => 'required',
             'nazwisko' => 'required',
             'pesel' => 'required',
+            'email' => 'required',
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
             'stanowisko' => 'required',
@@ -109,11 +136,36 @@ class PracownicyController extends Controller
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
         $pracownicy->pesel = $request->pesel;
+        $pracownicy->email = $request->email;
         $pracownicy->id_wydzialu = $request->id_wydzialu;
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
+        if($pracownicy->id_wydzialu==1)
+            {
+               $pracownicy->role = 'admin';
+            } 
+        elseif($pracownicy->id_wydzialu==2)
+            {
+               $pracownicy->role = 'dzial_zamowien';
+            }
+        elseif($pracownicy->id_wydzialu==3)
+            {
+               $pracownicy->role = 'dzial_hr';
+            }
+        elseif($pracownicy->id_wydzialu==4)
+            {
+               $pracownicy->role = 'dzial_produkcji';
+            }
+        elseif($pracownicy->id_wydzialu==5)
+            {
+               $pracownicy->role = 'dzial_magazyn';
+            }
+        elseif($pracownicy->id_wydzialu==6)
+            {
+               $pracownicy->role = 'pracownik bez dzialu';
+            }
         $pracownicy->save();  
         return redirect(route('pracownicy.index'));
     }

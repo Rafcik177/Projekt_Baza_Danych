@@ -48,6 +48,12 @@ return new class extends Migration
             )
             );
 
+        DB::table('dzialy')->insert(
+            array(
+                'nazwa' => 'Pracownicy bez działów',
+            )
+            );
+
     }
 
     /**
