@@ -108,8 +108,7 @@ class ModeleController extends Controller
             'ilosc_miejsc' => 'required',
             'max_predkosc' => 'required',
             'waga' => 'required',
-            'cena' => 'required',
-            'czy_ukonczona' => 'required'
+            'cena' => 'required'
             ]);
         $model = Modele::find($id);
         $model->nazwa = $request->nazwa;
