@@ -10,14 +10,14 @@ class Modele extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'nazwa',
         'kategoria',
         'moc',
         'ilosc_miejsc',
         'max_predkosc',
         'waga',
-        'cena',
-              
+        'cena'
     ];
 
     protected $table = 'modele';
