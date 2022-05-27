@@ -18,11 +18,12 @@ return new class extends Migration
             $table->integer('id_zamawiajacego')->references('id')->on('users');
             $table->string('id_zamowienia')->nullable();
             $table->integer('id_modelu')->references('id')->on('modele')->nullable();
+            $table->string('nazwa_modelu')->nullable();
             $table->integer('ilosc')->nullable();
-            $table->string('status')->default(NULL);
-            $table->datetime('data_zlozenia');
+            $table->string('status')->nullable();
+            $table->datetime('data_zlozenia')->nullable();
             $table->boolean('realizacja')->nullable();
-            $table->string('cena')->nullable();
+            $table->string('cena_pojedyncza')->nullable();
             $table->string('odnosnie_id_zamowienia')->nullable();
         });
 
