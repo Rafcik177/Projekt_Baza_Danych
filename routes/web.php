@@ -9,6 +9,7 @@ use App\Http\Controllers\ZamowieniaKlientController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiskiStan;
+use App\Http\Controllers\ZamAdminController;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 /*
@@ -80,11 +81,12 @@ Route::middleware(['auth', 'verified'])->group(function(){
 });
 
 
-//Powiadomienia o stanie + email
+//Powiadomienia o stanie + zamówienia admin
 
+Route::get('/zamadmin',[ZamAdminController::class, 'wypisz']);
 
 Route::get('/niskistan',[NiskiStan::class, 'wypisz']);
 
-Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
+//Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
 
 
