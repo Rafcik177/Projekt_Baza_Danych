@@ -21,6 +21,8 @@
                                     <th class="text-center">Cena</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Id zamawiającego</th>
+                                    <th class="text-center">Szczegóły Zamówienia</th>
+                                    
                             </thead>
                             <tbody>
                                 @foreach($zamadmin as $za)
@@ -31,6 +33,7 @@
                                     <td class="text-center">{{$za->cena}}</td>
                                     <td class="text-center">{{$za->status}}</td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
+                                    <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
                                     
                                 </tr>
                                 @endforeach

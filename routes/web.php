@@ -35,6 +35,7 @@ Route::get('/email', function (){
 
 
 //Dla magazynu
+
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
@@ -46,6 +47,9 @@ Route::resource('produkcja', ProdukcjaController::class);
 
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);
+
+Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
+Route::resource('zamadmin', ZamAdminController::class);
 
 Route::get('/historia', [HistoriaController::class, 'index']);
 Route::resource('historia', HistoriaController::class);
@@ -83,7 +87,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //Powiadomienia o stanie + zamówienia admin
 
-Route::get('/zamadmin',[ZamAdminController::class, 'wypisz']);
+//Route::get('/zamadmin',[ZamAdminController::class, 'wypisz']);
 
 Route::get('/niskistan',[NiskiStan::class, 'wypisz']);
 
