@@ -14,7 +14,7 @@
                         
                         <table class="table table-striped">
                             <thead>
-                                <tr class="bg-warning">
+                                <tr class="bg-danger">
                                     <th class="text-center">Lp.</th>
                                     <th class="text-center">Nazwa części</th>
                                     <th class="text-center">Ilość</th>
@@ -22,7 +22,7 @@
                             </thead>
                             <tbody>
                                 @foreach($niskistan as $ns)
-                                <tr class="table-warning">
+                                <tr class="table-danger">
                                     <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$ns->id}}</td> -->
                                     <td class="text-center">{{$ns->nazwa_czesci}}</td> 
                                     <td class="text-center">{{$ns->ilosc}}</td>

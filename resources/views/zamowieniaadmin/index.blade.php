@@ -14,7 +14,7 @@
                         
                         <table class="table table-striped">
                             <thead>
-                                <tr class="bg-suces">
+                                <tr class="bg-warning">
                                     <th class="text-center">Lp.</th>
                                     <th class="text-center">Id Zamówienia</th>
                                     <th class="text-center">Data Złożenia</th>
@@ -26,7 +26,7 @@
                             </thead>
                             <tbody >
                                 @foreach($zamadmin as $za)
-                                <tr class="table-succes">
+                                <tr class="table-warning">
                                     <td class="text-center">{{ $loop->index + 1 }}</td> 
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>

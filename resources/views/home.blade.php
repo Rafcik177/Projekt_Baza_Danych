@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        @if (Auth::user()->role == 'dzial_magazyn')
+                        @if (Auth::user()->role == 'dzial_magazyn' or 'admin')
                             @php
                                 $liczba = App\Http\Controllers\NiskiStan::stanczesci();
                             @endphp
@@ -24,15 +24,10 @@
                                     Uwaga - zanotowano niski stan części w magazynie!!! <br>
                                     <a href="{{url('niskistan')}}">Kliknij by wejść w stan magazynowy !</a>
                                 </div>
-
-                                
-                                
-                            
-
                             @endif
                         @endif
 
-                        @if (Auth::user()->role == 'admin')
+                        @if (Auth::user()->role == 'admin' )
                             @php
                                 $liczba = App\Http\Controllers\ZamAdminController::zamowieniaadmin();
                             @endphp
