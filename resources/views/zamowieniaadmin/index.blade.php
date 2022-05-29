@@ -20,19 +20,20 @@
                                     <th class="text-center">Data Złożenia</th>
                                     <th class="text-center">Cena</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Id zamawiającego</th>
+                                    <th class="text-center">Id Zamawiającego</th>
                                     <th class="text-center">Szczegóły Zamówienia</th>
                                     
                             </thead>
-                            <tbody>
+                            <tbody >
                                 @foreach($zamadmin as $za)
                                 <tr class="table-succes">
-                                    <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$za->id}}</td> -->
+                                    <td class="text-center">{{ $loop->index + 1 }}</td> 
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
-                                    <td class="text-center">{{$za->cena}}</td>
+                                    <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
                                     <td class="text-center">{{$za->status}}</td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
+
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
                                     
                                 </tr>

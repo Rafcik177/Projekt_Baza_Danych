@@ -32,6 +32,24 @@
                             @endif
                         @endif
 
+                        @if (Auth::user()->role == 'admin')
+                            @php
+                                $liczba = App\Http\Controllers\ZamAdminController::zamowieniaadmin();
+                            @endphp
+
+                            @if ($liczba != 0)
+                                <div class='text-bold' style="font-size: 26px">
+                                    Sprawdź otrzymane zamówienia! <br>
+                                    <a href="{{url('zamadmin')}}">Kliknij by wejść w zamówienia !</a>
+                                </div>
+
+                                
+                                
+                            
+
+                            @endif
+                        @endif
+
 
                         {{ __('Zostałeś poprawnie zalogowany!') }}
                     </div>
