@@ -15,6 +15,9 @@ use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\ZamAdminController;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\DzialyController;
+use App\Http\Controllers\UrlopyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +70,13 @@ Route::get('/modele', [ModeleController::class, 'index']);
 Route::resource('/modele', ModeleController::class);
 
 Route::resource('/spisyczesci', SpisyCzesciController::class);
+
+Route::get('/dzialy', [DzialyController::class, 'index']);
+Route::resource('dzialy', DzialyController::class);
+
+Route::get('/urlopy', [UrlopyController::class, 'index']);
+Route::resource('urlopy', UrlopyController::class);
+
 
 Auth::routes();
  //poniższa grupa jest dla wszystkich zalogowanych

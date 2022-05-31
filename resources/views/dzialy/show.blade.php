@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Lista pracowników') }} </div>
+
+                <div class="card-header">{{$nazwa}} </div>
+
                 <div class="row text center">
 
                     <div class="table-responsive">
@@ -28,7 +30,7 @@
                                     <th class="text-center">Pokaż</th>
                             </thead>
                             <tbody>
-                                @foreach($pracownicy as $pra)
+                                @foreach($dzial as $pra)
                                 <tr >
                                     <td class="text-center">{{ $loop->index + 1 }}</td> 
                                     <td class="text-center">{{$pra->imie}}</td> 
@@ -70,7 +72,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <a href="{{route('pracownicy.create') }}" class="btn btn-primary col-3">Dodaj nowego pracownika</a>
+                        <a href="{{route('dzialy.index') }}" class="btn btn-primary col-3">Powrót</a>
                     </div>
                    
 
