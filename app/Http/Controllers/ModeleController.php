@@ -5,17 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Modele;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 //ModeleController: CRUD modeli maszyn
 
 class ModeleController extends Controller
 {
-    /*public function index()
-    {
-        $maszyna = Maszyna::all();
-        return view('produkcja.index', compact('maszyna'));
-    }*/
-
     /**
      * Display a listing of the resource.
      *
@@ -77,13 +72,14 @@ class ModeleController extends Controller
     public function show($id)
     {
         $model = Modele::findOrFail($id);
-        return view('modele.show', compact('model'));
+        $czesci = DB::select('select id, nazwa_czesci, ilosc_do_wykonania from czesci where id_modelu = ?', [$model->id]);
+        return view('modele.show', compact('model','czesci'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Maszyna  $maszyna
+     * @param  \App\Models\Modele  $model
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
