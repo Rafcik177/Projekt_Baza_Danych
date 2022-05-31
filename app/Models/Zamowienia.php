@@ -10,6 +10,7 @@ class Zamowienia extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'id_zamawiajacego',
         'id_modelu',
         'ilosc',
@@ -18,10 +19,8 @@ class Zamowienia extends Model
         'realizacja',
         'cena',
         'id_zamowienia'
-              
     ];
 
     protected $table = 'zamowienia';
     public $timestamps = false;
 }
- 

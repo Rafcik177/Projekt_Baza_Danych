@@ -13,7 +13,7 @@
                         {{ method_field('PATCH') }}
 
                          <div class="row mb-3">
-                            <label for="id_zamowienia" class="col-md-4 col-form-label text-md-end">{{ __('ID zamówienia') }}</label>
+                            <label for="id_zamowienia" class="col-md-4 col-form-label text-md-end">{{ __('Numer zamówienia') }}</label>
 
                             <div class="col-md-6">
                                 <input id="id_zamowienia" type="text" class="form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ $stan->id_zamowienia }}" required autocomplete="id_zamowienia" autofocus>
@@ -33,12 +33,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="id_modelu" class="col-md-4 col-form-label text-md-end">{{ __('ID modelu') }}</label>
+                            <label for="nazwa_modelu" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa modelu') }}</label>
 
                             <div class="col-md-6">
-                                <input id="id_modelu" type="text" class="form-control @error('id_modelu') is-invalid @enderror" name="id_modelu" value="{{ $stan->id_modelu }}" required autocomplete="id_modelu" autofocus>
+                                <input id="nazwa_modelu" type="text" class="form-control @error('nazwa_modelu') is-invalid @enderror" name="nazwa_modelu" value="{{ $stan->nazwa_modelu }}" required autocomplete="nazwa_modelu" autofocus>
 
-                                @error('id_modelu')
+                                @error('nazwa_modelu')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

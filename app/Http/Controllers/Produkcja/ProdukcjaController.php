@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Produkcja;
 
 use App\Models\StanProdukcji;
+use App\Models\Zamowienia;
+use App\Models\Modele;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,13 @@ class ProdukcjaController extends Controller
     public function index()
     {
         $stan = StanProdukcji::all();
-        return view('produkcja.index', compact('stan'));
+        $zam_numer = [];
+        $model_nazwa = [];
+        foreach($stan as $s) {
+            $zam_numer[] = Zamowienia::findOrFail($s->id_zamowienia)->id_zamowienia;
+            $model_nazwa[] = Modele::findOrFail($s->id_modelu)->nazwa;
+        }
+        return view('produkcja.index', compact('stan','zam_numer','model_nazwa'));
     }
 
     /**
@@ -42,13 +50,13 @@ class ProdukcjaController extends Controller
     {
         $this->validate($request,[
             'id_zamowienia' => 'required',
-            'id_modelu' => 'required',
+            'nazwa_modelu' => 'required',
             'ilosc_docelowa' => 'required'
         ]);
 
         $stan = new StanProdukcji;
-        $stan->id_zamowienia = $request->id_zamowienia;
-        $stan->id_modelu = $request->id_modelu;
+        $stan->id_zamowienia = Zamowienia::where('id_zamowienia',$request->id_zamowienia)->firstOrFail()->id;
+        $stan->id_modelu = Modele::where('nazwa', $request->nazwa_modelu)->firstOrFail()->id;
         $stan->ilosc_obecna = 0; //default value
         $stan->ilosc_docelowa = $request->ilosc_docelowa;
         $stan->save();
@@ -65,7 +73,9 @@ class ProdukcjaController extends Controller
     public function show($id)
     {
         $stan = StanProdukcji::findOrFail($id);
-        return view('produkcja.show', compact('stan'));
+        $zam_numer = Zamowienia::findOrFail($stan->id_zamowienia)->id_zamowienia;
+        $model_nazwa = Modele::findOrFail($stan->id_modelu)->nazwa;
+        return view('produkcja.show', compact('stan','zam_numer','model_nazwa'));
     }
 
     /**
@@ -91,14 +101,14 @@ class ProdukcjaController extends Controller
     {
         $this->validate($request,[
             'id_zamowienia' => 'required',
-            'id_modelu' => 'required',
+            'nazwa_modelu' => 'required',
             'ilosc_obecna' => 'required',
             'ilosc_docelowa' => 'required'
         ]);
-
+        
         $stan = StanProdukcji::find($id);
-        $stan->id_zamowienia = $request->id_zamowienia;
-        $stan->id_modelu = $request->id_modelu;
+        $stan->id_zamowienia = Zamowienia::where('id_zamowienia',$request->id_zamowienia)->firstOrFail()->id;
+        $stan->id_modelu = Modele::where('nazwa', $request->nazwa_modelu)->firstOrFail()->id;
         $stan->ilosc_obecna = $request->ilosc_obecna;
         $stan->ilosc_docelowa = $request->ilosc_docelowa;
         $stan->save();

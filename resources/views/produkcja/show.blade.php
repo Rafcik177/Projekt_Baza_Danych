@@ -10,12 +10,16 @@
                     <div class="card-body">
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Numer zamówienia: ') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($stan->id_zamowienia) }}</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">
+                                <a href="{{ route('zamadmin.show', $stan->id_zamowienia) }}">{{ __($zam_numer) }}</a>
+                            </label>
                         </div>
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa modelu maszyny: ') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($stan->id_modelu) }}</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">
+                                <a href="{{ route('modele.show', $stan->id_modelu) }}">{{ __($model_nazwa) }}</a>
+                            </label>   
                         </div>
 
                         <div class="row mb-3">

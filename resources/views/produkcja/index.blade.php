@@ -25,8 +25,11 @@
                                 @foreach($stan as $s)
                                 <tr>
                                     <td class="text-center">{{ $loop->index + 1 }}</td>
-                                    <td class="text-center">{{$s->id_zamowienia}}</td>
-                                    <td class="text-center">{{$s->id_modelu}}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('zamadmin.show', $s->id_zamowienia) }}">{{ $zam_numer[$loop->index] }}</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('modele.show', $s->id_modelu) }}">{{ $model_nazwa[$loop->index] }}</a>
                                     <td class="text-center">{{$s->ilosc_obecna}}</td>
                                     <td class="text-center">{{$s->ilosc_docelowa}}</td>
                                     <td><a href="{{ route('produkcja.edit', $s->id) }}">Edytuj</a></td>
