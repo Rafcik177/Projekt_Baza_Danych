@@ -42,7 +42,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="dlugosc" class="col-md-4 col-form-label text-md-end">{{ __('Długość') }}</label>
+                            <label for="dlugosc" class="col-md-4 col-form-label text-md-end">{{ __('Długość (m)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="dlugosc" type="text" class="form-control @error('dlugosc') is-invalid @enderror" name="dlugosc" value="{{ old('dlugosc') }}" required autocomplete="dlugosc" autofocus>
@@ -57,7 +57,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="szerokosc" class="col-md-4 col-form-label text-md-end">{{ __('Szerokość') }}</label>
+                            <label for="szerokosc" class="col-md-4 col-form-label text-md-end">{{ __('Szerokość (m)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="szerokosc" type="text" class="form-control @error('szerokosc') is-invalid @enderror" name="szerokosc" value="{{ old('szerokosc') }}" required autocomplete="szerokosc" autofocus>
@@ -72,7 +72,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="wysokosc" class="col-md-4 col-form-label text-md-end">{{ __('Wysokość') }}</label>
+                            <label for="wysokosc" class="col-md-4 col-form-label text-md-end">{{ __('Wysokość (m)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="wysokosc" type="text" class="form-control @error('wysokosc') is-invalid @enderror" name="wysokosc" value="{{ old('wysokosc') }}" required autocomplete="wysokosc" autofocus>
@@ -87,7 +87,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="waga" class="col-md-4 col-form-label text-md-end">{{ __('Waga') }}</label>
+                            <label for="waga" class="col-md-4 col-form-label text-md-end">{{ __('Waga (kg)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="waga" type="text" class="form-control @error('waga') is-invalid @enderror" name="waga" value="{{ old('waga') }}" required autocomplete="waga" autofocus>

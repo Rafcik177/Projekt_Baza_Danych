@@ -16,25 +16,25 @@
 
 
                         <div class="row mb-3">
-                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Długość: ') }}</label>
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Długość (m): ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->dlugosc) }}</label>   
                         </div>
 
 
                         <div class="row mb-3">
-                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Szerokość: ') }}</label>
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Szerokość (m): ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->szerokosc) }}</label>   
                         </div>
 
 
                         <div class="row mb-3">
-                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Wysokość: ') }}</label>
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Wysokość (m): ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->wysokosc) }}</label>   
                         </div>
 
 
                         <div class="row mb-3">
-                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Waga: ') }}</label>
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Waga (kg): ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->waga) }}</label>   
                         </div>
 

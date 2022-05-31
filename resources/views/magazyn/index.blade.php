@@ -15,10 +15,10 @@
                                     <th class="text-center">Lp.</th>
                                     <th class="text-center">Nazwa części</th>
                                     <th class="text-center">Opis</th>
-                                    <th class="text-center">Długość</th>
-                                    <th class="text-center">Szerokość</th>
-                                    <th class="text-center">Wysokość</th>
-                                    <th class="text-center">Waga</th>
+                                    <th class="text-center">Długość (m)</th>
+                                    <th class="text-center">Szerokość (m)</th>
+                                    <th class="text-center">Wysokość (m)</th>
+                                    <th class="text-center">Waga (kg)</th>
                                     <th class="text-center">Ilość</th>
                                     <th class="text-center">Próg niskiego stanu</th>
                                     <th class="text-center">Edytuj</th>

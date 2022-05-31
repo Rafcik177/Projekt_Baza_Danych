@@ -72,8 +72,17 @@
                                 <a class="dropdown-item" href="{{ url('/magazyn') }}">
                                     {{ __('Magazyn') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ url('/dzialy') }}">
+                                    {{ __('Działy') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ url('/pracownicy') }}">
                                     {{ __('Pracownicy') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/historia') }}">
+                                    {{ __('Historia') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ url('/urlopy') }}">
+                                    {{ __('Urlopy') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ url('/produkcja') }}">
                                     {{ __('Produkcja') }}
