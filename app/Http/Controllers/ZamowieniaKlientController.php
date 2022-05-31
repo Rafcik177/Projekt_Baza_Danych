@@ -21,7 +21,13 @@ class ZamowieniaKlientController extends Controller
     public function index()
     {
         //tutaj zmiana musi być. Trzeba brać z bazy id zamówienia, które będzie tworzone podczas dodawania do bazy
-        $zamowienia = DB::table('zamowienia')->where('id_zamawiajacego', Auth::user()->id)->where('id_zamowienia', '<>', '')->paginate(10);
+        $zamowienia = DB::table('zamowienia AS zz')
+        ->select("status", "data_zlozenia", "id_zamowienia", DB::raw('(SELECT  sum(ilosc*cena_pojedyncza) FROM `zamowienia` AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena'))
+        ->where('id_zamawiajacego', Auth::user()->id)
+        ->where('id_zamowienia', '<>', '')
+        ->paginate(10);
+        
+        
         return view('zamowieniaKlient/index', ['zamowienia' => $zamowienia]);
     }
 /**
@@ -56,7 +62,7 @@ class ZamowieniaKlientController extends Controller
             $suma=$suma+ $request->ilosc[$i];
         }
         
-        $calkowita_kwota= 0;
+       
         for($i=0; $i<=$count-1; $i++)
         {
             $zamowienie = new Zamowienia($request->all());
@@ -64,21 +70,19 @@ class ZamowieniaKlientController extends Controller
             $zamowienie->id_zamowienia = '';
             $zamowienie->id_modelu = $request->pojazd[$i];
             $iloscPojazdow=$zamowienie->ilosc = $request->ilosc[$i];
-            $zamowienie->status = "Złożono";
             $zamowienie->data_zlozenia= $datatime;
             $zamowienie->realizacja= 0;
-            $cenamodelu = DB::table('modele')->where('id', $request->pojazd[$i])->first();
-            $cenapojazdu=$cenamodelu->cena;
-            $calkowitacena=$cenapojazdu*$iloscPojazdow;
-            $calkowita_kwota=$calkowita_kwota+$calkowitacena;
-            $zamowienie->cena= $calkowitacena;
+            $model = DB::table('modele')->where('id', $request->pojazd[$i])->first();
+            $zamowienie->nazwa_modelu= $model->nazwa;
+            $cenapojazdu=$model->cena;
+            $zamowienie->cena_pojedyncza= $cenapojazdu;
             $zamowienie->odnosnie_id_zamowienia= $numer_zamowienia;
             if($iloscPojazdow!=0)
             {
                $zamowienie->save();
             }
         }
-        DB::insert('INSERT INTO zamowienia (id_zamawiajacego, id_zamowienia, status, data_zlozenia, realizacja, cena, odnosnie_id_zamowienia ) values (?, ?,?,?,?,?,?)', [$userID, $numer_zamowienia, "Złożono", $datatime, "0",$calkowita_kwota, '']);
+        DB::insert('INSERT INTO zamowienia (id_zamawiajacego, id_zamowienia, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia ) values (?, ?,?,?,?,?,?)', [$userID, $numer_zamowienia, "Złożono", $datatime, "0",'', '']);
         return redirect(route('zamowienia.index'));
     }
 
@@ -98,12 +102,20 @@ class ZamowieniaKlientController extends Controller
          else
          {
             $pokaz = DB::table('zamowienia')
-            ->join('modele', 'modele.id','=','zamowienia.id_modelu')
-            ->select('modele.nazwa','modele.cena as pojedyncza_cena','zamowienia.ilosc','zamowienia.cena as laczna_cena')
+            ->select('id_modelu','nazwa_modelu','ilosc','cena_pojedyncza', DB::raw('ilosc*cena_pojedyncza as laczna_cena',)) 
             ->where('id_zamawiajacego', Auth::user()->id)
             ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
             
-            return view('zamowieniaKlient/show', compact('pokaz', 'id','glowne'));
+            $laczna_cena=DB::table('zamowienia')
+            ->where('id_zamawiajacego', Auth::user()->id)
+            ->where('odnosnie_id_zamowienia', $id)
+            ->sum(DB::raw('ilosc*cena_pojedyncza'));
+            
+            $kupujacy=DB::table('users')
+            ->select('imie', 'nazwisko', 'firma', 'email')
+            ->where('id', Auth::user()->id)->first();
+
+            return view('zamowieniaKlient/show', compact('pokaz', 'id','glowne','laczna_cena', 'kupujacy'));
          }
         
         

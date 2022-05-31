@@ -36,7 +36,7 @@
                         </tr>
                         <tr>
                             <td class="col-6">
-                                <a class="btn btn-secondary col-12"> <!-- href="{{route('zamowienia.index') }}" -->
+                                <a href="{{url('zamadmin')}}" class="btn btn-primary col-12">
                                     Zamówienia
                                 </a>
                             </td>

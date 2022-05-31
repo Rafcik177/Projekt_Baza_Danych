@@ -47,7 +47,7 @@
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Próg niskiego stanu:') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->prog_niskiego_stanu) }}</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($magazyn->prog_niskiego_stanu) }}</label> 
                         </div>
 
                         <div class="row mb-0">

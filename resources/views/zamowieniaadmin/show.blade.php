@@ -4,8 +4,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-
-                <div class="card-header">{{ __('Szczegóły zamowienia o numerze: ') }}{{$id}} <a style="float:right;" href="{{ route('zamowienia.index') }}">Powrót</a></div>
+           
+                <div class="card-header">{{ __('Szczegóły zamowienia o numerze: ') }}{{$id}} <a style="float:right;" href="{{ route('zamadmin.index') }}">Powrót</a></div>
                 <div class="card-header">Zamawiający:</div>
                 <table class="table ">
                     <tbody>
@@ -19,7 +19,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div></br>
+            </div><br>
             <div class="card">
                 <div class="card-header">Wybrane modele:</div>
                 <table class="table table-striped">
@@ -41,7 +41,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div></br>
+            </div><br>
             <div class="card">
                 @foreach($glowne as $g)
                 <table class="table table-striped">
@@ -59,9 +59,9 @@
                 @if(isset($error))
                 {{$error}}
                 @endif
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

@@ -9,7 +9,10 @@ use App\Http\Controllers\Produkcja\ProdukcjaController;
 use App\Http\Controllers\ZamowieniaKlientController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\NiskiStan;
+use App\Http\Controllers\ZamAdminController;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +28,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/email', function (){
+    Mail::to('tocarra.2@mufollowsa.com')->send(new WelcomeMail());
+    return new WelcomeMail();
+});
+
 
 
 //Dla magazynu
+
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
@@ -39,6 +48,9 @@ Route::resource('produkcja', ProdukcjaController::class);
 
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);
+
+Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
+Route::resource('zamadmin', ZamAdminController::class);
 
 Route::get('/historia', [HistoriaController::class, 'index']);
 Route::resource('historia', HistoriaController::class);
@@ -75,5 +87,14 @@ Route::middleware(['auth', 'verified'])->group(function(){
     });
     
 });
+
+
+//Powiadomienia o stanie + zamówienia admin
+
+//Route::get('/zamadmin',[ZamAdminController::class, 'wypisz']);
+
+Route::get('/niskistan',[NiskiStan::class, 'wypisz']);
+
+//Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
 
 
