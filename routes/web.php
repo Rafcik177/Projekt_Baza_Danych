@@ -13,6 +13,7 @@ use App\Http\Controllers\ZamAdminController;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\DzialyController;
+use App\Http\Controllers\UrlopyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,8 @@ Route::resource('admin', AdminController::class);
 Route::get('/dzialy', [DzialyController::class, 'index']);
 Route::resource('dzialy', DzialyController::class);
 
-Route::get('/dzialy/show',[DzialyController::class, 'show']);
+Route::get('/urlopy', [UrlopyController::class, 'index']);
+Route::resource('urlopy', UrlopyController::class);
 
 
 Auth::routes();

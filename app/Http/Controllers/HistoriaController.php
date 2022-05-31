@@ -6,6 +6,7 @@ use App\Models\Historia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use DB;
 
 class HistoriaController extends Controller
 {
@@ -18,6 +19,7 @@ class HistoriaController extends Controller
     {
         $historia = Historia::all();
         return view('historia.index', compact('historia'));
+
     }
 
     /**
@@ -46,6 +48,7 @@ class HistoriaController extends Controller
             'stanowisko' => 'required',
         ]);
 
+
         $historia = new Historia;
         $historia->id_pracownika = $request->id_pracownika;
         $historia->data_start = $request->data_start;
@@ -55,6 +58,7 @@ class HistoriaController extends Controller
         $historia->save();
 
         return redirect(route('historia.index'));
+
     }
 
     /**

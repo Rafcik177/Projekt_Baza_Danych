@@ -127,10 +127,4 @@ class DzialyController extends Controller
         //
     }
 
-    public function administacja()
-    {
-        $administracja = DB::table('users')->whereRaw('id_wydzialu == 1')->get();
-        return view('dzialy/administracja', ['administracja'=>$administracja]);
-    }
-
 }
