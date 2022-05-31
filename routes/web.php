@@ -12,6 +12,8 @@ use App\Http\Controllers\NiskiStan;
 use App\Http\Controllers\ZamAdminController;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\DzialyController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +59,11 @@ Route::resource('historia', HistoriaController::class);
 
 Route::get('/admin', [AdminController::class, 'index']);
 Route::resource('admin', AdminController::class);
+
+Route::get('/dzialy', [DzialyController::class, 'index']);
+Route::resource('dzialy', DzialyController::class);
+
+Route::get('/dzialy/show',[DzialyController::class, 'show']);
 
 
 Auth::routes();
