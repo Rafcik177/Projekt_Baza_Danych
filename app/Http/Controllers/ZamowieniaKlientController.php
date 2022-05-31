@@ -112,7 +112,7 @@ class ZamowieniaKlientController extends Controller
             ->sum(DB::raw('ilosc*cena_pojedyncza'));
             
             $kupujacy=DB::table('users')
-            ->select('imie', 'nazwisko', 'firma', 'email')
+            ->select('imie', 'nazwisko', 'firma', 'email','adres')
             ->where('id', Auth::user()->id)->first();
 
             return view('zamowieniaKlient/show', compact('pokaz', 'id','glowne','laczna_cena', 'kupujacy'));
@@ -131,8 +131,7 @@ class ZamowieniaKlientController extends Controller
     {
         
         $edycja = DB::table('zamowienia')
-        ->join('modele', 'modele.id','=','zamowienia.id_modelu')
-        ->select('modele.nazwa','modele.cena as pojedyncza_cena','zamowienia.id','zamowienia.ilosc','zamowienia.cena as laczna_cena')
+        ->select('id_modelu','nazwa_modelu','cena_pojedyncza','id','ilosc')
         ->where('id_zamawiajacego', Auth::user()->id)
         ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
         if ($edycja === null) {
@@ -161,44 +160,21 @@ class ZamowieniaKlientController extends Controller
      */
     public function update(Request $request, $id) //ten id to numer zamówienia do którego się odnosi
     {
-        //to będzie proste, sam wiesz
+        
              if(isset($request->zmien))
-             {$id_user = Auth::user()->id;
+             {
                 $count = count( $request->zmien);
                 for($i=0; $i<=$count-1; $i++)
                 {
-                    if($request->ilosc[$i]=='0')
-                    {
-                        DB::statement("DELETE FROM zamowienia  where id = ".$request->zmien[$i]." AND id_zamawiajacego = '$id_user'"); 
-                    }
                     $edycja = Zamowienia::find($request->zmien[$i]);
                     $edycja->ilosc=$request->ilosc[$i];
                     $edycja->id=$request->zmien[$i];
 
-
-                    $cenazam = DB::table('zamowienia')->where('id', $request->zmien[$i])->first();
-                    $nowacena=(($cenazam->cena)/($cenazam->ilosc))*$request->ilosc[$i];
-                    $edycja->cena=$nowacena;
-                    
-                    $roznica_cen=$cenazam->cena-$nowacena;
-
-                    $cenacalosci = DB::table('zamowienia')->where('id_zamowienia', $id)->first();
-                    $nowacenacalosci=($cenacalosci->cena)-($roznica_cen);
-
                     $edycja->update();
-                    
-                    DB::statement("UPDATE zamowienia SET cena = '$nowacenacalosci' where id_zamowienia = '$id' AND id_zamawiajacego = '$id_user'");
-                    return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
-                
-                }
-                
-                
+                }    
              }
-             
-              
-            
-            
-            
+             return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
+      
     }
 
     /**

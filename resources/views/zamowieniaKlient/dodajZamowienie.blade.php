@@ -14,7 +14,11 @@
                     @foreach($modele as $modele)
                     
                     <div class="flex-column p-3 m-2 bd-highlight bg-light">
-                        <div class="p-2 text-center " style="font-weight: 600; font-size:20px;">{{$modele->nazwa}}</div>
+                        <div class="p-2 text-center " style="font-weight: 600; font-size:20px;">
+                        <a href="{{ route('oferta.show', $modele->id) }}" style="text-decoration:none; color:black;">
+                                    {{$modele->nazwa}}
+                                </a>
+                        </div>
                         <div class="p-2 text-center">[Grafika]</div>
                         <div class="p-2 ">Typ: {{$modele->kategoria}}</div>
                         @if($modele->moc!=0)

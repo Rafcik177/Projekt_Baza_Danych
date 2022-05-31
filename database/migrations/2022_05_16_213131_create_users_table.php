@@ -99,7 +99,21 @@ return new class extends Migration
                 'role'=>'dzial_hr'
             )
             );
-        
+            DB::table('users')->insert(
+                array(
+                    'imie' => 'Rafał',
+                    'nazwisko' => 'Michalik',
+                    'pesel' => '91030467389',
+                    'data_urodzenia' => '1991-03-04',
+                    'stanowisko' => null,
+                    'czy_kierownik' => 0,
+                    'wynagrodzenie_miesieczne' => NULL,
+                    'id_wydzialu' => NULL,
+                    'email' => "rafcik1771@gmail.com",
+                    'password' => Hash::make('12345'),
+                     'role'=>'klient'
+                )
+                );
     }
 
     /**

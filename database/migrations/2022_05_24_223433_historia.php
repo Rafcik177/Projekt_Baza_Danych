@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('stanowisko');
         });
 
+        /*
+        wszystko do poprawy
         $datas =\DB::table('users')->latest()->get();
         foreach($datas as $data){
             DB::table('historia')
@@ -33,7 +35,7 @@ return new class extends Migration
                 'stanowisko'=>$data->stanowisko, 
             ]);
         }
-
+        */
     }
 
     /**

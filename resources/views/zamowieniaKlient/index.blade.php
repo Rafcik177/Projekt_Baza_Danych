@@ -14,7 +14,7 @@
                             <th class="text-center">Status</th>
                             <th class="text-center">Data złożenia</th>
                             <th class="text-center">Kwota</th>
-                            <th class="text-center"><!-- Edytuj--></th>
+                            <th class="text-center">Edytuj</th>
                             <th class="text-center">Anuluj</th>
                             <th class="text-center">Szczegóły</th>
                     </thead>
@@ -33,7 +33,7 @@
                                 @endphp
                                 @if($zamow>$nowa)
                                 
-                                <!--<a href="{{ route('zamowienia.edit', $zam->id_zamowienia) }}">Edytuj</a>-->
+                                <a href="{{ route('zamowienia.edit', $zam->id_zamowienia) }}">Edytuj</a>
                                 @endif
                             
                             </td>

@@ -17,6 +17,7 @@ class Modele extends Model
         'max_predkosc',
         'waga',
         'cena',
+        'opis',
               
     ];
 

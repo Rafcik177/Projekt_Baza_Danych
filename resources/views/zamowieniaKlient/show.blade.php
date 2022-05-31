@@ -11,11 +11,15 @@
                     <tbody>
                         <tr class="success">
                             <td class="text-center">Imię: {{$kupujacy->imie}} </td>
-                            <td class="text-center">E-mail: {{$kupujacy->email}}</td> 
-                            <tr>  
-                            </tr>
+                            <td class="text-center">E-mail: {{$kupujacy->email}}</td>
+                        </tr>
+                        <tr>
                             <td class="text-center">Nazwisko: {{$kupujacy->nazwisko}}</td>
                             <td class="text-center">Firma: {{$kupujacy->firma}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">Adres: {{$kupujacy->adres}}</td>
+                            <td class="text-center"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,10 +37,14 @@
                     <tbody>
                         @foreach($pokaz as $p)
                         <tr>
-                            <td class="text-center">{{$p->nazwa_modelu}} </td>
+                            <td class="text-center">
+                                <a href="{{ route('oferta.show', $p->id_modelu) }}">
+                                    {{$p->nazwa_modelu}}
+                                </a>
+                             </td>
                             <td class="text-center">{{$p->ilosc}}</td>
                             <td class="text-center">{{number_format((int)$p->cena_pojedyncza,0,"."," ")}} zł</td>
-                            <td class="text-center">{{number_format((int)$p->laczna_cena,0,"."," ")}} zł</td>   
+                            <td class="text-center">{{number_format((int)$p->laczna_cena,0,"."," ")}} zł</td>
                         </tr>
                         @endforeach
                     </tbody>

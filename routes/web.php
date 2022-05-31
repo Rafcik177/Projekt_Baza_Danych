@@ -9,6 +9,7 @@ use App\Http\Controllers\ZamowieniaKlientController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NiskiStan;
+use App\Http\Controllers\OfertaController;
 use App\Http\Controllers\ZamAdminController;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
@@ -33,6 +34,8 @@ Route::get('/email', function (){
 });
 
 
+Route::get('/oferta', [OfertaController::class, 'index']);
+Route::resource('/oferta', OfertaController::class);
 
 //Dla magazynu
 

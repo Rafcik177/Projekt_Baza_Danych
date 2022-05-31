@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('waga');
             $table->string('cena', 20);
             $table->boolean('czy_ukonczona')->default(false);
+            $table->text('opis')->nullable();
         });
         DB::table('modele')->insert(
             array(
