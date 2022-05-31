@@ -10,6 +10,7 @@ class Modele extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'nazwa',
         'kategoria',
         'moc',

@@ -529,6 +529,7 @@ class ComposerStaticInit9be7dce4a34886525451b639f8219371
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MagazynController' => __DIR__ . '/../..' . '/app/Http/Controllers/MagazynController.php',
         'App\\Http\\Controllers\\NiskiStan' => __DIR__ . '/../..' . '/app/Http/Controllers/NiskiStan.php',
+        'App\\Http\\Controllers\\ModeleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ModeleController.php',
         'App\\Http\\Controllers\\PracownicyController' => __DIR__ . '/../..' . '/app/Http/Controllers/PracownicyController.php',
         'App\\Http\\Controllers\\Produkcja\\ProdukcjaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Produkcja/ProdukcjaController.php',
         'App\\Http\\Controllers\\ZamAdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/ZamAdminController.php',

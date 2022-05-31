@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MagazynController;
+use App\Http\Controllers\ModeleController;
 use App\Http\Controllers\PracownicyController;
 use App\Http\Controllers\Produkcja\ProdukcjaController;
+use App\Http\Controllers\SpisyCzesciController;
 use App\Http\Controllers\ZamowieniaKlientController;
 use App\Http\Controllers\HistoriaController;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +63,10 @@ Route::resource('historia', HistoriaController::class);
 Route::get('/admin', [AdminController::class, 'index']);
 Route::resource('admin', AdminController::class);
 
+Route::get('/modele', [ModeleController::class, 'index']);
+Route::resource('/modele', ModeleController::class);
+
+Route::resource('/spisyczesci', SpisyCzesciController::class);
 
 Auth::routes();
  //poniższa grupa jest dla wszystkich zalogowanych
