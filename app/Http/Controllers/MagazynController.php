@@ -38,14 +38,14 @@ class MagazynController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nazwa_czesci' => 'required',
-            'opis' => 'required',
-            'dlugosc' => 'required',
-            'szerokosc' => 'required',
-            'wysokosc' => 'required',
-            'waga' => 'required',
-            'ilosc' => 'required',
-            'prog_niskiego_stanu' => 'required',
+            'nazwa_czesci' => 'required|max:45',
+            'opis' => 'required|max:45',
+            'dlugosc' => 'required|numeric',
+            'szerokosc' => 'required|numeric',
+            'wysokosc' => 'required|numeric',
+            'waga' => 'required|numeric',
+            'ilosc' => 'required|numeric',
+            'prog_niskiego_stanu' => 'required|numeric',
         ]);
 
         $magazyn = new Magazyn;
@@ -96,15 +96,16 @@ class MagazynController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'nazwa_czesci' => 'required',
-            'opis' => 'required',
-            'dlugosc' => 'required',
-            'szerokosc' => 'required',
-            'wysokosc' => 'required',
-            'waga' => 'required',
-            'ilosc' => 'required',
-            'prog_niskiego_stanu' => 'required',
+            'nazwa_czesci' => 'required|max:45',
+            'opis' => 'required|max:45',
+            'dlugosc' => 'required|numeric',
+            'szerokosc' => 'required|numeric',
+            'wysokosc' => 'required|numeric',
+            'waga' => 'required|numeric',
+            'ilosc' => 'required|numeric',
+            'prog_niskiego_stanu' => 'required|numeric',
             ]);
+            
         $magazyn = Magazyn::find($id);
         $magazyn->nazwa_czesci = $request->nazwa_czesci;
         $magazyn->opis = $request->opis;

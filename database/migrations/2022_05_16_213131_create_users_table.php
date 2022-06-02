@@ -35,7 +35,10 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
             $table->enum('role', allowed: RoleNZTK::TYPES)->default(RoleNZTK::KLIENT);
+            $table->integer('lata_pracy')->nullable();
+            $table->boolean('czy_zwolniony')->nullable();
         });
+
         DB::table('users')->insert(
             array(
                 'imie' => 'Jan',
@@ -48,7 +51,9 @@ return new class extends Migration
                 'id_wydzialu' => 5,
                 'email' => "jankowalski@gmail.com",
                 'password' => Hash::make('12345'),
-                 'role'=>'dzial_magazyn'
+                'role' =>'dzial_magazyn',
+                'lata_pracy' => 9,
+                'czy_zwolniony' => 0 
             )
             );
 
@@ -64,7 +69,9 @@ return new class extends Migration
                 'id_wydzialu' => 5,
                 'email' => "jakubnowak@gmail.com",
                 'password' => Hash::make('12345'),
-                'role'=>'dzial_magazyn'
+                'role'=>'dzial_magazyn',
+                'lata_pracy' => 11,
+                'czy_zwolniony' => 0 
             )
             );
 
@@ -80,7 +87,9 @@ return new class extends Migration
                 'id_wydzialu' => 4,
                 'email' => "andrzejmorski@gmail.com",
                 'password' => Hash::make('12345'),
-                'role'=>'dzial_produkcji'
+                'role'=>'dzial_produkcji',
+                'lata_pracy' => 14,
+                'czy_zwolniony' => 0 
             )
             );
 
@@ -96,7 +105,9 @@ return new class extends Migration
                 'id_wydzialu' => 3,
                 'email' => "konradwolski@gmail.com",
                 'password' => Hash::make('12345'),
-                'role'=>'dzial_hr'
+                'role'=>'dzial_hr',
+                'lata_pracy' => 9,
+                'czy_zwolniony' => 1
             )
             );
             DB::table('users')->insert(
@@ -111,7 +122,9 @@ return new class extends Migration
                     'id_wydzialu' => NULL,
                     'email' => "rafcik1771@gmail.com",
                     'password' => Hash::make('12345'),
-                     'role'=>'klient'
+                    'role'=>'klient',
+                    'lata_pracy' => NULL,
+                    'czy_zwolniony' => NULL
                 )
                 );
     }

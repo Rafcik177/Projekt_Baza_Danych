@@ -150,6 +150,37 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="lata_pracy" class="col-md-4 col-form-label text-md-end">{{ __('Lata pracy') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="lata_pracy" type="text" class="form-control @error('lata_pracy') is-invalid @enderror" name="lata_pracy" value="{{ $pracownicy->lata_pracy }}" required autocomplete="lata_pracy" autofocus>
+
+                                @error('lata_pracy')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="czy_zwolniony" class="col-md-4 col-form-label text-md-end">{{ __('Zwolniony?') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="czy_zwolniony" name="czy_zwolniony" style="width: 100%" class="form-control @error('czy_zwolniony') is-invalid @enderror">
+                                    <option value='0'<?php if($pracownicy->czy_zwolniony == 0) { ?> selected="selected"<?php } ?>>NIE</option>
+                                    <option value='1'<?php if($pracownicy->czy_zwolniony == 1) { ?> selected="selected"<?php } ?>>TAK</option>
+                                </select>
+
+                                @error('czy_zwolniony')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success">

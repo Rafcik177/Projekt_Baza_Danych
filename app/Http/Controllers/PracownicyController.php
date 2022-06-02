@@ -38,15 +38,17 @@ class PracownicyController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'imie' => 'required',
-            'nazwisko' => 'required',
-            'pesel' => 'required',
-            'email' => 'required',
+            'imie' => 'required|max:45',
+            'nazwisko' => 'required|max:45',
+            'pesel' => 'required|digits:11',
+            'email' => 'required|max:45',
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
-            'stanowisko' => 'required',
+            'stanowisko' => 'required|max:45',
             'czy_kierownik' => 'required',
-            'wynagrodzenie_miesieczne' => 'required',
+            'wynagrodzenie_miesieczne' => 'required|numeric',
+            'lata_pracy' => 'required|numeric',
+            'czy_zwolniony' => 'required',
         ]);
 
         $pracownicy = new User;
@@ -59,6 +61,8 @@ class PracownicyController extends Controller
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
+        $pracownicy->lata_pracy = $request->lata_pracy;
+        $pracownicy->czy_zwolniony = $request->czy_zwolniony;
         if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
@@ -84,6 +88,8 @@ class PracownicyController extends Controller
                $pracownicy->role = 'pracownik bez dzialu';
             }
         $pracownicy->save();
+
+        //App\Http\Controllers\Historia::();
 
         return redirect(route('pracownicy.index'));
     }
@@ -122,16 +128,19 @@ class PracownicyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'imie' => 'required',
-            'nazwisko' => 'required',
-            'pesel' => 'required',
-            'email' => 'required',
+            'imie' => 'required|max:45',
+            'nazwisko' => 'required|max:45',
+            'pesel' => 'required|digits:11',
+            'email' => 'required|max:45',
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
-            'stanowisko' => 'required',
+            'stanowisko' => 'required|max:45',
             'czy_kierownik' => 'required',
-            'wynagrodzenie_miesieczne' => 'required',
+            'wynagrodzenie_miesieczne' => 'required|numeric',
+            'lata_pracy' => 'required|numeric',
+            'czy_zwolniony' => 'required',
             ]);
+
         $pracownicy = User::find($id);
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
@@ -142,6 +151,8 @@ class PracownicyController extends Controller
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
+        $pracownicy->lata_pracy = $request->lata_pracy;
+        $pracownicy->czy_zwolniony = $request->czy_zwolniony;
         if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
