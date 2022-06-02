@@ -18,9 +18,48 @@ return new class extends Migration
             $table->integer('id_pracownika')->references('id')->on('users');
             $table->date('data_start');
             $table->date('data_koniec')->nullable();
-            $table->string('wydzial');
+            $table->integer('wydzial');
             $table->string('stanowisko');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
+
+
+        DB::table('historia')->insert(
+            array(
+                'id_pracownika' => 1,
+                'data_start' => '2021-11-23',
+                'wydzial' => 5,
+                'stanowisko' => 'magazynier'
+                )
+                );
+
+        DB::table('historia')->insert(
+            array(
+                'id_pracownika' => 2,
+                'data_start' => '2021-07-13',
+                'wydzial' => 5,
+                'stanowisko' => 'Kierownik'
+                )
+                );
+
+        DB::table('historia')->insert(
+            array(
+                'id_pracownika' => 3,
+                'data_start' => '2019-07-13',
+                'wydzial' => 4,
+                'stanowisko' => 'robotnik'
+                )
+                );
+
+        DB::table('historia')->insert(
+            array(
+                'id_pracownika' => 4,
+                'data_start' => '2015-09-16',
+                'wydzial' => 3,
+                'stanowisko' => 'rekruter'
+                )
+                );
 
     }
 

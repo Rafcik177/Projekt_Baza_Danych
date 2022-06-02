@@ -107,7 +107,7 @@ return new class extends Migration
                 'password' => Hash::make('12345'),
                 'role'=>'dzial_hr',
                 'lata_pracy' => 9,
-                'czy_zwolniony' => 1
+                'czy_zwolniony' => 0
             )
             );
             DB::table('users')->insert(

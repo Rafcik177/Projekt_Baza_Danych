@@ -15,6 +15,7 @@ class HistoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $historia = Historia::all();

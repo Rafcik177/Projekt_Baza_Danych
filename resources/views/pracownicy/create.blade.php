@@ -165,23 +165,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="czy_zwolniony" class="col-md-4 col-form-label text-md-end">{{ __('Zwolniony?') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="czy_zwolniony" name="czy_zwolniony" class="form-control @error('czy_zwolniony') is-invalid @enderror">
-                                    <option value='0'>NIE</option>
-                                    <option value='1'>TAK</option>
-                                </select>
-
-                                @error('czy_kierownik')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
                         
 
                         <div class="row mb-0">

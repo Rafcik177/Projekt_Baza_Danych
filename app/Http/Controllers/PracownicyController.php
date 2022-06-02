@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class PracownicyController extends Controller
 {
@@ -48,7 +49,6 @@ class PracownicyController extends Controller
             'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
-            'czy_zwolniony' => 'required',
         ]);
 
         $pracownicy = new User;
@@ -60,9 +60,18 @@ class PracownicyController extends Controller
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
+        if($pracownicy->czy_kierownik==1)
+        {
+            $pracownicy->stanowisko='Kierownik';
+        }
+        else
+        {
+            if($pracownicy->stanowisko=='Kierownik')
+            $pracownicy->stanowisko='-';
+        }
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
         $pracownicy->lata_pracy = $request->lata_pracy;
-        $pracownicy->czy_zwolniony = $request->czy_zwolniony;
+        $pracownicy->czy_zwolniony = 0;
         if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
@@ -87,9 +96,16 @@ class PracownicyController extends Controller
             {
                $pracownicy->role = 'pracownik bez dzialu';
             }
+
         $pracownicy->save();
 
-        //App\Http\Controllers\Historia::();
+        DB::table('historia')
+        ->insert([
+            'id_pracownika' => $pracownicy->id,
+            'data_start'=> $pracownicy->created_at,  
+            'wydzial'=>$pracownicy->id_wydzialu, 
+            'stanowisko'=>$pracownicy->stanowisko,
+        ]); 
 
         return redirect(route('pracownicy.index'));
     }
@@ -141,18 +157,56 @@ class PracownicyController extends Controller
             'czy_zwolniony' => 'required',
             ]);
 
+        $checkx=0;
+        $checky=0;
+        $checkz=0;
         $pracownicy = User::find($id);
         $pracownicy->imie = $request->imie;
         $pracownicy->nazwisko = $request->nazwisko;
         $pracownicy->pesel = $request->pesel;
         $pracownicy->email = $request->email;
+        $x=$pracownicy->id_wydzialu;
         $pracownicy->id_wydzialu = $request->id_wydzialu;
+        if($x!=$pracownicy->id_wydzialu)
+        {
+            $checkx=1;
+        }
         $pracownicy->data_urodzenia = $request->data_urodzenia;
+        $y=$pracownicy->stanowisko;
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
+        if($pracownicy->czy_kierownik==1)
+        {
+            $pracownicy->stanowisko='Kierownik';
+        }
+        else
+        {
+            if($pracownicy->stanowisko=='Kierownik')
+            $pracownicy->stanowisko='-';
+        }
+        if($y!=$pracownicy->stanowisko)
+        {
+            $checky=1;
+        }
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
         $pracownicy->lata_pracy = $request->lata_pracy;
+        $z=$pracownicy->czy_zwolniony;
         $pracownicy->czy_zwolniony = $request->czy_zwolniony;
+        if($z==0)
+        {
+            if($z!=$pracownicy->czy_zwolniony)
+            {
+                $checkz=1;
+            }
+        }
+        elseif($z==1)
+        {
+            if($z!=$pracownicy->czy_zwolniony)
+            {
+                $checkz=2;
+            }
+        }
+
         if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
@@ -177,7 +231,48 @@ class PracownicyController extends Controller
             {
                $pracownicy->role = 'pracownik bez dzialu';
             }
-        $pracownicy->save();  
+
+        $pracownicy->save(); 
+
+        if($checkz==1)
+        {
+            DB::table('historia')->latest()
+            ->where('id_pracownika', $id)
+            ->limit(1)
+            ->update([
+                'data_koniec'=>$pracownicy->updated_at,
+                'updated_at'=>$pracownicy->updated_at, 
+            ]);
+        }
+        elseif($checkz==2)
+        {
+            DB::table('historia')
+            ->insert([
+                'id_pracownika' => $pracownicy->id,
+                'data_start'=> $pracownicy->updated_at,  
+                'wydzial'=>$pracownicy->id_wydzialu, 
+                'stanowisko'=>$pracownicy->stanowisko,
+            ]);
+        }
+        elseif($checkx==1 or $checky==1)
+        {
+            DB::table('historia')->latest()
+            ->where('id_pracownika', $id)
+            ->limit(1)
+            ->update([
+                'data_koniec'=>$pracownicy->updated_at,
+                'updated_at'=>$pracownicy->updated_at, 
+            ]);
+            
+            DB::table('historia')
+            ->insert([
+                'id_pracownika' => $pracownicy->id,
+                'data_start'=> $pracownicy->updated_at,  
+                'wydzial'=>$pracownicy->id_wydzialu, 
+                'stanowisko'=>$pracownicy->stanowisko,
+            ]); 
+        }
+        
         return redirect(route('pracownicy.index'));
     }
 
