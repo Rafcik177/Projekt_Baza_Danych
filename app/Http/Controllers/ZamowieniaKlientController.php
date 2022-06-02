@@ -56,12 +56,7 @@ class ZamowieniaKlientController extends Controller
         $teraz = strtotime($datatime);
         $numer_zamowienia = $userID.$teraz;
         $count = count( $request->pojazd);
-        $suma=0;
-        for($i=0; $i<=$count-1; $i++)
-        {
-            $suma=$suma+ $request->ilosc[$i];
-        }
-        
+        $liczba_skladowa=0;
        
         for($i=0; $i<=$count-1; $i++)
         {
@@ -79,10 +74,15 @@ class ZamowieniaKlientController extends Controller
             $zamowienie->odnosnie_id_zamowienia= $numer_zamowienia;
             if($iloscPojazdow!=0)
             {
+                $liczba_skladowa++;
                $zamowienie->save();
+               
             }
+            
         }
+        if($liczba_skladowa>0)
         DB::insert('INSERT INTO zamowienia (id_zamawiajacego, id_zamowienia, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia ) values (?, ?,?,?,?,?,?)', [$userID, $numer_zamowienia, "Złożono", $datatime, "0",'', '']);
+        
         return redirect(route('zamowienia.index'));
     }
 
