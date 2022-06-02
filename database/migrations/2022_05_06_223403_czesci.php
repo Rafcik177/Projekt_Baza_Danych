@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -21,22 +22,19 @@ return new class extends Migration
         });
 
         //Theoretical insertions
-        /*
-        DB::table('modele')->insert(
+
+        DB::table('czesci')->insert(
             array(
-                'nazwa_czesci' => 'Ko³o',
-                'id_modelu' => 1,
-                'ilosc_do_wykonania' => 6,
+                array('nazwa_czesci' => 'Silnik', 'id_modelu' => 1, 'ilosc_do_wykonania' => 4),
+                array('nazwa_czesci' => 'KoÅ‚o 15', 'id_modelu' => 1, 'ilosc_do_wykonania' => 40),
+                array('nazwa_czesci' => 'Lampa lewa', 'id_modelu' => 1, 'ilosc_do_wykonania' => 2),
+                array('nazwa_czesci' => 'Lampa prawa', 'id_modelu' => 1, 'ilosc_do_wykonania' => 2),
+                array('nazwa_czesci' => 'Hamulce', 'id_modelu' => 1, 'ilosc_do_wykonania' => 40),
+                array('nazwa_czesci' => 'Pantograf', 'id_modelu' => 1, 'ilosc_do_wykonania' => 2),
+                array('nazwa_czesci' => 'Fotel', 'id_modelu' => 1, 'ilosc_do_wykonania' => 308),
             )
         );
-        DB::table('modele')->insert(
-            array(
-                'nazwa_czesci' => 'Wa³ napêdowy',
-                'id_modelu' => 1,
-                'ilosc_do_wykonania' => 3,
-            )
-        );
-        */
+        
     }
 
     /**
