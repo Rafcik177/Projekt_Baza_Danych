@@ -59,7 +59,7 @@
                             <tr class="success">
                                 <td class="text-center">{{ $loop->index + 1 }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('magazyn.show', $cz->id) }}">{{$cz->nazwa_czesci}}</a>
+                                    <a href="{{ route('magazyn.show', $cz->id_mag) }}">{{$cz->nazwa_czesci}}</a>
                                 </td>
                                 <td class="text-center">{{$cz->ilosc_do_wykonania}}</td>
                                 <td class="text-center">

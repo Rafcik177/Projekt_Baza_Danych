@@ -72,7 +72,9 @@ class ModeleController extends Controller
     public function show($id)
     {
         $model = Modele::findOrFail($id);
-        $czesci = DB::select('select id, nazwa_czesci, ilosc_do_wykonania from czesci where id_modelu = ?', [$model->id]);
+        $czesci = DB::select('select cz.id, m.id as id_mag, cz.nazwa_czesci, cz.ilosc_do_wykonania
+        from czesci cz inner join magazyn m on cz.nazwa_czesci = m.nazwa_czesci
+        where id_modelu = ?', [$model->id]);
         return view('modele.show', compact('model','czesci'));
     }
 
