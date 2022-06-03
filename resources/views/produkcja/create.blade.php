@@ -15,7 +15,17 @@
                             <label for="id_zamowienia" class="col-md-4 col-form-label text-md-end">{{ __('Numer zamówienia') }}</label>
 
                             <div class="col-md-6">
-                                <input id="id_zamowienia" type="text" class="form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ old('id_zamowienia') }}" required autocomplete="id_zamowienia" autofocus>
+                                <input id="id_zamowienia" type="text" class="typeahead form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ old('id_zamowienia') }}" required autocomplete="off" autofocus>
+                                <script>
+                                    var path = "{{ route('autocomplete_nr_zam') }}";
+                                    $('input.typeahead#id_zamowienia').typeahead({
+                                        source:  function (query, process) {
+                                        return $.get(path, { term: query }, function (data) {
+                                                return process(data);
+                                            });
+                                        }
+                                    });
+                                </script>
 
                                 <!--
                                 <select id="id_zamowienia" class="form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ old('id_zamowienia') }}" required autocomplete="id_zamowienia" autofocus>

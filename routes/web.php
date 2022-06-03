@@ -50,8 +50,10 @@ Route::resource('magazyn', MagazynController::class);
 Route::get('/pracownicy', [PracownicyController::class, 'index']);
 Route::resource('pracownicy', PracownicyController::class);
 
-Route::get('/php', [ProdukcjaController::class, 'index']);
+Route::get('/produkcja', [ProdukcjaController::class, 'index']);
 Route::resource('produkcja', ProdukcjaController::class);
+
+Route::get('autocomplete_nr_zam', [ProdukcjaController::class, 'autocomplete_nr_zam'])->name('autocomplete_nr_zam');
 
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);

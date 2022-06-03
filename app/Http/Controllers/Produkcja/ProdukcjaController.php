@@ -7,6 +7,7 @@ use App\Models\Zamowienia;
 use App\Models\Modele;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 //ProdukcjaController: CRUD stanów produkcji
@@ -28,6 +29,20 @@ class ProdukcjaController extends Controller
             $model_nazwa[] = Modele::findOrFail($s->id_modelu)->nazwa;
         }
         return view('produkcja.index', compact('stan','zam_numer','model_nazwa'));
+    }
+
+    public function autocomplete_nr_zam(Request $request)
+    {
+        $data = DB::select('select id_zamowienia from zamowienia
+        where id_zamowienia like ? limit 10',["%".$request->term."%"]);
+
+        $data_pruned=[];
+        foreach($data as $d)
+        {
+            $data_pruned[] = $d->id_zamowienia;
+        }
+   
+        return response()->json($data_pruned);
     }
 
     /**
