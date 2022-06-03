@@ -14,6 +14,7 @@ class PracownicyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $pracownicy = User::all()->where('role','<>', 'klient');
@@ -197,6 +198,10 @@ class PracownicyController extends Controller
             if($z!=$pracownicy->czy_zwolniony)
             {
                 $checkz=1;
+                $pracownicy->id_wydzialu = 6;
+                $pracownicy->czy_kierownik = 0;
+                $pracownicy->stanowisko = '-';
+                $pracownicy->wynagrodzenie_miesieczne =0;
             }
         }
         elseif($z==1)

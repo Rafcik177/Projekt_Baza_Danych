@@ -20,20 +20,18 @@
                                     <tr class="success">
                                         <th class="text-center">Lp.</th>
                                         <th class="text-center">Id pracownika</th>
-                                        <th class="text-center">Data start</th>
-                                        <th class="text-center">Data koniec</th>
-                                        <th class="text-center">Wydział</th>
-                                        <th class="text-center">Stanowisko</th>
+                                        <th class="text-center">Imie</th>
+                                        <th class="text-center">Nazwisko</th>
+                                        <th class="text-center">Historia</th>
                                 </thead>
                                 <tbody>
                                     @foreach($historia as $his)
                                     <tr>
                                         <td class="text-center">{{ $loop->index + 1 }}</td>
-                                        <td class="text-center">{{$his->id_pracownika}}</td>
-                                        <td class="text-center">{{$his->data_start}}</td>
-                                        <td class="text-center">{{$his->data_koniec}}</td>
-                                        <td class="text-center">{{$his->wydzial}}</td>
-                                        <td class="text-center">{{$his->stanowisko}}</td>
+                                        <td class="text-center">{{$his->id}}</td>
+                                        <td class="text-center">{{$his->imie}}</td>
+                                        <td class="text-center">{{$his->nazwisko}}</td>
+                                        <td class="text-center"><a href="{{ route('historia.show', $his->id) }}">Historia</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

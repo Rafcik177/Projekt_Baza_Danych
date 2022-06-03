@@ -65,7 +65,7 @@
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Lata pracy: ') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($pracownicy->lata_pracy) }} zł</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($pracownicy->lata_pracy) }}</label>   
                         </div>
 
                         <div class="row mb-3">
