@@ -73,31 +73,57 @@ class PracownicyController extends Controller
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
         $pracownicy->lata_pracy = $request->lata_pracy;
         $pracownicy->czy_zwolniony = 0;
-        if($pracownicy->id_wydzialu==1)
+        if($pracownicy->czy_kierownik==1)
+        {
+            if($pracownicy->id_wydzialu==1)
+            {
+                $pracownicy->role = 'kierownik_admin';
+            }
+            elseif($pracownicy->id_wydzialu==2)
+            {
+                $pracownicy->role = 'kierownik_zamowien';
+            }
+            elseif($pracownicy->id_wydzialu==3)
+            {
+                $pracownicy->role = 'kierownik_hr';
+            }
+            elseif($pracownicy->id_wydzialu==4)
+            {
+                $pracownicy->role = 'kierownik_produkcji';
+            }
+            elseif($pracownicy->id_wydzialu==5)
+            {
+                $pracownicy->role = 'kierownik_magazyn';
+            }
+        }
+        elseif($pracownicy->czy_kierownik==0)
+        {
+            if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
             } 
-        elseif($pracownicy->id_wydzialu==2)
+            elseif($pracownicy->id_wydzialu==2)
             {
                $pracownicy->role = 'dzial_zamowien';
             }
-        elseif($pracownicy->id_wydzialu==3)
+            elseif($pracownicy->id_wydzialu==3)
             {
                $pracownicy->role = 'dzial_hr';
             }
-        elseif($pracownicy->id_wydzialu==4)
+            elseif($pracownicy->id_wydzialu==4)
             {
                $pracownicy->role = 'dzial_produkcji';
             }
-        elseif($pracownicy->id_wydzialu==5)
+            elseif($pracownicy->id_wydzialu==5)
             {
                $pracownicy->role = 'dzial_magazyn';
             }
-        elseif($pracownicy->id_wydzialu==6)
+            elseif($pracownicy->id_wydzialu==6)
             {
                $pracownicy->role = 'pracownik bez dzialu';
             }
-
+        }
+        
         $pracownicy->save();
 
         DB::table('historia')
@@ -212,30 +238,56 @@ class PracownicyController extends Controller
             }
         }
 
-        if($pracownicy->id_wydzialu==1)
+        if($pracownicy->czy_kierownik==1)
+        {
+            if($pracownicy->id_wydzialu==1)
+            {
+                $pracownicy->role = 'kierownik_admin';
+            }
+            elseif($pracownicy->id_wydzialu==2)
+            {
+                $pracownicy->role = 'kierownik_zamowien';
+            }
+            elseif($pracownicy->id_wydzialu==3)
+            {
+                $pracownicy->role = 'kierownik_hr';
+            }
+            elseif($pracownicy->id_wydzialu==4)
+            {
+                $pracownicy->role = 'kierownik_produkcji';
+            }
+            elseif($pracownicy->id_wydzialu==5)
+            {
+                $pracownicy->role = 'kierownik_magazyn';
+            }
+        }
+        elseif($pracownicy->czy_kierownik==0)
+        {
+            if($pracownicy->id_wydzialu==1)
             {
                $pracownicy->role = 'admin';
             } 
-        elseif($pracownicy->id_wydzialu==2)
+            elseif($pracownicy->id_wydzialu==2)
             {
                $pracownicy->role = 'dzial_zamowien';
             }
-        elseif($pracownicy->id_wydzialu==3)
+            elseif($pracownicy->id_wydzialu==3)
             {
                $pracownicy->role = 'dzial_hr';
             }
-        elseif($pracownicy->id_wydzialu==4)
+            elseif($pracownicy->id_wydzialu==4)
             {
                $pracownicy->role = 'dzial_produkcji';
             }
-        elseif($pracownicy->id_wydzialu==5)
+            elseif($pracownicy->id_wydzialu==5)
             {
                $pracownicy->role = 'dzial_magazyn';
             }
-        elseif($pracownicy->id_wydzialu==6)
+            elseif($pracownicy->id_wydzialu==6)
             {
                $pracownicy->role = 'pracownik bez dzialu';
             }
+        }
 
         $pracownicy->save(); 
 

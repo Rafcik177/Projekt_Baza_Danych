@@ -15,8 +15,8 @@
                                     <th class="text-center">Lp.</th>
                                     <th class="text-center">Imie</th>
                                     <th class="text-center">Nazwisko</th>
-                                    <th class="text-center">Data urodzenia</th>
-                                    <th class="text-center">Pesel</th>
+                                    <!--<th class="text-center">Data urodzenia</th>
+                                    <th class="text-center">Pesel</th> -->
                                     <!-- <th class="text-center">Email</th> -->
                                     <th class="text-center">Wydział</th>
                                     <th class="text-center">Kierownik?</th>
@@ -34,8 +34,8 @@
                                     <td class="text-center">{{ $loop->index + 1 }}</td> 
                                     <td class="text-center">{{$pra->imie}}</td> 
                                     <td class="text-center">{{$pra->nazwisko}}</td>
-                                    <td class="text-center">{{$pra->data_urodzenia}}</td>
-                                    <td class="text-center">{{$pra->pesel}}</td>
+                                    <!-- <td class="text-center">{{$pra->data_urodzenia}}</td>
+                                    <td class="text-center">{{$pra->pesel}}</td> -->
                                     <!-- <td class="text-center">{{$pra->email}}</td> -->
                                     <td 
                                     <?php 

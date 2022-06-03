@@ -34,6 +34,12 @@ class AuthServiceProvider extends ServiceProvider
         $this->defineRoleNZTK(name: 'czyZamowienia', role: RoleNZTK::ZAMOWIENIA);
         $this->defineRoleNZTK(name: 'czyProdukcja', role: RoleNZTK::PRODUKCJA);
         $this->defineRoleNZTK(name: 'czyPracownik_bez_dzialu', role: RoleNZTK::PRACOWNIK_BEZ_DZIALU);
+
+        $this->defineRoleNZTK(name: 'czyKierownik_Admin', role: RoleNZTK::KIEROWNIK_ADMINISTRACJA);
+        $this->defineRoleNZTK(name: 'czyKierownik_HR', role: RoleNZTK::KIEROWNIK_HR);
+        $this->defineRoleNZTK(name: 'czyKierownik_Magazyn', role: RoleNZTK::KIEROWNIK_MAGAZYN);
+        $this->defineRoleNZTK(name: 'czyKierownik_Zamowienia', role: RoleNZTK::KIEROWNIK_ZAMOWIENIA);
+        $this->defineRoleNZTK(name: 'czyKierownik_Produkcja', role: RoleNZTK::KIEROWNIK_PRODUKCJA);
     }
 
         private function defineRoleNZTK(string $name, string $role): void
