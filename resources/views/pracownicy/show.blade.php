@@ -63,6 +63,21 @@
                             <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($pracownicy->wynagrodzenie_miesieczne) }} zł</label>   
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Lata pracy: ') }}</label>
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($pracownicy->lata_pracy) }}</label>   
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Zwolniony?') }}</label>
+                            <label for="opis" 
+                                <?php 
+                                if($pracownicy->czy_zwolniony == 0) { ?> class="col-md-4 col-form-label text-md-start">NIE<?php }
+                                elseif($pracownicy->czy_zwolniony == 1) { ?> class="col-md-4 col-form-label text-md-start">TAK<?php } 
+                                ?> 
+                            </label>   
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 

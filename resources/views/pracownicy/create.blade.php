@@ -121,7 +121,7 @@
 
 
                         <div class="row mb-3">
-                            <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Czy kierownik') }}</label>
+                            <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Kierownik?') }}</label>
 
                             <div class="col-md-6">
                                 <select id="czy_kierownik" name="czy_kierownik" class="form-control @error('czy_kierownik') is-invalid @enderror">
@@ -151,8 +151,21 @@
                                 @enderror
                             </div>
                         </div>
-                        
 
+                        <div class="row mb-3">
+                            <label for="lata_pracy" class="col-md-4 col-form-label text-md-end">{{ __('Lata pracy') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="lata_pracy" type="text" class="form-control @error('lata_pracy') is-invalid @enderror" name="lata_pracy" value="{{ old('lata_pracy') }}" required autocomplete="lata_pracy" autofocus>
+
+                                @error('lata_pracy')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

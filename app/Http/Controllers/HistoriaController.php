@@ -15,11 +15,11 @@ class HistoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $historia = Historia::all();
+        $historia=DB::table('users')->select('*')->where('role', '<>', 'klient')->get();
         return view('historia.index', compact('historia'));
-
     }
 
     /**
@@ -67,9 +67,10 @@ class HistoriaController extends Controller
      * @param  \App\Models\Historia  $historia
      * @return \Illuminate\Http\Response
      */
-    public function show(Historia $historia)
+    public function show($id_pracownika)
     {
-        //
+        $historia=DB::table('historia')->select('*')->where('id_pracownika', $id_pracownika)->get();
+        return view('historia.show', compact('historia'));
     }
 
     /**
