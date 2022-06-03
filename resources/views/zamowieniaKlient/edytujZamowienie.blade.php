@@ -24,13 +24,14 @@
                             <div class="col-md-6">
                             @php
                                     $liczba = App\Http\Controllers\RezerwowanieCzesci::wyliczanie_ilosci_modeli($e->id_modelu);
+                                    echo $liczba;
                             @endphp
                                 <input id="ilosc" type="number" name="ilosc[]" value="{{$e->ilosc}}" min="0" max="{{$liczba}}">
                                 </br>Zmień <input id="zmien" type="checkbox" name="zmien[]" value="{{$e->id}}">
 
                                 @error('ilosc')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>{{ $_SESSION['error']}}</strong>
                                 </span>
                                 @enderror
                             </div>

@@ -48,4 +48,23 @@ class RezerwowanieCzesci extends Controller
         */
     
     }
+
+
+    public static function zarezerwuj_czesci_do_modelu($id_modelu, $liczba_modeli)
+    {
+        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu',$id_modelu)->get();
+        $policz_wszystkie_czesci_do_modelu=count($pobierz_liczbe_czesci);
+        if($policz_wszystkie_czesci_do_modelu>0)
+        {
+            foreach($pobierz_liczbe_czesci as $czesc)
+            {
+                $rezem_czesci= ($czesc->ilosc_do_wykonania)*$liczba_modeli;
+                $zapytaj= DB::table('magazyn')->where('id_czesci','=',$czesc->id)->first();
+                $obecnie_zarezerwowano = $zapytaj->zarezerwowano_ilosc;
+                
+                DB::statement("UPDATE magazyn SET zarezerwowano_ilosc=$rezem_czesci+$obecnie_zarezerwowano WHERE id=$zapytaj->id"); 
+               
+            }
+        }
+    }
 }

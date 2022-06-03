@@ -49,8 +49,7 @@ class ZamowieniaKlientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //Tutaj też trzeba powtórzyć moduł do sprawdzania zasobów magazynu do wybranych modeli - to jest w celach bezpieczeństwa - walidacja formularza. Jeśli klient wybierze więcej pojazdów niż jest dostępnych części w magazynie, to wówczas tutaj ta akcja musi być zablokowana i klient zostanie cofnięty do formularza. 
+    { 
         $userID=Auth::user()->id;
         $datatime=date("Y-m-d H:i:s");
         $teraz = strtotime($datatime);
@@ -64,6 +63,7 @@ class ZamowieniaKlientController extends Controller
             $zamowienie->id_zamawiajacego = $userID;
             $zamowienie->id_zamowienia = '';
             $zamowienie->id_modelu = $request->pojazd[$i];
+            $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli($request->pojazd[$i]);
             $iloscPojazdow=$zamowienie->ilosc = $request->ilosc[$i];
             $zamowienie->data_zlozenia= $datatime;
             $zamowienie->realizacja= 0;
@@ -72,10 +72,15 @@ class ZamowieniaKlientController extends Controller
             $cenapojazdu=$model->cena;
             $zamowienie->cena_pojedyncza= $cenapojazdu;
             $zamowienie->odnosnie_id_zamowienia= $numer_zamowienia;
-            if($iloscPojazdow!=0)
+            if($liczba<$request->ilosc[$i])
+            {
+                return redirect()->action([ZamowieniaKlientController::class, 'create']);  
+            }
+            else if($iloscPojazdow!=0)
             {
                 $liczba_skladowa++;
-               $zamowienie->save();
+                RezerwowanieCzesci::zarezerwuj_czesci_do_modelu($request->pojazd[$i], $iloscPojazdow);
+                $zamowienie->save();
                
             }
             
@@ -168,15 +173,18 @@ class ZamowieniaKlientController extends Controller
                 {
                     
                     $edycja = Zamowienia::find($request->zmien[$i]);
-                    //wyszukaj w bazie modele id modelu z zamowienia, i to id przekaż do funkcji niżej 
-                   // $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli($e->id_modelu);
+                    $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli($edycja->id_modelu);
+                    if($liczba!=$request->ilosc[$i])
+                    { 
+                       return redirect()->action([ZamowieniaKlientController::class, 'edit'], [$id]);  
+                    }
                     $edycja->ilosc=$request->ilosc[$i];
                     $edycja->id=$request->zmien[$i];
 
                     $edycja->update();
                 }    
              }
-             return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
+             //return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
       
     }
 
