@@ -24,7 +24,7 @@
                                 @foreach($niskistan as $ns)
                                 <tr class="table-danger">
                                     <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$ns->id}}</td> -->
-                                    <td class="text-center">{{$ns->nazwa_czesci}}</td> 
+                                    <td class="text-center">{{$ns->id_czesci}}</td> 
                                     <td class="text-center">{{$ns->ilosc}}</td>
                                     <td class="text-center">{{$ns->prog_niskiego_stanu}}</td>
                                     

@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('czesci', function (Blueprint $table) {
             $table->id();
-            $table->string('nazwa_czesci')->references('nazwa_czesci')->on('magazyn');
+            $table->string('nazwa_czesci');
             $table->integer('id_modelu')->references('id')->on('modele');
             $table->string('ilosc_do_wykonania');
         });

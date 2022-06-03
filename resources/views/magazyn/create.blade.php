@@ -12,12 +12,12 @@
                         {{ csrf_field() }}
 
                         <div class="row mb-3">
-                            <label for="nazwa_czesci" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa części') }}</label>
+                            <label for="id_czesci" class="col-md-4 col-form-label text-md-end">{{ __('id_czesci') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nazwa_czesci" type="text" class="form-control @error('nazwa_czesci') is-invalid @enderror" name="nazwa_czesci" value="{{ old('nazwa_czesci') }}" required autocomplete="nazwa_czesci" autofocus>
+                                <input id="id_czesci" type="text" class="form-control @error('id_czesci') is-invalid @enderror" name="id_czesci" value="{{ old('id_czesci') }}" required autocomplete="id_czesci" autofocus>
 
-                                @error('nazwa_czesci')
+                                @error('id_czesci')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

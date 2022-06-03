@@ -166,7 +166,10 @@ class ZamowieniaKlientController extends Controller
                 $count = count( $request->zmien);
                 for($i=0; $i<=$count-1; $i++)
                 {
+                    
                     $edycja = Zamowienia::find($request->zmien[$i]);
+                    //wyszukaj w bazie modele id modelu z zamowienia, i to id przekaż do funkcji niżej 
+                   // $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli($e->id_modelu);
                     $edycja->ilosc=$request->ilosc[$i];
                     $edycja->id=$request->zmien[$i];
 

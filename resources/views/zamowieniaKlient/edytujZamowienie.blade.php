@@ -22,8 +22,11 @@
                             <label for="ilosc" class="col-md-6 col-form-label text-md-end">{{ __('Ilość') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ilosc" type="number" name="ilosc[]" value="{{$e->ilosc}}" min="0" max="10">
-                                </br>Zmień <input id="zmien" type="checkbox" name="zmien[]" value="{{$e->id}}" min="0" max="10">
+                            @php
+                                    $liczba = App\Http\Controllers\RezerwowanieCzesci::wyliczanie_ilosci_modeli($e->id_modelu);
+                            @endphp
+                                <input id="ilosc" type="number" name="ilosc[]" value="{{$e->ilosc}}" min="0" max="{{$liczba}}">
+                                </br>Zmień <input id="zmien" type="checkbox" name="zmien[]" value="{{$e->id}}">
 
                                 @error('ilosc')
                                 <span class="invalid-feedback" role="alert">

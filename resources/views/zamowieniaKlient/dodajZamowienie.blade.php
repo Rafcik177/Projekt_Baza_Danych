@@ -28,8 +28,15 @@
                         <div class="p-2 ">Waga: {{$modele->waga}}</div>
                         <div class="p-2 ">Ilość miejsc: {{$modele->ilosc_miejsc}}</div>
                         <div class="p-2 ">Cena: {{number_format((int)$modele->cena,0,"."," ")}} zł</div>
+                        <div class="p-2 ">Dostępna ilość:
+                            @php
+                                    $liczba = App\Http\Controllers\RezerwowanieCzesci::wyliczanie_ilosci_modeli($modele->id);
+                                    echo $liczba;
+                            @endphp
+                        </div>
+                        
                         <div class="p-2"><input type="hidden" id="pojazd" name="pojazd[]" value="{{$modele->id}}"></div>
-                        <div class="p-2 ">Ilość: <input type="number" name="ilosc[]" value="0" min="0" max="10" ></div>
+                        <div class="p-2 ">Ilość: <input type="number" name="ilosc[]" value="0" min="0" max="{{$liczba}}" ></div>
                         
                     </div>
 

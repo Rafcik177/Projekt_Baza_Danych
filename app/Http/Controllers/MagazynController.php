@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Magazyn;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use phpDocumentor\Reflection\Types\Nullable;
+use Illuminate\Support\Facades\DB;
 class MagazynController extends Controller
 {
     /**
@@ -38,7 +39,7 @@ class MagazynController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nazwa_czesci' => 'required|max:45',
+            'id_czesci' => 'required|max:45',
             'opis' => 'required|max:45',
             'dlugosc' => 'required|numeric',
             'szerokosc' => 'required|numeric',
@@ -49,7 +50,7 @@ class MagazynController extends Controller
         ]);
 
         $magazyn = new Magazyn;
-        $magazyn->nazwa_czesci = $request->nazwa_czesci;
+        $magazyn->id_czesci = $request->id_czesci;
         $magazyn->opis = $request->opis;
         $magazyn->dlugosc = $request->dlugosc;
         $magazyn->szerokosc = $request->szerokosc;
@@ -57,6 +58,7 @@ class MagazynController extends Controller
         $magazyn->waga = $request->waga;
         $magazyn->ilosc = $request->ilosc;
         $magazyn->prog_niskiego_stanu = $request->prog_niskiego_stanu;
+        $magazyn->zarezerwowano_ilosc = null;
         $magazyn->save();
 
         return redirect(route('magazyn.index'));
@@ -70,8 +72,9 @@ class MagazynController extends Controller
      */
     public function show($id)
     {
-        $magazyn = Magazyn::findOrFail($id);
-        return view('magazyn.show', compact('magazyn'));
+        $magazyn = DB::table('magazyn')->where('id_czesci',$id)->first();
+        $czesci = DB::table('czesci')->where('id',$id)->first();
+        return view('magazyn.show', ['magazyn' => $magazyn, 'czesci'=>$czesci]);
     }
 
     /**
@@ -96,7 +99,7 @@ class MagazynController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'nazwa_czesci' => 'required|max:45',
+            'id_czesci' => 'required|max:45',
             'opis' => 'required|max:45',
             'dlugosc' => 'required|numeric',
             'szerokosc' => 'required|numeric',
@@ -107,7 +110,7 @@ class MagazynController extends Controller
             ]);
             
         $magazyn = Magazyn::find($id);
-        $magazyn->nazwa_czesci = $request->nazwa_czesci;
+        $magazyn->id_czesci = $request->id_czesci;
         $magazyn->opis = $request->opis;
         $magazyn->dlugosc = $request->dlugosc;
         $magazyn->szerokosc = $request->szerokosc;
