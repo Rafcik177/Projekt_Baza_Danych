@@ -19,10 +19,6 @@ class HistoriaController extends Controller
     public function index()
     {
         $historia=DB::table('users')->select('*')->where('role', '<>', 'klient')->get();
-        //$country_data =DB::table('country')->select('country_id','country_name')->get();
-        //$profile_data=DB::table('profiles')->select('*')->where('id',$user_id)->first();
-        //return view('profile_update',compact('profile_data','country_data'));
-        //$historia = Historia::all();
         return view('historia.index', compact('historia'));
     }
 
@@ -74,10 +70,6 @@ class HistoriaController extends Controller
     public function show($id_pracownika)
     {
         $historia=DB::table('historia')->select('*')->where('id_pracownika', $id_pracownika)->get();
-        //$pracownicy=DB::table('users')->select('*')->where('role', '<>', 'klient')->get();
-        //$historia=DB::table('historia')
-                    //->join('users', 'users.id','=', 'historia.id_pracownika')
-                    //->select('*')->where('id_pracownika', $id_pracownika)->get();
         return view('historia.show', compact('historia'));
     }
 
