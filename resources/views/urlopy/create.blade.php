@@ -75,7 +75,7 @@
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Dodaj urlop') }}
                                 </button>
-                                <a href="{{ route('urlopy.index') }}" class="btn btn-primary">Powrót</a>
+                                <a href="{{ route('pracownicy.index') }}" class="btn btn-primary">Powrót</a>
                             </div>
                         </div>
                     </form>

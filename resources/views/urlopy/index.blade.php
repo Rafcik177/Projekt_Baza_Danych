@@ -19,7 +19,7 @@
                                     <th class="text-center">Dni_max</th>
                                     <th class="text-center">Edytuj</th>
                                     <th class="text-center">Usuń</th>
-                                    <th class="text-center">Pokaż</th>
+                                    <!-- <th class="text-center">Pokaż</th> -->
                             </thead>
                             <tbody>
                                 @foreach($urlopy as $urlop)
@@ -45,7 +45,7 @@
                                             Usuń
                                         </a>
                                     </td>
-                                    <td class="text-center"><a href="{{ route('urlopy.show', $urlop->id) }}">Pokaż</a></td>
+                                    <!--- <td class="text-center"><a href="{{ route('urlopy.show', $urlop->id) }}">Pokaż</a></td> -->
                                 </tr>
                                 @endforeach
                             </tbody>

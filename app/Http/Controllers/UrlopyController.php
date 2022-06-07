@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Urlopy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
 class UrlopyController extends Controller
 {
@@ -51,7 +52,7 @@ class UrlopyController extends Controller
         $urlopy->dni_max = $request->dni_max;
         $urlopy->save();
 
-        return redirect(route('urlopy.index'));
+        return redirect(route('pracownicy.index'));
     }
 
     /**
@@ -60,10 +61,11 @@ class UrlopyController extends Controller
      * @param  \App\Models\Urlopy  $urlopy
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_pracownika)
     {
-        $urlopy = Urlopy::findOrFail($id);
-        return view('urlopy.show', compact('urlopy'));
+        $urlopy=DB::table('urlopy')->select('*')->where('id_pracownika', $id_pracownika)->get();
+        $pracownicy=DB::table('users')->select('*')->where('id', $id_pracownika)->get();
+        return view('urlopy.show', compact('urlopy', 'pracownicy'));
     }
 
     /**
@@ -101,7 +103,8 @@ class UrlopyController extends Controller
         $urlopy->dni_max = $request->dni_max;
         $urlopy->save();  
 
-        return redirect(route('urlopy.index'));   
+        //return redirect(route('urlopy.index'));
+        return redirect(route('urlopy.show', $urlopy->id_pracownika));
     }
 
     /**

@@ -36,6 +36,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->enum('role', allowed: RoleNZTK::TYPES)->default(RoleNZTK::KLIENT);
             $table->integer('lata_pracy')->nullable();
+            $table->integer('wykorzystany_urlop')->nullable();
             $table->boolean('czy_zwolniony')->nullable();
         });
 
@@ -53,6 +54,7 @@ return new class extends Migration
                 'password' => Hash::make('12345'),
                 'role' =>'dzial_magazyn',
                 'lata_pracy' => 9,
+                'wykorzystany_urlop' => 5,
                 'czy_zwolniony' => 0 
             )
             );
@@ -71,6 +73,7 @@ return new class extends Migration
                 'password' => Hash::make('12345'),
                 'role'=>'dzial_magazyn',
                 'lata_pracy' => 11,
+                'wykorzystany_urlop' => 16,
                 'czy_zwolniony' => 0 
             )
             );
@@ -89,6 +92,7 @@ return new class extends Migration
                 'password' => Hash::make('12345'),
                 'role'=>'dzial_produkcji',
                 'lata_pracy' => 14,
+                'wykorzystany_urlop' => 7,
                 'czy_zwolniony' => 0 
             )
             );
@@ -107,6 +111,7 @@ return new class extends Migration
                 'password' => Hash::make('12345'),
                 'role'=>'dzial_hr',
                 'lata_pracy' => 9,
+                'wykorzystany_urlop' => 0,
                 'czy_zwolniony' => 0
             )
             );

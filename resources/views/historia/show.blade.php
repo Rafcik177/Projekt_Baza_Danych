@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Historia pracownika')}}</div>
+                <?php $count=0; ?>
+                @foreach($pracownicy as $pra)
+                <?php if($count==1) break; ?>
+                <div class="card-header">{{ __('Historia pracownika: ')}} {{ $pra->imie }} {{ $pra->nazwisko }} {{ __(', Id: ')}} {{ $pra->id }}</div>
+                <?php $count++; ?>
+                @endforeach
                 <div class="row text center">
                     <div class="col-12 ">
                         <div class="table-responsive">

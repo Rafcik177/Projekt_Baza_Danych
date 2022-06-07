@@ -77,7 +77,7 @@
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Zapisz') }}
                                 </button>
-                                <a href="{{ route('urlopy.index') }}" class="btn btn-primary">Powrót</a>
+                                <a href="{{ route('urlopy.show', $urlopy->id_pracownika) }}" class="btn btn-primary">Powrót</a>
                             </div>
                         </div>
                     </form>
