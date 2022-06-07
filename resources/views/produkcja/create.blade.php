@@ -17,21 +17,14 @@
                             <div class="col-md-6">
                                 <input id="id_zamowienia" type="text" class="typeahead form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ old('id_zamowienia') }}" required autocomplete="off" autofocus>
                                 <script>
-                                    var path = "{{ route('autocomplete_nr_zam') }}";
                                     $('input.typeahead#id_zamowienia').typeahead({
                                         source:  function (query, process) {
-                                        return $.get(path, { term: query }, function (data) {
+                                        return $.get('/autocomplete/nr_zam', { term: query }, function (data) {
                                                 return process(data);
                                             });
                                         }
                                     });
                                 </script>
-
-                                <!--
-                                <select id="id_zamowienia" class="form-control @error('id_zamowienia') is-invalid @enderror" name="id_zamowienia" value="{{ old('id_zamowienia') }}" required autocomplete="id_zamowienia" autofocus>
-                                    <option></option>
-                                </select>
-                                -->
 
                                 @error('id_zamowienia')
                                     <span class="invalid-feedback" role="alert">
@@ -45,7 +38,16 @@
                             <label for="nazwa_modelu" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa modelu') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nazwa_modelu" type="text" class="form-control @error('nazwa_modelu') is-invalid @enderror" name="nazwa_modelu" value="{{ old('nazwa_modelu') }}" required autocomplete="nazwa_modelu" autofocus>
+                                <input id="nazwa_modelu" type="text" class="typeahead form-control @error('nazwa_modelu') is-invalid @enderror" name="nazwa_modelu" value="{{ old('nazwa_modelu') }}" required autocomplete="off" autofocus>
+                                <script>
+                                    $('input.typeahead#nazwa_modelu').typeahead({
+                                        source:  function (query, process) {
+                                        return $.get('/autocomplete/n_model', { term: query }, function (data) {
+                                                return process(data);
+                                            });
+                                        }
+                                    });
+                                </script>
 
                                 @error('nazwa_modelu')
                                     <span class="invalid-feedback" role="alert">

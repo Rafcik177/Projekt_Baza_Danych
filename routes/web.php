@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AutocompleteController;
 use App\Http\Controllers\MagazynController;
 use App\Http\Controllers\ModeleController;
 use App\Http\Controllers\PracownicyController;
@@ -53,7 +54,21 @@ Route::resource('pracownicy', PracownicyController::class);
 Route::get('/produkcja', [ProdukcjaController::class, 'index']);
 Route::resource('produkcja', ProdukcjaController::class);
 
-Route::get('autocomplete_nr_zam', [ProdukcjaController::class, 'autocomplete_nr_zam'])->name('autocomplete_nr_zam');
+//Route::get('autocomplete_nr_zam', [ProdukcjaController::class, 'autocomplete_nr_zam'])->name('autocomplete_nr_zam');
+/*Route::get('/autocomplete/nr_zam', function(){
+    $col = 'nr_zam';
+    return AutocompleteController->$col();
+});*/
+
+Route::controller(AutocompleteController::class)->group(function(){
+    $allowedColNames = ['nr_zam', 'n_model'];
+    foreach($allowedColNames as $col){
+        Route::get('/autocomplete/'.$col, $col);
+    }
+    //Route::get('/autocomplete/nr_zam', 'nr_zam');
+    //Route::get('/autocomplete/n_model', 'n_model');
+});
+
 
 Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
 Route::resource('zamowienia', ZamowieniaKlientController::class);

@@ -31,20 +31,6 @@ class ProdukcjaController extends Controller
         return view('produkcja.index', compact('stan','zam_numer','model_nazwa'));
     }
 
-    public function autocomplete_nr_zam(Request $request)
-    {
-        $data = DB::select('select id_zamowienia from zamowienia
-        where id_zamowienia like ? limit 10',["%".$request->term."%"]);
-
-        $data_pruned=[];
-        foreach($data as $d)
-        {
-            $data_pruned[] = $d->id_zamowienia;
-        }
-   
-        return response()->json($data_pruned);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
