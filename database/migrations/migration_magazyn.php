@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('magazyn', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_czesci')->references('id')->on('czesci');
+            $table->unsignedBigInteger('id_czesci');
             $table->string('opis');
             $table->float('dlugosc');
             $table->float('szerokosc');
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('ilosc');
             $table->integer('prog_niskiego_stanu');
             $table->integer('zarezerwowano_ilosc')->nullable();
+            $table->foreign('id_czesci')->references('id')->on('czesci')->onDelete('cascade');
         });
 
 

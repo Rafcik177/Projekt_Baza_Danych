@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('urlopy', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_pracownika')->references('id')->on('users');
+            $table->unsignedBigInteger('id_pracownika');
             $table->string('rok');
             $table->integer('dni_wykorzystane');
             $table->integer('dni_max');
+            $table->foreign('id_pracownika')->references('id')->on('users')->onDelete('cascade');
         });
 
         DB::table('urlopy')->insert(
