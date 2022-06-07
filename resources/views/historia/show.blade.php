@@ -8,7 +8,7 @@
                 <?php $count=0; ?>
                 @foreach($pracownicy as $pra)
                 <?php if($count==1) break; ?>
-                <div class="card-header">{{ __('Historia pracownika: ')}} {{ $pra->imie }} {{ $pra->nazwisko }} {{ __(', Id: ')}} {{ $pra->id }}</div>
+                <div class="card-header"> <b> {{ __('Historia pracownika: ')}} {{ $pra->imie }} {{ $pra->nazwisko }} {{ __(', Id: ')}} {{ $pra->id }} </b></div>
                 <?php $count++; ?>
                 @endforeach
                 <div class="row text center">
@@ -20,17 +20,17 @@
                                     border: 1px solid black;
                                 }
                             </style>
-                            <table class="table table-striped">
+                            <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr class="success">
+                                    <tr class="bg-primary">
                                         <th class="text-center">Lp.</th>
                                         <th class="text-center">Data start</th>
                                         <th class="text-center">Data koniec</th>
                                         <th class="text-center">Wydział</th>
                                         <th class="text-center">Stanowisko</th>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody class="table-primary">
+                                    <tr class="border-bottom-0">
                                     @foreach($historia as $his)
                                         <td class="text-center">{{ $loop->index + 1 }}</td>
                                         <td class="text-center">{{$his->data_start}}</td>

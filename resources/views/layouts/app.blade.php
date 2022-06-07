@@ -87,9 +87,9 @@
                                 <!-- <a class="dropdown-item" href="{{ url('/historia') }}">
                                     {{ __('Historia') }}
                                 </a> -->
-                                <a class="dropdown-item" href="{{ url('/urlopy') }}">
+                                <!-- <a class="dropdown-item" href="{{ url('/urlopy') }}">
                                     {{ __('Urlopy') }}
-                                </a>
+                                </a> -->
                                 <a class="dropdown-item" href="{{ url('/produkcja') }}">
                                     {{ __('Produkcja') }}
                                 </a>

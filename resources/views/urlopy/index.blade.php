@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Urlopy') }} </div>
+                <div class="card-header"> <b>{{ __('Urlopy') }}</b> </div>
                 <div class="row text center">
                     <div class="table-responsive">
                     <style>td {border: 0.5px solid black;}</style>

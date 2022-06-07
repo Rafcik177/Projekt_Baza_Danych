@@ -5,14 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Lista pracowników') }} </div>
+                <div class="card-header"> <b>{{ __('Lista pracowników') }}</b> <a style="float:right;" href="{{route('pracownicy.create') }}" class="btn btn-primary col-3">Dodaj nowego pracownika</a> </div>
                 <div class="row text center">
                     <div class="table-responsive">
-                    <style>td {border: 0.5px solid black;}</style>
-                        <table class="table table-striped">
+
+                        <table class="table table-striped table-hover">
                             <thead>
-                                <tr class="success">
+                                <tr class="bg-primary">
                                     <th class="text-center">Lp.</th>
+                                    <th class="text-center">Id pracownika</th>
                                     <th class="text-center">Imie</th>
                                     <th class="text-center">Nazwisko</th>
                                     <!--<th class="text-center">Data urodzenia</th>
@@ -22,17 +23,18 @@
                                     <!--<th class="text-center">Kierownik?</th> -->
                                     <th class="text-center">Stanowisko</th>
                                     <!-- <th class="text-center">Wynagrodzenie miesięczne</th> -->
-                                    <th class="text-center">Zwolniony?</th>
+                                    <!--<th class="text-center">Zwolniony?</th> -->
                                     <th class="text-center">Edytuj</th>
                                     <th class="text-center">Usuń</th>
                                     <th class="text-center">Pokaż</th>
                                     <th class="text-center">Historia</th>
                                     <th class="text-center">Urlop</th>
                             </thead>
-                            <tbody>
+                            <tbody class="table-primary">
                                 @foreach($pracownicy as $pra)
-                                <tr >
+                                <tr class="border-bottom-0">
                                     <td class="text-center">{{ $loop->index + 1 }}</td> 
+                                    <td class="text-center">{{$pra->id}}</td>
                                     <td class="text-center">{{$pra->imie}}</td> 
                                     <td class="text-center">{{$pra->nazwisko}}</td>
                                     <!-- <td class="text-center">{{$pra->data_urodzenia}}</td>
@@ -51,7 +53,7 @@
                                     <!-- <td <?php if($pra->czy_kierownik == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td> -->
                                     <td class="text-center">{{$pra->stanowisko}}</td>
                                     <!-- <td class="text-center">{{$pra->wynagrodzenie_miesieczne}}zł</td> -->
-                                    <td <?php if($pra->czy_zwolniony == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td>
+                                    <!-- <td <?php if($pra->czy_zwolniony == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td> -->
                                     <td><a href="{{ route('pracownicy.edit', $pra->id) }}">Edytuj</a></td>
                                     <td>
                                         <form action="{{ route('pracownicy.destroy', $pra->id) }}" method="post" id="delete-form-{{$pra->id}}" style="display: none;">
@@ -75,14 +77,11 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <a href="{{route('pracownicy.create') }}" class="btn btn-primary col-3">Dodaj nowego pracownika</a>
                     </div>
                    
-
                     @if(isset($error))
                     {{$error}}
                     @endif
-
 
                 </div>
             </div>

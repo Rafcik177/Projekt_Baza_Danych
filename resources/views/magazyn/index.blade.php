@@ -5,15 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Spis części') }} </div>
+                <div class="card-header"><b>{{ __('Spis części') }}</b> <a style="float:right;" href="{{route('magazyn.create') }}" class="btn btn-primary col-3">Dodaj nową część</a> </div>
                 <div class="row text center">
                     <div class="table-responsive">
-                    <style>td {border: 0.5px solid black;}</style>
+                    
                         <table class="table table-striped">
                             <thead>
-                                <tr class="success">
+                                <tr class="bg-primary">
                                     <th class="text-center">Lp.</th>
-                                    <th class="text-center">Nazwa części</th>
+                                    <th class="text-center">Id części</th>
                                     <th class="text-center">Opis</th>
                                     <th class="text-center">Długość (m)</th>
                                     <th class="text-center">Szerokość (m)</th>
@@ -25,9 +25,9 @@
                                     <th class="text-center">Usuń</th>
                                     <th class="text-center">Pokaż</th>
                             </thead>
-                            <tbody>
+                            <tbody class="table-primary">
                                 @foreach($magazyn as $mag)
-                                <tr>
+                                <tr class="border-bottom-0">
                                     <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$mag->id}}</td> -->
                                     <td class="text-center">{{$mag->id_czesci}}</td> <!-- <td class="text-center"><a href="{{ route('magazyn.show', $mag->id) }}">{{ $mag->nazwa_czesci }}</a></td> -->
                                     <td class="text-center">{{$mag->opis}}</td>
@@ -58,7 +58,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <a href="{{route('magazyn.create') }}" class="btn btn-primary col-3">Dodaj nową część</a>
                     </div>
 
                 </div>
