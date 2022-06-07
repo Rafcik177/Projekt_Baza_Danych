@@ -39,7 +39,6 @@ class ZamowieniaKlientController extends Controller
     {
         $modele = DB::table('modele')->orderBy('kategoria')->paginate(30);
         return view('/zamowieniaKlient/dodajZamowienie', ['modele' => $modele]);
-        //do składania zamówienia musi być dołączony moduł srawdzający zasoby magazynu do danego modelu. Jeśli nie ma części, klient nie może zamówić pojazdu, w innym wypadku obliczana jest maksymalna ilość pojazdów z dostępnych części. 
     }
     
     /**
@@ -173,18 +172,21 @@ class ZamowieniaKlientController extends Controller
                 {
                     
                     $edycja = Zamowienia::find($request->zmien[$i]);
-                    $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli($edycja->id_modelu);
-                    if($liczba!=$request->ilosc[$i])
+                    $liczba = RezerwowanieCzesci::wyliczanie_ilosci_modeli_edycja($edycja->id_modelu,$edycja->ilosc);
+                    if($liczba<$request->ilosc[$i])
                     { 
-                       return redirect()->action([ZamowieniaKlientController::class, 'edit'], [$id]);  
+                        return redirect()->action([ZamowieniaKlientController::class, 'edit'], [$id]);    
                     }
-                    $edycja->ilosc=$request->ilosc[$i];
-                    $edycja->id=$request->zmien[$i];
-
-                    $edycja->update();
+                    else
+                    {
+                        $liczba = RezerwowanieCzesci::zarezerwuj_czesci_do_modelu_edycja($edycja->id_modelu,$request->ilosc[$i],$request->zmien[$i]);
+                        $edycja->ilosc=$request->ilosc[$i];
+                        $edycja->id=$request->zmien[$i];
+                        $edycja->update();
+                    }
                 }    
              }
-             //return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
+             return redirect()->action([ZamowieniaKlientController::class, 'show'], [$id]);
       
     }
 
@@ -196,6 +198,9 @@ class ZamowieniaKlientController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        DB::statement("UPDATE zamowienia SET status='Anulowano-klient' WHERE id_zamowienia='$id'");
+        return redirect()->back();
+    
     }
 }

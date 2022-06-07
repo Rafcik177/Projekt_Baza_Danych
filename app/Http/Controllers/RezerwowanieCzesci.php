@@ -9,27 +9,23 @@ class RezerwowanieCzesci extends Controller
 {
     public static function wyliczanie_ilosci_modeli($id_modelu)
     {
-        $max_ilosc_modeli=array();
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu',$id_modelu)->get();
-        $policz_wszystkie_czesci_do_modelu=count($pobierz_liczbe_czesci);
-        if($policz_wszystkie_czesci_do_modelu>0)
-        {
-            foreach($pobierz_liczbe_czesci as $czesc)
-            {
-               
-                $zapytaj= DB::table('magazyn')->where('id_czesci','=',$czesc->id)->first();
-                $max_ilosc_modeli[]=(int)((($zapytaj->ilosc)-($zapytaj->zarezerwowano_ilosc))/$czesc->ilosc_do_wykonania);
-               
+        $max_ilosc_modeli = array();
+        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
+        if ($policz_wszystkie_czesci_do_modelu > 0) {
+            foreach ($pobierz_liczbe_czesci as $czesc) {
+
+                $zapytaj = DB::table('magazyn')->where('id_czesci', '=', $czesc->id)->first();
+                $max_ilosc_modeli[] = (int)((($zapytaj->ilosc) - ($zapytaj->zarezerwowano_ilosc)) / $czesc->ilosc_do_wykonania);
             }
             //print_r($max_ilosc_modeli);
-            if(min($max_ilosc_modeli)<0) 
+            if (min($max_ilosc_modeli) < 0)
                 return "0";
             else
                 return min($max_ilosc_modeli);
-        }
-        else
-        return "0";
-        
+        } else
+            return "0";
+
         /*
         
         przy każdym elemencie w składaniu zam musi być wywołan funkcja do wyliczenia części. 
@@ -46,24 +42,55 @@ class RezerwowanieCzesci extends Controller
         return najmniejsza liczba
 
         */
-    
     }
+    public static function wyliczanie_ilosci_modeli_edycja($id_modelu, $ilosc)
+    {
+        $max_ilosc_modeli = array();
+        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
+        if ($policz_wszystkie_czesci_do_modelu > 0) {
+            foreach ($pobierz_liczbe_czesci as $czesc) {
 
+                $zapytaj = DB::table('magazyn')->where('id_czesci', '=', $czesc->id)->first();
+                $max_ilosc_modeli[] = (int)((($zapytaj->ilosc) - ($zapytaj->zarezerwowano_ilosc) + ($ilosc * $czesc->ilosc_do_wykonania)) / ($czesc->ilosc_do_wykonania));
+            }
+            //print_r($max_ilosc_modeli);
+            if (min($max_ilosc_modeli) < 0)
+                return "0";
+            else
+                return min($max_ilosc_modeli);
+        } else
+            return "0";
+    }
 
     public static function zarezerwuj_czesci_do_modelu($id_modelu, $liczba_modeli)
     {
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu',$id_modelu)->get();
-        $policz_wszystkie_czesci_do_modelu=count($pobierz_liczbe_czesci);
-        if($policz_wszystkie_czesci_do_modelu>0)
-        {
-            foreach($pobierz_liczbe_czesci as $czesc)
-            {
-                $rezem_czesci= ($czesc->ilosc_do_wykonania)*$liczba_modeli;
-                $zapytaj= DB::table('magazyn')->where('id_czesci','=',$czesc->id)->first();
+        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
+        if ($policz_wszystkie_czesci_do_modelu > 0) {
+            foreach ($pobierz_liczbe_czesci as $czesc) {
+                $rezem_czesci = ($czesc->ilosc_do_wykonania) * $liczba_modeli;
+                $zapytaj = DB::table('magazyn')->where('id_czesci', '=', $czesc->id)->first();
+                $obecnie_zarezerwowano = $zapytaj->zarezerwowano_ilosc;
+
+                DB::statement("UPDATE magazyn SET zarezerwowano_ilosc=$rezem_czesci+$obecnie_zarezerwowano WHERE id=$zapytaj->id");
+            }
+        }
+    }
+
+    public static function zarezerwuj_czesci_do_modelu_edycja($id_modelu, $liczba_modeli, $id_zam)
+    {
+        $ilosc_obecna = DB::table('zamowienia')->where('id', '=', $id_zam)->first();
+        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
+        if ($policz_wszystkie_czesci_do_modelu > 0) {
+            foreach ($pobierz_liczbe_czesci as $czesc) {
+                $rezem_czesci = (($czesc->ilosc_do_wykonania) * $liczba_modeli)-($ilosc_obecna->ilosc * $czesc->ilosc_do_wykonania);
+                $zapytaj = DB::table('magazyn')->where('id_czesci', '=', $czesc->id)->first();
                 $obecnie_zarezerwowano = $zapytaj->zarezerwowano_ilosc;
                 
-                DB::statement("UPDATE magazyn SET zarezerwowano_ilosc=$rezem_czesci+$obecnie_zarezerwowano WHERE id=$zapytaj->id"); 
-               
+
+                DB::statement("UPDATE magazyn SET zarezerwowano_ilosc=$rezem_czesci+$obecnie_zarezerwowano WHERE id=$zapytaj->id");
             }
         }
     }

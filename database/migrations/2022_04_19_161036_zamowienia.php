@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('id_modelu')->references('id')->on('modele')->nullable();
             $table->string('nazwa_modelu')->nullable();
             $table->integer('ilosc')->nullable();
-            $table->string('status')->nullable();
+            $table->enum('status', ["Złożono", "Anulowano-klient","Anulowano-NZTK", "Produkcja", "Gotowe", "Usunięto"])->nullable();
             $table->datetime('data_zlozenia')->nullable();
             $table->boolean('realizacja')->nullable();
             $table->string('cena_pojedyncza')->nullable();

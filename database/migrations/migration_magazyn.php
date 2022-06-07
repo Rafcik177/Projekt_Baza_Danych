@@ -32,11 +32,11 @@ return new class extends Migration
             array(
                 array(
                     'id_czesci' => '1', 'opis' => 'silnik/35we', 'dlugosc' => 2, 'szerokosc' => 2,
-                    'wysokosc' => 2, 'waga' => 2500, 'ilosc' => 5, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
+                    'wysokosc' => 2, 'waga' => 2500, 'ilosc' => 20, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
                 ),
                 array(
                     'id_czesci' => '2', 'opis' => 'koło 15/35we', 'dlugosc' => 0.3, 'szerokosc' => 0.7,
-                    'wysokosc' => 0.7, 'waga' => 200, 'ilosc' => 90, 'prog_niskiego_stanu' => 120,'zarezerwowano_ilosc' => 0
+                    'wysokosc' => 0.7, 'waga' => 200, 'ilosc' => 160, 'prog_niskiego_stanu' => 120,'zarezerwowano_ilosc' => 0
                 ),
                 array(
                     'id_czesci' => '3', 'opis' => 'left lamp', 'dlugosc' => 0.5, 'szerokosc' => 0.3,
@@ -48,15 +48,15 @@ return new class extends Migration
                 ),
                 array(
                     'id_czesci' => '5', 'opis' => 'brakes/35we', 'dlugosc' => 0.5, 'szerokosc' => 0.5,
-                    'wysokosc' => 0.5, 'waga' => 100, 'ilosc' => 30, 'prog_niskiego_stanu' => 50,'zarezerwowano_ilosc' => 0
+                    'wysokosc' => 0.5, 'waga' => 100, 'ilosc' => 140, 'prog_niskiego_stanu' => 50,'zarezerwowano_ilosc' => 0
                 ),
                 array(
                     'id_czesci' => '6', 'opis' => 'Pantograf/35we', 'dlugosc' => 5, 'szerokosc' => 3,
-                    'wysokosc' => 0.2, 'waga' => 2500, 'ilosc' => 5, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
+                    'wysokosc' => 0.2, 'waga' => 2500, 'ilosc' => 12, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
                 ),
                 array(
                     'id_czesci' => '7', 'opis' => 'seat/35we', 'dlugosc' => 0.5, 'szerokosc' => 0.5,
-                    'wysokosc' => 1.5, 'waga' => 2500, 'ilosc' => 5, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
+                    'wysokosc' => 1.5, 'waga' => 2500, 'ilosc' => 1200, 'prog_niskiego_stanu' => 12,'zarezerwowano_ilosc' => 0
                 )
             )
         );
