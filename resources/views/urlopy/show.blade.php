@@ -34,7 +34,7 @@
                                         <td class="text-center">{{$url->rok}}</td>
                                         <td class="text-center">{{$url->dni_wykorzystane}}</td>
                                         <td class="text-center">{{$url->dni_max}}</td>
-                                        <td><a href="{{ route('urlopy.edit', $url->id) }}">Edytuj</a></td>
+                                        <td class="text-center"><a href="{{ route('urlopy.edit', $url->id) }}">Edytuj</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

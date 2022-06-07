@@ -25,7 +25,7 @@
                                     <!--<th class="text-center">Kierownik?</th>-->
                                     <th class="text-center">Stanowisko</th>
                                     <!--<th class="text-center">Wynagrodzenie miesięczne</th>-->
-                                    <th class="text-center">Zwolniony?</th>
+                                    <!-- <th class="text-center">Zwolniony?</th>-->
                                     <th class="text-center">Edytuj</th>
                                     <th class="text-center">Usuń</th>
                                     <th class="text-center">Pokaż</th>
@@ -52,9 +52,9 @@
                                     <!--<td <?php if($pra->czy_kierownik == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td> -->
                                     <td class="text-center">{{$pra->stanowisko}}</td>
                                     <!-- <td class="text-center">{{$pra->wynagrodzenie_miesieczne}}zł</td> -->
-                                    <td <?php if($pra->czy_zwolniony == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td>
-                                    <td><a href="{{ route('pracownicy.edit', $pra->id) }}">Edytuj</a></td>
-                                    <td>
+                                    <!-- <td <?php if($pra->czy_zwolniony == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td> -->
+                                    <td class="text-center"><a href="{{ route('pracownicy.edit', $pra->id) }}">Edytuj</a></td>
+                                    <td class="text-center">
                                         <form action="{{ route('pracownicy.destroy', $pra->id) }}" method="post" id="delete-form-{{$pra->id}}" style="display: none;">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
