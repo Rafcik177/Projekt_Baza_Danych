@@ -5,21 +5,21 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Lista działów') }} </div>
+                <div class="card-header"> <b>{{ __('Lista działów') }} </b></div>
                 <div class="row text center">
-
                     <div class="table-responsive">
-                    <style>td {border: 0.5px solid black;}</style>
-                        <table class="table table-striped">
+                   
+                        <table class="table table-striped table-hover">
                             <thead>
-                                <tr class="success">
-                                    <th class="text-center">Lp.</th>
+                                <tr class="bg-primary">
+                                    <th class="text-center">Id działu</th>
                                     <th class="text-center">Nazwa działu</th>
+                                    <th class="text-center">Lista pracowników</th>
                             </thead>
-                            <tbody>
+                            <tbody class="table-primary">
                                 @foreach($dzialy as $dzial)
-                                <tr >
-                                    <td class="text-center">{{ $loop->index + 1 }}</td> 
+                                <tr class="border-bottom-0">
+                                    <td class="text-center">{{$dzial->id}}</td> 
                                     <td class="text-center">{{$dzial->nazwa}}</td>
                                     <td class="text-center"><a href="{{ route('dzialy.show', $dzial->id) }}">Lista pracowników</a></td>
                                 </tr>

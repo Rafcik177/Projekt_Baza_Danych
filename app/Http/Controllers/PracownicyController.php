@@ -50,6 +50,7 @@ class PracownicyController extends Controller
             'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
+            'wykorzystany_urlop' => 'required|numeric',
         ]);
 
         $pracownicy = new User;
@@ -72,6 +73,7 @@ class PracownicyController extends Controller
         }
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
         $pracownicy->lata_pracy = $request->lata_pracy;
+        $pracownicy->wykorzystany_urlop = $request->wykorzystany_urlop;
         $pracownicy->czy_zwolniony = 0;
         if($pracownicy->czy_kierownik==1)
         {
@@ -134,6 +136,24 @@ class PracownicyController extends Controller
             'stanowisko'=>$pracownicy->stanowisko,
         ]); 
 
+        $max=0;
+        if($pracownicy->lata_pracy<10)
+        {
+            $max=20;
+        }
+        else
+        {
+            $max=26;
+        }
+
+        DB::table('urlopy')
+        ->insert([
+            'id_pracownika' => $pracownicy->id,
+            'rok'=> now()->year,  
+            'dni_wykorzystane'=>$pracownicy->wykorzystany_urlop, 
+            'dni_max'=>$max,
+        ]);
+
         return redirect(route('pracownicy.index'));
     }
 
@@ -181,6 +201,7 @@ class PracownicyController extends Controller
             'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
+            'wykorzystany_urlop' => 'required|numeric',
             'czy_zwolniony' => 'required',
             ]);
 
@@ -217,6 +238,7 @@ class PracownicyController extends Controller
         }
         $pracownicy->wynagrodzenie_miesieczne = $request->wynagrodzenie_miesieczne;
         $pracownicy->lata_pracy = $request->lata_pracy;
+        $pracownicy->wykorzystany_urlop = $request->wykorzystany_urlop;
         $z=$pracownicy->czy_zwolniony;
         $pracownicy->czy_zwolniony = $request->czy_zwolniony;
         if($z==0)
@@ -329,6 +351,23 @@ class PracownicyController extends Controller
                 'stanowisko'=>$pracownicy->stanowisko,
             ]); 
         }
+
+        $max=0;
+        if($pracownicy->lata_pracy<10)
+        {
+            $max=20;
+        }
+        else
+        {
+            $max=26;
+        }
+
+        DB::table('urlopy')
+        ->where('id_pracownika', $pracownicy->id)
+        ->update([  
+            'dni_wykorzystane'=>$pracownicy->wykorzystany_urlop, 
+            'dni_max'=>$max,
+        ]);
         
         return redirect(route('pracownicy.index'));
     }

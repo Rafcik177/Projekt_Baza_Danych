@@ -16,7 +16,7 @@
                             <thead>
                                 <tr class="bg-danger">
                                     <th class="text-center">Lp.</th>
-                                    <th class="text-center">Nazwa części</th>
+                                    <th class="text-center">Id części</th>
                                     <th class="text-center">Ilość</th>
                                     <th class="text-center">Próg niskiego stanu</th>
                             </thead>

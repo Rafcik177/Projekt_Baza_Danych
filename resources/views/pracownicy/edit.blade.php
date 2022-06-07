@@ -165,6 +165,20 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="wykorzystany_urlop" class="col-md-4 col-form-label text-md-end">{{ __('Wykorzystane w roku zatrudnienia dni urlopu') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="wykorzystany_urlop" type="text" class="form-control @error('wykorzystany_urlop') is-invalid @enderror" name="wykorzystany_urlop" value="{{ $pracownicy->wykorzystany_urlop }}" required autocomplete="wykorzystany_urlop" autofocus>
+
+                                @error('wykorzystany_urlop')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="czy_zwolniony" class="col-md-4 col-form-label text-md-end">{{ __('Zwolniony?') }}</label>
 
                             <div class="col-md-6">

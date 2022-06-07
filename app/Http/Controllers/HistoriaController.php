@@ -70,7 +70,8 @@ class HistoriaController extends Controller
     public function show($id_pracownika)
     {
         $historia=DB::table('historia')->select('*')->where('id_pracownika', $id_pracownika)->get();
-        return view('historia.show', compact('historia'));
+        $pracownicy=DB::table('users')->select('*')->where('id', $id_pracownika)->get();
+        return view('historia.show', compact('historia', 'pracownicy'));
     }
 
     /**

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Urlopy') }} </div>
+                <div class="card-header"> <b>{{ __('Urlopy') }}</b> </div>
                 <div class="row text center">
                     <div class="table-responsive">
                     <style>td {border: 0.5px solid black;}</style>
@@ -19,7 +19,7 @@
                                     <th class="text-center">Dni_max</th>
                                     <th class="text-center">Edytuj</th>
                                     <th class="text-center">Usuń</th>
-                                    <th class="text-center">Pokaż</th>
+                                    <!-- <th class="text-center">Pokaż</th> -->
                             </thead>
                             <tbody>
                                 @foreach($urlopy as $urlop)
@@ -45,7 +45,7 @@
                                             Usuń
                                         </a>
                                     </td>
-                                    <td class="text-center"><a href="{{ route('urlopy.show', $urlop->id) }}">Pokaż</a></td>
+                                    <!--- <td class="text-center"><a href="{{ route('urlopy.show', $urlop->id) }}">Pokaż</a></td> -->
                                 </tr>
                                 @endforeach
                             </tbody>
