@@ -60,32 +60,32 @@ class DzialyController extends Controller
     {
         if($id==1)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 1')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 1')->paginate(10);
             $nazwa='Dział administracji - lista pracowników';
         }
         elseif($id==2)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 2')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 2')->paginate(10);
             $nazwa='Dział zamówień - lista pracowników';
         }
         elseif($id==3)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 3')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 3')->paginate(10);
             $nazwa='Dział HR - lista pracowników';
         }
         elseif($id==4)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 4')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 4')->paginate(10);
             $nazwa='Dział produkcji - lista pracowników';
         }
         elseif($id==5)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 5')->orderby('czy_kierownik', 'DESC')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 5')->orderby('czy_kierownik', 'DESC')->paginate(10);
             $nazwa='Dział Magazyn - lista pracowników';
         }
         elseif($id==6)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 6')->get();
+            $dzial = DB::table('users')->whereRaw('id_wydzialu = 6')->paginate(10);
             $nazwa='Lista pracowników bez przypisanego działu';
         }
 

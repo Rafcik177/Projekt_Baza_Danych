@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12">
             <div class="card">
 
-                <div class="card-header"> <b>{{$nazwa}}</b> <a style="float:right;" href="{{route('dzialy.index') }}" class="btn btn-primary col-3">Powrót</a> </div>
+                <div class="card-header"> <b>{{$nazwa}}</b> <a style="float:right;" href="{{route('pracownicy.index') }}" class="btn btn-primary col-3">Powrót</a> </div>
 
                 <div class="row text center">
 
@@ -84,6 +84,7 @@
 
                 </div>
             </div>
+            {{$dzial->links()}}
         </div>
     </div>
 </div>

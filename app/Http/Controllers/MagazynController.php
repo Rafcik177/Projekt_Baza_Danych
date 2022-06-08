@@ -16,7 +16,7 @@ class MagazynController extends Controller
      */
     public function index()
     {
-        $magazyn = Magazyn::all();
+        $magazyn=DB::table('magazyn')->paginate(10);
         return view('magazyn.index', compact('magazyn'));
     }
 

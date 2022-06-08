@@ -17,7 +17,7 @@ class PracownicyController extends Controller
 
     public function index()
     {
-        $pracownicy = User::all()->where('role','<>', 'klient');
+        $pracownicy=DB::table('users')->where('role','<>', 'klient')->paginate(10);
         return view('pracownicy.index', compact('pracownicy'));
     }
 

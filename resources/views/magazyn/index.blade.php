@@ -28,8 +28,8 @@
                             <tbody class="table-primary">
                                 @foreach($magazyn as $mag)
                                 <tr class="border-bottom-0">
-                                    <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$mag->id}}</td> -->
-                                    <td class="text-center">{{$mag->id_czesci}}</td> <!-- <td class="text-center"><a href="{{ route('magazyn.show', $mag->id) }}">{{ $mag->nazwa_czesci }}</a></td> -->
+                                    <td class="text-center">{{ $loop->index + 1 }}</td> 
+                                    <td class="text-center">{{$mag->id_czesci}}</td> 
                                     <td class="text-center">{{$mag->opis}}</td>
                                     <td class="text-center">{{$mag->dlugosc}}</td>
                                     <td class="text-center">{{$mag->szerokosc}}</td>
@@ -68,5 +68,6 @@
 
             </div>
         </div>
+        {{$magazyn->links()}}
     </div>
     @endsection
