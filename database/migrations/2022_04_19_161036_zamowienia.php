@@ -25,6 +25,7 @@ return new class extends Migration
             $table->boolean('realizacja')->nullable();
             $table->string('cena_pojedyncza')->nullable();
             $table->string('odnosnie_id_zamowienia')->nullable();
+            $table->integer('staty')->references('id')->on('statusy')->nullable();
         });
 
     }
