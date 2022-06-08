@@ -38,7 +38,7 @@
                             <a href="{{ route('modele.index') }}" class="btn btn-primary">Powrót</a>
                         </div>
                     </div>
-                </div><!-- end card-body -->
+                </div><!-- end card-body  -->
             </div>        
         </div>
         <div class="col-md-8">
