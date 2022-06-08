@@ -38,6 +38,13 @@
                                     <a href="{{url('zamadmin')}}">Kliknij by wejść w zamówienia !</a>
                                 </div>
 
+                                @if (Auth::user()->role == 'admin' )
+                                    <div id="app">
+                                       @include('flash-message')
+                                       
+                                        @yield('content')
+                                    </div>
+                                 @endif
                                 
                                 
                             

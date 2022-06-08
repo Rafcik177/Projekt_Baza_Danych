@@ -59,4 +59,24 @@ class TestStanu extends Notification
             //
         ];
     }
+
+    public function create(Request $request)
+    {
+    
+	    $this->validate($request,[
+        'title' => 'required',
+        'details' => 'required'
+        ]);
+
+
+	    $items = Item::create($request->all());
+
+
+	    return back()->with('success','Item created successfully!');
+ 
+    }
+
 }
+
+
+    
