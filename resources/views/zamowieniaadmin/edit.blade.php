@@ -5,41 +5,49 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edytuj') }}</div>
+                <div class="card-header">{{ __('Edytuj') }} <a href="{{ route('zamadmin.index') }}" style="float:right;">Powrót</a></div>
 
                 <div class="card-body">
-                    <form action="{{ route('zamadmin.update', $zamadmin->id) }}" method="post" role="form">
+                    <form action="{{ route('zamowienia.update', $id) }}" method="POST" role="form">
                         {{ csrf_field() }}
-                        {{ method_field('PATCH') }}
+                        {{ method_field('PUT') }}
+                        @foreach($edycja as $e)
+                        <div class="col-md-12 mt-4" style="text-align: center; font-weight:600;">
+                            <a href="{{ route('oferta.show', $e->id_modelu) }}">
+                                {{$e->nazwa_modelu}}
+                            </a>
+                        </div>
+                        <div class="row mb-3 ">
 
-                        <div class="row mb-3">
-                            <label for="staty" class="col-md-4 col-form-label text-md-end">{{ __('staty') }}</label>
+                            <label for="ilosc" class="col-md-6 col-form-label text-md-end">{{ __('Ilość') }}</label>
 
                             <div class="col-md-6">
-                                <select id="staty" name="staty" style="width: 100%" class="form-control @error('staty') is-invalid @enderror">
-                                    <option value='6'<?php if($zamadmin->staty == 6) { ?> selected="selected"<?php } ?>>Usunięto</option>
-                                    <option value='1'<?php if($zamadmin->staty == 1) { ?> selected="selected"<?php } ?>>Złożono</option>
-                                    <option value='2'<?php if($zamadmin->staty == 2) { ?> selected="selected"<?php } ?>>Anulowano Klient</option>
-                                    <option value='3'<?php if($zamadmin->staty == 3) { ?> selected="selected"<?php } ?>>Anulowano NZTK</option>
-                                    <option value="4"<?php if($zamadmin->staty == 4) { ?> selected="selected"<?php } ?>>Produkcja</option>
-                                    <option value='5'<?php if($zamadmin->staty == 5) { ?> selected="selected"<?php } ?>>Gotowe</option>
-                                </select>
+                            @php
+                                    $liczba = App\Http\Controllers\RezerwowanieCzesci::wyliczanie_ilosci_modeli_edycja($e->id_modelu,$e->ilosc);
+                                    echo "max ".$liczba;
+                            @endphp
+                                <input id="ilosc" type="number" name="ilosc[]" value="{{$e->ilosc}}" min="0" max="{{$liczba}}">
+                                </br>Zmień <input id="zmien" type="checkbox" name="zmien[]" value="{{$e->id}}">
 
-                                @error('staty')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                @error('ilosc')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $_SESSION['error']}}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
-                        
+                        <hr>
+                        @endforeach
+
+
+
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-8 offset-md-5">
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Zapisz') }}
                                 </button>
-                                <a href="{{ route('zamowieniaadmin.index') }}" class="btn btn-primary">Powrót</a>
+
                             </div>
                         </div>
                     </form>

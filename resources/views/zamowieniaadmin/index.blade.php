@@ -37,15 +37,17 @@
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
                                     <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
-                                    <td 
-                                    <?php 
-                                    if($za->staty = 1) { ?> class="text-center">Złożono<?php } 
-                                    elseif ($za->staty = 2) { ?> class="text-center">Anulowano klient<?php }
-                                    elseif ($za->staty = 3) { ?> class="text-center">Anulowano NZTK<?php }
-                                    elseif ($za->staty = 4) { ?> class="text-center">Produkcja<?php }
-                                    elseif ($za->staty = 5) { ?> class="text-center">Gotowe<?php }
-                                    elseif ($za->staty = 6) { ?> class="text-center">Usunięto<?php }
-                                    ?> 
+                                    <td class="text-center">
+                                        <form action="" method="POST">
+                                            <select name="status">
+                                                <option value={{$za->status}}> Złożono</option>
+                                                <option value={{$za->status}}> Anulowane - klient</option>
+                                                <option value={{$za->status}}> Anulowane - NZTK</option>
+                                                <option value={{$za->status}}> Produkcja</option>
+                                                <option value={{$za->status}}> Gotowe</option>
+                                                <option value={{$za->status}}> Usunięto</option>
+                                            </select>
+                                        </form>    
                                     </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
