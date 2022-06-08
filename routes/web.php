@@ -33,26 +33,8 @@ use App\Http\Controllers\UrlopyController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/email', function (){
-    Mail::to('tocarra.2@mufollowsa.com')->send(new WelcomeMail());
-    return new WelcomeMail();
-});
-
-
 Route::get('/oferta', [OfertaController::class, 'index']);
 Route::resource('/oferta', OfertaController::class);
-
-//Dla magazynu
-
-Route::get('/magazyn', [MagazynController::class, 'index']);
-Route::resource('magazyn', MagazynController::class);
-
-Route::get('/pracownicy', [PracownicyController::class, 'index']);
-Route::resource('pracownicy', PracownicyController::class);
-
-Route::get('/produkcja', [ProdukcjaController::class, 'index']);
-Route::resource('produkcja', ProdukcjaController::class);
 
 //Route::get('autocomplete_nr_zam', [ProdukcjaController::class, 'autocomplete_nr_zam'])->name('autocomplete_nr_zam');
 /*Route::get('/autocomplete/nr_zam', function(){
@@ -60,64 +42,66 @@ Route::resource('produkcja', ProdukcjaController::class);
     return AutocompleteController->$col();
 });*/
 
-Route::controller(AutocompleteController::class)->group(function(){
+Route::controller(AutocompleteController::class)->group(function () {
     $allowedColNames = ['nr_zam', 'n_model'];
-    foreach($allowedColNames as $col){
-        Route::get('/autocomplete/'.$col, $col);
+    foreach ($allowedColNames as $col) {
+        Route::get('/autocomplete/' . $col, $col);
     }
     //Route::get('/autocomplete/nr_zam', 'nr_zam');
     //Route::get('/autocomplete/n_model', 'n_model');
 });
 
 
-Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
-Route::resource('zamowienia', ZamowieniaKlientController::class);
-
-Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
-Route::resource('zamadmin', ZamAdminController::class);
-
-Route::get('/historia', [HistoriaController::class, 'index']);
-Route::resource('historia', HistoriaController::class);
-
-
-Route::get('/admin', [AdminController::class, 'index']);
-Route::resource('admin', AdminController::class);
-
-Route::get('/modele', [ModeleController::class, 'index']);
-Route::resource('/modele', ModeleController::class);
-
-Route::resource('/spisyczesci', SpisyCzesciController::class);
-
-Route::get('/dzialy', [DzialyController::class, 'index']);
-Route::resource('dzialy', DzialyController::class);
-
-Route::get('/urlopy', [UrlopyController::class, 'index']);
-Route::resource('urlopy', UrlopyController::class);
-
-
 Auth::routes();
- //poniższa grupa jest dla wszystkich zalogowanych
-Route::middleware(['auth', 'verified'])->group(function(){
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
-    Route::middleware(['can:czyKlient'])->group(function(){
-        
 
+    Route::middleware(['can:czyAdmin'])->group(function () {
+        Route::get('/email', function () {
+            Mail::to('tocarra.2@mufollowsa.com')->send(new WelcomeMail());
+            return new WelcomeMail();
+        });
+        Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
+        Route::resource('zamadmin', ZamAdminController::class);
+        Route::get('/admin', [AdminController::class, 'index']);
+        Route::resource('admin', AdminController::class);
+        Route::get('/modele', [ModeleController::class, 'index']);
+        Route::resource('/modele', ModeleController::class);
+        Route::resource('/spisyczesci', SpisyCzesciController::class);
     });
-    //poniższa grupa jest tylko dla tych, którzy są w dziale HR
-    Route::middleware(['can:czyHR'])->group(function(){
 
-
-    //Route::middleware(['can:czyHR'])->group(function(){
-        //Route::get('/pracownicy', [PracownicyController::class, 'index']);
-        //Route::resource('pracownicy', PracownicyController::class);
-
-    //Route::middleware(['can:czyMAGAZYN'])->group(function(){
-        //Route::get('/magazyn', [MagazynController::class, 'index']);
-        //Route::resource('magazyn', MagazynController::class);
-
-    });
     
+    Route::middleware(['can:czyKlient','can:czyAdmin'])->group(function () {
+        Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
+        Route::resource('zamowienia', ZamowieniaKlientController::class);
+    });
+
+
+    Route::middleware(['can:czyHR','can:czyAdmin'])->group(function () {
+        Route::get('/urlopy', [UrlopyController::class, 'index']);
+        Route::resource('urlopy', UrlopyController::class);
+        Route::get('/pracownicy', [PracownicyController::class, 'index']);
+        Route::resource('pracownicy', PracownicyController::class);
+        Route::get('/historia', [HistoriaController::class, 'index']);
+        Route::resource('historia', HistoriaController::class);
+        Route::get('/dzialy', [DzialyController::class, 'index']);
+        Route::resource('dzialy', DzialyController::class);
+    });
+
+
+    Route::middleware(['can:czyMagazyn','can:czyAdmin'])->group(function () {
+        Route::get('/magazyn', [MagazynController::class, 'index']);
+        Route::resource('magazyn', MagazynController::class);
+        Route::get('/niskistan', [NiskiStan::class, 'wypisz']);
+    });
+
+
+    Route::middleware(['can:czyProdukcja','can:czyAdmin'])->group(function () {
+        Route::get('/produkcja', [ProdukcjaController::class, 'index']);
+        Route::resource('produkcja', ProdukcjaController::class);
+    });
 });
 
 
@@ -125,8 +109,6 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //Route::get('/zamadmin',[ZamAdminController::class, 'wypisz']);
 
-Route::get('/niskistan',[NiskiStan::class, 'wypisz']);
+
 
 //Route::get('/powiadomienia',[NiskiStan::class, 'sendTestNotification']);
-
-
