@@ -64,7 +64,7 @@ class ModeleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource
      *
      * @param  \App\Models\Modele  $model
      * @return \Illuminate\Http\Response
