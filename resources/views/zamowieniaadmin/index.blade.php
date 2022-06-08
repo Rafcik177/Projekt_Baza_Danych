@@ -6,7 +6,7 @@
         <div class="col-md-10 col-lg-12">
             <div class="card">
                 <div class="card-header">{{ __('Zamówienia') }} 
-                <form class="form-inline my-2 my-lg-0" type="get" action="{{route('zamadmin.search')}} ">
+                <form class="form-inline my-2 my-lg-0" type="get" action="{{url('/search')}} ">
                     <input class="form-control mr-sm-2" name ="znajdz" type="search" placeholder="Podaj Id zamówienia">
                     <button class="btn btn-outline-succ@ss my-2 my-sm-0" type="submit">Wyszukaj</button>
                 </form>
@@ -26,6 +26,7 @@
                                     <th class="text-center">Cena</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Id Zamawiającego</th>
+                                    <th class="text-center">Firma</th>
                                     <th class="text-center">Szczegóły Zamówienia</th>
                                     <th class="text-center">Edytuj</th>
                                     

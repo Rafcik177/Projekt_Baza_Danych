@@ -66,7 +66,9 @@ class ZamAdminController extends Controller
     public function search(Request $request)
     {
         $search_text = $request->znajdz;
-        $zamadmin = DB::table('zamowienia')
+        $zamadmin =  $zamadmin = DB::table('zamowienia AS zz')
+        ->select("id_zamawiajacego","status", "data_zlozenia", "id_zamowienia", DB::raw('(SELECT  sum(ilosc*cena_pojedyncza) FROM `zamowienia` AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena'))
+        ->where('id_zamowienia', '<>', '')
         ->where('id_zamowienia','LIKE', '%'.$search_text.'%')
         ->get();
 
