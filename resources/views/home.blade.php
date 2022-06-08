@@ -13,8 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        @if (Auth::user()->role == 'dzial_magazyn' )
+                        @if (Auth::user()->role == 'dzial_magazyn' || Auth::user()->role == 'admin')
                             @php
                                 $liczba = App\Http\Controllers\NiskiStan::stanczesci();
                             @endphp
