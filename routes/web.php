@@ -45,6 +45,7 @@ Route::resource('/oferta', OfertaController::class);
 
 //Dla magazynu
 
+
 Route::get('/magazyn', [MagazynController::class, 'index']);
 Route::resource('magazyn', MagazynController::class);
 
@@ -75,6 +76,8 @@ Route::resource('zamowienia', ZamowieniaKlientController::class);
 
 Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
 Route::resource('zamadmin', ZamAdminController::class);
+
+Route::get('/search',[ZamAdminController::class, 'search']);
 
 Route::get('/historia', [HistoriaController::class, 'index']);
 Route::resource('historia', HistoriaController::class);

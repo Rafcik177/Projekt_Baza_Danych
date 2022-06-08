@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('Zamówienia') }} </div>
+                <div class="card-header">{{ __('Zamówienia') }} 
+                <form class="form-inline my-2 my-lg-0" type="get" action="{{url('/search')}} ">
+                    <input class="form-control mr-sm-2" name ="znajdz" type="search" placeholder="Podaj Id zamówienia">
+                    <button class="btn btn-outline-succ@ss my-2 my-sm-0" type="submit">Wyszukaj</button>
+                </form>
+                </div>
                 <div class="row text center">
                     <div class="table-responsive">
                         <style>

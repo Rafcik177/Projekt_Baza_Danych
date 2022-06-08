@@ -132,6 +132,23 @@ return new class extends Migration
                     'czy_zwolniony' => NULL
                 )
                 );
+                DB::table('users')->insert(
+                    array(
+                        'imie' => 'Nicolas',
+                        'nazwisko' => 'Świątnik',
+                        'pesel' => '99041706547',
+                        'data_urodzenia' => '1990-12-12',
+                        'stanowisko' => null,
+                        'czy_kierownik' => 0,
+                        'wynagrodzenie_miesieczne' => NULL,
+                        'id_wydzialu' => NULL,
+                        'email' => "niko9521@gmail.com",
+                        'password' => Hash::make('12345'),
+                        'role'=>'dzial_produkcji',
+                        'lata_pracy' => NULL,
+                        'czy_zwolniony' => NULL
+                    )
+                    );
     }
 
     /**

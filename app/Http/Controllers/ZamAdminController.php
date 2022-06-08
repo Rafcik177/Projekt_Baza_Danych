@@ -63,5 +63,16 @@ class ZamAdminController extends Controller
         
     }
     
+    public function search()
+    {
+        $search_text = $_GET['znajdz'];
+        $xd = DB::table('zamowienia')
+        ->where('id_zamowienia','LIKE', '%'.$search_text.'%')
+        ->when('id_zamowienia')
+        ->get();
+
+
+        return view('zamowieniaadmin/search', compact('xd'));
+    }
 }
 
