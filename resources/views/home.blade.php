@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        @if (Auth::user()->role == 'dzial_magazyn' or 'admin')
+                        @if (Auth::user()->role == 'dzial_magazyn' )
                             @php
                                 $liczba = App\Http\Controllers\NiskiStan::stanczesci();
                             @endphp

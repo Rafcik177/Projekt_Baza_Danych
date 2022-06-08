@@ -36,9 +36,17 @@
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
                                     <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
-                                    <td class="text-center">{{$za->status}}</td>
+                                    <td 
+                                    <?php 
+                                    if($za->status = 1) { ?> class="text-center">Złożono<?php } 
+                                    elseif ($za->status = 2) { ?> class="text-center">Anulowano klient<?php }
+                                    elseif ($za->status = 3) { ?> class="text-center">Anulowano NZTK<?php }
+                                    elseif ($za->status = 4) { ?> class="text-center">Produkcja<?php }
+                                    elseif ($za->status = 5) { ?> class="text-center">Gotowe<?php }
+                                    elseif ($za->status = 6) { ?> class="text-center">Usunięto<?php }
+                                    ?> 
+                                    </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
-
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
                                     
                                 </tr>

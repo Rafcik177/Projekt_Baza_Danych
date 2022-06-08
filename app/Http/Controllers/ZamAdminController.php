@@ -74,5 +74,36 @@ class ZamAdminController extends Controller
 
         return view('zamowieniaadmin/search', compact('xd'));
     }
+
+        /* public function staty()
+        {
+            if($zamadmin->status== Złożono)
+                {
+                $zamadmin->status = 'Złożono';
+                } 
+                elseif($zamadmin->id_wydzialu== Anulowano-klient)
+                {
+                $zamadmin->status = 'Anulowano Klient';
+                }
+                elseif($zamadmin->id_wydzialu== Anulowano-NZTK)
+                {
+                $zamadmin->status = 'dzialAnulowano NZTK';
+                }
+                elseif($zamadmin->id_wydzialu== Produkcja)
+                {
+                $zamadmin->status = 'Produkcja';
+                }
+                elseif($zamadmin->id_wydzialu== Gotowe)
+                {
+                $zamadmin->status = 'Gotowe';
+                }
+                elseif($zamadmin->id_wydzialu== Usunięto)
+                {
+                $zamadmin->status = 'Usunięto';
+                }
+        }*/
+
 }
+
+
 
