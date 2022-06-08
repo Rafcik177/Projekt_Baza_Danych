@@ -37,7 +37,7 @@
                                    
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
-                                    <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
+                                    <td class="text-center"></td>
                                     <td class="text-center">
                                         <form action="" method="POST">
                                             <select name="status">
@@ -51,8 +51,8 @@
                                         </form>    
                                     </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
-                                    <td class="text-center"><a href="{{route('za.show', $za->id_zamowienia) }}">Pokaż</a></td>
-                                    <td class="text-center"><a href="{{ route('za.edit', $za->id_zamowienia) }}">Edytuj</a></td>
+                                    <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
+                                    <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td>
                                     
                                 </tr>
                                 @endforeach
