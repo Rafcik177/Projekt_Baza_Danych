@@ -21,13 +21,18 @@ class ProdukcjaController extends Controller
      */
     public function index()
     {
-        $stan = StanProdukcji::all();
-        $zam_numer = [];
-        $model_nazwa = [];
-        foreach($stan as $s) {
-            $zam_numer[] = Zamowienia::findOrFail($s->id_zamowienia)->id_zamowienia;
-            $model_nazwa[] = Modele::findOrFail($s->id_modelu)->nazwa;
-        }
+        $stan = DB::select('SELECT * FROM stanprodukcji');
+        $zam_numer = array_map(
+            function($v){ return $v->id_zamowienia; },
+            DB::select('SELECT z.id_zamowienia FROM stanprodukcji s
+            INNER JOIN zamowienia z ON s.id_zamowienia = z.id')
+        );
+        $model_nazwa = array_map(
+            function($v){ return $v->nazwa; },
+            DB::select('SELECT m.nazwa FROM stanprodukcji s
+            INNER JOIN modele m ON s.id_modelu = m.id')
+        );
+
         return view('produkcja.index', compact('stan','zam_numer','model_nazwa'));
     }
 
@@ -55,12 +60,10 @@ class ProdukcjaController extends Controller
             'ilosc_docelowa' => 'required'
         ]);
 
-        $stan = new StanProdukcji;
-        $stan->id_zamowienia = Zamowienia::where('id_zamowienia',$request->id_zamowienia)->firstOrFail()->id;
-        $stan->id_modelu = Modele::where('nazwa', $request->nazwa_modelu)->firstOrFail()->id;
-        $stan->ilosc_obecna = 0; //default value
-        $stan->ilosc_docelowa = $request->ilosc_docelowa;
-        $stan->save();
+        DB::statement('INSERT INTO stanprodukcji(id_zamowienia, id_modelu, ilosc_obecna, ilosc_docelowa)
+            VALUES( (SELECT id FROM zamowienia WHERE id_zamowienia = ?),
+            (SELECT id FROM modele WHERE nazwa = ?), 0, ?)',
+            [$request->id_zamowienia, $request->nazwa_modelu, $request->ilosc_docelowa]);
 
         return redirect(route('produkcja.index'));
     }
@@ -73,10 +76,12 @@ class ProdukcjaController extends Controller
      */
     public function show($id)
     {
-        $stan = StanProdukcji::findOrFail($id);
-        $zam_numer = Zamowienia::findOrFail($stan->id_zamowienia)->id_zamowienia;
-        $model_nazwa = Modele::findOrFail($stan->id_modelu)->nazwa;
-        return view('produkcja.show', compact('stan','zam_numer','model_nazwa'));
+        $dbdata = DB::select('SELECT s.id_zamowienia AS id_zamowienia, s.id_modelu AS id_modelu,
+            s.ilosc_obecna AS stan_il_obecna, s.ilosc_docelowa AS stan_il_docelowa,
+            z.id_zamowienia AS zam_numer, m.nazwa AS model_nazwa
+            FROM stanprodukcji s INNER JOIN zamowienia z ON s.id_zamowienia = z.id
+            INNER JOIN modele m ON s.id_modelu = m.id WHERE s.id = ?', [$id])[0];
+        return view('produkcja.show', compact('dbdata'));
     }
 
     /**
@@ -87,7 +92,11 @@ class ProdukcjaController extends Controller
      */
     public function edit($id)
     {
-        $stan = StanProdukcji::find($id);
+        //$stan = StanProdukcji::find($id);
+        $stan = DB::select('SELECT s.id, z.id_zamowienia, m.nazwa AS nazwa_modelu,
+            s.ilosc_obecna, s.ilosc_docelowa FROM stanprodukcji s
+            INNER JOIN zamowienia z ON s.id_zamowienia = z.id
+            INNER JOIN modele m ON s.id_modelu = m.id WHERE s.id = ?',[$id])[0];
         return view('produkcja.edit', compact('stan'));
     }
 
@@ -107,13 +116,11 @@ class ProdukcjaController extends Controller
             'ilosc_docelowa' => 'required'
         ]);
         
-        $stan = StanProdukcji::find($id);
-        $stan->id_zamowienia = Zamowienia::where('id_zamowienia',$request->id_zamowienia)->firstOrFail()->id;
-        $stan->id_modelu = Modele::where('nazwa', $request->nazwa_modelu)->firstOrFail()->id;
-        $stan->ilosc_obecna = $request->ilosc_obecna;
-        $stan->ilosc_docelowa = $request->ilosc_docelowa;
-        $stan->save();
-
+        DB::statement('UPDATE stanprodukcji SET id_zamowienia = (SELECT id FROM zamowienia WHERE id_zamowienia = ?),
+            id_modelu = (SELECT id FROM modele WHERE nazwa = ?), ilosc_obecna = ?, ilosc_docelowa = ?
+            WHERE id = ?', [$request->id_zamowienia, $request->nazwa_modelu,
+            $request->ilosc_obecna, $request->ilosc_docelowa, $id]);
+        
         return redirect(route('produkcja.index'));
     }
 
@@ -125,7 +132,7 @@ class ProdukcjaController extends Controller
      */
     public function destroy($id)
     {
-        StanProdukcji::where('id', $id)->delete();
+        DB::statement('DELETE FROM stanprodukcji WHERE id = ?', [$id]);
         return redirect()->back();
     }
 }
