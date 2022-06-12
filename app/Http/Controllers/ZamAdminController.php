@@ -29,6 +29,8 @@ class ZamAdminController extends Controller
         ->where('id_zamowienia', '<>', '')
         ->paginate(10);
 
+       
+
         return view('zamowieniaadmin/index', ['zamadmin' => $zamadmin]);
     }
 

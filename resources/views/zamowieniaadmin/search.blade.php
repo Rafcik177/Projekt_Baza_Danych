@@ -53,6 +53,7 @@
                                         </form>    
                                     </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
+                                    <td class="text-center">firma</td>
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
                                     <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td>
                                     
