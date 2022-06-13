@@ -100,17 +100,7 @@ class ModeleController extends Controller
             'waga' => 'required',
             'cena' => 'required'
             ]);
-        /*
-        $model = Modele::find($id);
-        $model->nazwa = $request->nazwa;
-        $model->kategoria = $request->kategoria;
-        $model->moc = $request->moc;
-        $model->ilosc_miejsc = $request->ilosc_miejsc;
-        $model->max_predkosc = $request->max_predkosc;
-        $model->waga = $request->waga;
-        $model->cena = $request->cena;
-        $model->save();
-        */
+        
         DB::statement('UPDATE modele SET nazwa=?, kategoria=?, moc=?, ilosc_miejsc=?, max_predkosc=?,
             waga=?, cena=? WHERE id=?', [$request->nazwa, $request->kategoria, $request->moc,
             $request->ilosc_miejsc, $request->max_predkosc, $request->waga, $request->cena, $id]);

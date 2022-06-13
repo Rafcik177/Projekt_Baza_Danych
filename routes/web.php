@@ -42,21 +42,21 @@ Route::resource('/oferta', OfertaController::class);
     return AutocompleteController->$col();
 });*/
 
-Route::controller(AutocompleteController::class)->group(function () {
-    $allowedColNames = ['nr_zam', 'n_model'];
-    foreach ($allowedColNames as $col) {
-        Route::get('/autocomplete/' . $col, $col);
-    }
-    //Route::get('/autocomplete/nr_zam', 'nr_zam');
-    //Route::get('/autocomplete/n_model', 'n_model');
-});
-
-
 Auth::routes();
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    //route dla systemu autocomplete
+    Route::controller(AutocompleteController::class)->group(function () {
+        $allowedColNames = ['nr_zam', 'n_model'];
+        foreach ($allowedColNames as $col) {
+            Route::get('/autocomplete/' . $col, $col);
+        }
+        //Route::get('/autocomplete/nr_zam', 'nr_zam');
+        //Route::get('/autocomplete/n_model', 'n_model');
+    });
 
     Route::middleware(['can:czyAdmin'])->group(function () {
         Route::get('/email', function () {
