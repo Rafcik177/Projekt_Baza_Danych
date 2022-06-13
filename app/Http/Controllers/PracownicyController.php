@@ -269,10 +269,6 @@ class PracownicyController extends Controller
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
-            ],
-            [
-                'czy_kierownik.required'=>'Wymagane pole',
-                'validation.unique'=>'Dział ma już kierownika',
             ]);
         }
         elseif($pracownicy->id_wydzialu==2 and $pracownicy->czy_kierownik==1 and $count2>0)
@@ -326,7 +322,7 @@ class PracownicyController extends Controller
                 $pracownicy->id_wydzialu = 6;
                 $pracownicy->czy_kierownik = 0;
                 $pracownicy->stanowisko = '-';
-                $pracownicy->wynagrodzenie_miesieczne =0;
+                $pracownicy->wynagrodzenie_miesieczne = 0;
             }
         }
         elseif($z==1)
