@@ -6,6 +6,7 @@ use App\Models\Modele;
 use App\Models\SpisCzesci;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SpisyCzesciController extends Controller
 {
@@ -17,7 +18,7 @@ class SpisyCzesciController extends Controller
      */
     public function edit($id)
     {
-        $model = Modele::find($id);
+        $model = DB::select('SELECT * FROM modele WHERE id=?', [$id])[0];
         return view('spisyczesci.edit', compact('model'));
     }
 
@@ -34,11 +35,8 @@ class SpisyCzesciController extends Controller
             'ilosc_do_wykonania' => 'required'
             ]);
 
-        $spis = new SpisCzesci;
-        $spis->nazwa_czesci = $request->nazwa_czesci;
-        $spis->ilosc_do_wykonania = $request->ilosc_do_wykonania;
-        $spis->id_modelu = $request->id_modelu;
-        $spis->save();
+        DB::statement('INSERT INTO czesci(nazwa_czesci, ilosc_do_wykonania, id_modelu) VALUES
+            (?,?,?)',[$request->nazwa_czesci, $request->ilosc_do_wykonania, $request->id_modelu]);
 
         return redirect(route('spisyczesci.edit', $request->id_modelu));
     }
@@ -51,7 +49,7 @@ class SpisyCzesciController extends Controller
      */
     public function destroy($id)
     {
-        SpisCzesci::where('id', $id)->delete();
+        DB::statement('DELETE FROM czesci WHERE id = ?', [$id]);
         return redirect()->back();
     }
 }
