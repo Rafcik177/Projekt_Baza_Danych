@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-//This model describes atble "czesci", which binds "modele" and "magazyn"
+//This model describes table "czesci", which binds "modele" and "magazyn"
 class SpisCzesci extends Model
 {
     use HasFactory;
