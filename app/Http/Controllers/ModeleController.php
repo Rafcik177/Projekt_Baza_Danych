@@ -18,7 +18,7 @@ class ModeleController extends Controller
      */
     public function index()
     {
-        $model = Modele::all();
+        $model = DB::select('SELECT * FROM modele');
         return view('modele.index', compact('model'));
     }
 
@@ -50,16 +50,9 @@ class ModeleController extends Controller
             'cena' => 'required'
         ]);
 
-        $model = new Modele;
-        $model->nazwa = $request->nazwa;
-        $model->kategoria = $request->kategoria;
-        $model->moc = $request->moc;
-        $model->ilosc_miejsc = $request->ilosc_miejsc;
-        $model->max_predkosc = $request->max_predkosc;
-        $model->waga = $request->waga;
-        $model->cena = $request->cena;
-        $model->save();
-
+        DB::statement('INSERT INTO modele(nazwa, kategoria, moc, ilosc_miejsc, max_predkosc,
+            waga, cena) VALUES (?,?,?,?,?, ?,?)', [$request->nazwa, $request->kategoria, $request->moc,
+            $request->ilosc_miejsc, $request->max_predkosc, $request->waga, $request->cena]);
         return redirect(route('modele.index'));
     }
 
@@ -71,9 +64,10 @@ class ModeleController extends Controller
      */
     public function show($id)
     {
-        $model = Modele::findOrFail($id);
-        $czesci = DB::table('czesci')->where('id_modelu',$id)->get();
-        return view('modele.show', ['model'=>$model, 'czesci'=>$czesci]);
+        $model = DB::select('SELECT * FROM modele WHERE id=?', [$id])[0];
+        $czesci = DB::select('SELECT id, nazwa_czesci, ilosc_do_wykonania FROM czesci
+            WHERE id_modelu=?', [$id]);
+        return view('modele.show', compact('model', 'czesci'));
     }
 
     /**
@@ -84,7 +78,7 @@ class ModeleController extends Controller
      */
     public function edit($id)
     {
-        $model = Modele::find($id);
+        $model = DB::select('SELECT * FROM modele WHERE id=?', [$id])[0];
         return view('modele.edit', compact('model'));
     }
 
@@ -106,6 +100,7 @@ class ModeleController extends Controller
             'waga' => 'required',
             'cena' => 'required'
             ]);
+        /*
         $model = Modele::find($id);
         $model->nazwa = $request->nazwa;
         $model->kategoria = $request->kategoria;
@@ -115,6 +110,10 @@ class ModeleController extends Controller
         $model->waga = $request->waga;
         $model->cena = $request->cena;
         $model->save();
+        */
+        DB::statement('UPDATE modele SET nazwa=?, kategoria=?, moc=?, ilosc_miejsc=?, max_predkosc=?,
+            waga=?, cena=? WHERE id=?', [$request->nazwa, $request->kategoria, $request->moc,
+            $request->ilosc_miejsc, $request->max_predkosc, $request->waga, $request->cena, $id]);
 
         return redirect(route('modele.index'));
     }
@@ -127,7 +126,7 @@ class ModeleController extends Controller
      */
     public function destroy($id)
     {
-        Modele::where('id', $id)->delete();
+        DB::statement('DELETE FROM modele WHERE id = ?', [$id]);
         return redirect()->back();
     }
 }
