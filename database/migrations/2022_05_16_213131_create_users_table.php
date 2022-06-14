@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('stanowisko')->nullable();
             $table->boolean('czy_kierownik')->nullable();
             $table->float('wynagrodzenie_miesieczne')->nullable();
-            $table->integer('id_wydzialu')->references('id')->on('dzialy')->nullable();
+            $table->unsignedBigInteger('id_wydzialu')->references('id')->on('dzialy')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->default(Hash::make('12345'));
@@ -40,6 +40,7 @@ return new class extends Migration
             $table->integer('lata_pracy')->nullable();
             $table->integer('wykorzystany_urlop')->nullable();
             $table->boolean('czy_zwolniony')->nullable();
+            $table->foreign('id_wydzialu')->references('id')->on('dzialy')->onDelete('cascade');
         });
 
         DB::table('users')->insert(

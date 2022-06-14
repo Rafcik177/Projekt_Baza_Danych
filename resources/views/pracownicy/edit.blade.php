@@ -45,7 +45,7 @@
                             <label for="data_urodzenia" class="col-md-4 col-form-label text-md-end">{{ __('Data urodzenia') }}</label>
 
                             <div class="col-md-6">
-                                <input id="data_urodzenia" type="text" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ $pracownicy->data_urodzenia }}" required autocomplete="data_urodzenia" autofocus>
+                                <input id="data_urodzenia" type="date" class="form-control @error('data_urodzenia') is-invalid @enderror" name="data_urodzenia" value="{{ $pracownicy->data_urodzenia }}" required autocomplete="data_urodzenia" autofocus>
 
                                 @error('data_urodzenia')
                                     <span class="invalid-feedback" role="alert">

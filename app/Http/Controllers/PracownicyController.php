@@ -17,7 +17,7 @@ class PracownicyController extends Controller
 
     public function index()
     {
-        $pracownicy = User::all()->where('role','<>', 'klient');
+        $pracownicy=DB::table('users')->where('role','<>', 'klient')->paginate(10);
         return view('pracownicy.index', compact('pracownicy'));
     }
 
@@ -47,11 +47,16 @@ class PracownicyController extends Controller
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
             'stanowisko' => 'required|max:45',
-            'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
             'wykorzystany_urlop' => 'required|numeric',
         ]);
+
+        $count1=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '1')->where('czy_kierownik', '=', '1')->count());
+        $count2=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '2')->where('czy_kierownik', '=', '1')->count());
+        $count3=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '3')->where('czy_kierownik', '=', '1')->count());
+        $count4=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '4')->where('czy_kierownik', '=', '1')->count());
+        $count5=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '5')->where('czy_kierownik', '=', '1')->count());
 
         $pracownicy = new User;
         $pracownicy->imie = $request->imie;
@@ -62,6 +67,37 @@ class PracownicyController extends Controller
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $pracownicy->stanowisko = $request->stanowisko;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
+        if($pracownicy->id_wydzialu==1 and $pracownicy->czy_kierownik==1 and $count1>0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==2 and $pracownicy->czy_kierownik==1 and $count2>0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==3 and $pracownicy->czy_kierownik==1 and $count3>0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==4 and $pracownicy->czy_kierownik==1 and $count4>0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==5 and $pracownicy->czy_kierownik==1 and $count5>0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+    
         if($pracownicy->czy_kierownik==1)
         {
             $pracownicy->stanowisko='Kierownik';
@@ -198,12 +234,17 @@ class PracownicyController extends Controller
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
             'stanowisko' => 'required|max:45',
-            'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
             'wykorzystany_urlop' => 'required|numeric',
             'czy_zwolniony' => 'required',
-            ]);
+        ]);
+
+        $count1=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '1')->where('czy_kierownik', '=', '1')->count());
+        $count2=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '2')->where('czy_kierownik', '=', '1')->count());
+        $count3=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '3')->where('czy_kierownik', '=', '1')->count());
+        $count4=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '4')->where('czy_kierownik', '=', '1')->count());
+        $count5=(DB::table('users')->where('role','<>', 'klient')->where('id_wydzialu', '=', '5')->where('czy_kierownik', '=', '1')->count());
 
         $checkx=0;
         $checky=0;
@@ -222,7 +263,39 @@ class PracownicyController extends Controller
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $y=$pracownicy->stanowisko;
         $pracownicy->stanowisko = $request->stanowisko;
+        $sprawdz_czy_kierownik=$pracownicy->czy_kierownik;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
+        if($pracownicy->id_wydzialu==1 and $pracownicy->czy_kierownik==1 and $count1>0 and $sprawdz_czy_kierownik==0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==2 and $pracownicy->czy_kierownik==1 and $count2>0 and $sprawdz_czy_kierownik==0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==3 and $pracownicy->czy_kierownik==1 and $count3>0 and $sprawdz_czy_kierownik==0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==4 and $pracownicy->czy_kierownik==1 and $count4>0 and $sprawdz_czy_kierownik==0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+        elseif($pracownicy->id_wydzialu==5 and $pracownicy->czy_kierownik==1 and $count5>0 and $sprawdz_czy_kierownik==0)
+        {
+            $this->validate($request,[
+                'czy_kierownik' => 'required|unique:users,czy_kierownik',
+            ]);
+        }
+
         if($pracownicy->czy_kierownik==1)
         {
             $pracownicy->stanowisko='Kierownik';
@@ -249,7 +322,7 @@ class PracownicyController extends Controller
                 $pracownicy->id_wydzialu = 6;
                 $pracownicy->czy_kierownik = 0;
                 $pracownicy->stanowisko = '-';
-                $pracownicy->wynagrodzenie_miesieczne =0;
+                $pracownicy->wynagrodzenie_miesieczne = 0;
             }
         }
         elseif($z==1)

@@ -10,7 +10,7 @@ class Magazyn extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nazwa_czesci',
+        'id_czesci',
         'opis',
         'dlugosc',
         'szerokosc',

@@ -104,22 +104,6 @@
                             </div>
                         </div>
 
-
-                        <div class="row mb-3">
-                            <label for="stanowisko" class="col-md-4 col-form-label text-md-end">{{ __('Stanowisko') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="stanowisko" type="text" class="form-control @error('stanowisko') is-invalid @enderror" name="stanowisko" value="{{ old('stanowisko') }}" required autocomplete="stanowisko" autofocus>
-
-                                @error('stanowisko')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
                         <div class="row mb-3">
                             <label for="czy_kierownik" class="col-md-4 col-form-label text-md-end">{{ __('Kierownik?') }}</label>
 
@@ -137,6 +121,19 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="stanowisko" class="col-md-4 col-form-label text-md-end">{{ __('Stanowisko') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="stanowisko" type="text" class="form-control @error('stanowisko') is-invalid @enderror" name="stanowisko" value="{{ old('stanowisko') }}" required autocomplete="stanowisko" autofocus>
+
+                                @error('stanowisko')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="wynagrodzenie_miesieczne" class="col-md-4 col-form-label text-md-end">{{ __('Wynagrodzenie miesięczne (zł)') }}</label>

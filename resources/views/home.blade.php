@@ -47,10 +47,7 @@
                             @endif
                         @endif
                         
-                        @include('flash-message')
-
-
-                        @yield('content')
+                        
 
 
                         {{ __('Zostałeś poprawnie zalogowany!') }}

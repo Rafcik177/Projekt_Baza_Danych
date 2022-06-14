@@ -11,25 +11,25 @@
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Numer zamówienia: ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">
-                                <a href="{{ route('zamadmin.show', $stan->id_zamowienia) }}">{{ __($zam_numer) }}</a>
+                                <a href="{{ route('zamadmin.show', $dbdata->id_zamowienia) }}">{{ __($dbdata->zam_numer) }}</a>
                             </label>
                         </div>
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Nazwa modelu maszyny: ') }}</label>
                             <label for="opis" class="col-md-4 col-form-label text-md-start">
-                                <a href="{{ route('modele.show', $stan->id_modelu) }}">{{ __($model_nazwa) }}</a>
+                                <a href="{{ route('modele.show', $dbdata->id_modelu) }}">{{ __($dbdata->model_nazwa) }}</a>
                             </label>   
                         </div>
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Obecna ilość: ') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($stan->ilosc_obecna) }}</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($dbdata->stan_il_obecna) }}</label>   
                         </div>
 
                         <div class="row mb-3">
                             <label for="opis" class="col-md-4 col-form-label text-md-end">{{ __('Docelowa ilość: ') }}</label>
-                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($stan->ilosc_docelowa) }}</label>   
+                            <label for="opis" class="col-md-4 col-form-label text-md-start">{{ __($dbdata->stan_il_docelowa) }}</label>   
                         </div>
 
 

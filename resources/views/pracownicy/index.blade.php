@@ -42,12 +42,12 @@
                                     <!-- <td class="text-center">{{$pra->email}}</td> -->
                                     <td 
                                     <?php 
-                                    if($pra->id_wydzialu == 1) { ?> class="text-center">Dział administracji<?php } 
-                                    elseif ($pra->id_wydzialu == 2) { ?> class="text-center">Dział zamówień<?php }
-                                    elseif ($pra->id_wydzialu == 3) { ?> class="text-center">Dział HR<?php }
-                                    elseif ($pra->id_wydzialu == 4) { ?> class="text-center">Dział produkcji<?php }
-                                    elseif ($pra->id_wydzialu == 5) { ?> class="text-center">Dział magazyn<?php }
-                                    elseif ($pra->id_wydzialu == 6) { ?> class="text-center">-<?php }
+                                    if($pra->id_wydzialu == 1) { ?> class="text-center"><a href="{{ route('dzialy.show', 1) }}">Dział administracji</a><?php } 
+                                    elseif ($pra->id_wydzialu == 2) { ?> class="text-center"><a href="{{ route('dzialy.show', 2) }}">Dział zamówień</a><?php }
+                                    elseif ($pra->id_wydzialu == 3) { ?> class="text-center"><a href="{{ route('dzialy.show', 3) }}">Dział HR</a><?php }
+                                    elseif ($pra->id_wydzialu == 4) { ?> class="text-center"><a href="{{ route('dzialy.show', 4) }}">Dział produkcji</a><?php }
+                                    elseif ($pra->id_wydzialu == 5) { ?> class="text-center"><a href="{{ route('dzialy.show', 5) }}">Dział magazyn</a><?php }
+                                    elseif ($pra->id_wydzialu == 6) { ?> class="text-center"><a href="{{ route('dzialy.show', 6) }}">-</a><?php }
                                     ?> 
                                     </td>
                                     <!-- <td <?php if($pra->czy_kierownik == 0) { ?> class="text-center">NIE<?php } else { ?> class="text-center">TAK<?php } ?> </td> -->
@@ -78,13 +78,14 @@
                             </tbody>
                         </table>
                     </div>
-                   
+            
                     @if(isset($error))
                     {{$error}}
                     @endif
 
                 </div>
             </div>
+            {{$pracownicy->links()}}
         </div>
     </div>
 </div>
