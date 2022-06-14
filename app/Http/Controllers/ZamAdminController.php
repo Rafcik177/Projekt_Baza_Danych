@@ -29,9 +29,13 @@ class ZamAdminController extends Controller
         ->where('id_zamowienia', '<>', '')
         ->paginate(10);
 
+        $kupujacy=DB::table('users')
+            ->select('imie', 'nazwisko', 'firma', 'email')
+            ->where('id', Auth::user()->id)->first();
+
        
 
-        return view('zamowieniaadmin/index', ['zamadmin' => $zamadmin]);
+        return view('zamowieniaadmin/index', compact('zamadmin','kupujacy'));
     }
 
     public function show($id)
