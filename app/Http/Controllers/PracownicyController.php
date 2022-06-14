@@ -234,7 +234,6 @@ class PracownicyController extends Controller
             'id_wydzialu' => 'required',
             'data_urodzenia' => 'required',
             'stanowisko' => 'required|max:45',
-            'czy_kierownik' => 'required',
             'wynagrodzenie_miesieczne' => 'required|numeric',
             'lata_pracy' => 'required|numeric',
             'wykorzystany_urlop' => 'required|numeric',
@@ -264,32 +263,33 @@ class PracownicyController extends Controller
         $pracownicy->data_urodzenia = $request->data_urodzenia;
         $y=$pracownicy->stanowisko;
         $pracownicy->stanowisko = $request->stanowisko;
+        $sprawdz_czy_kierownik=$pracownicy->czy_kierownik;
         $pracownicy->czy_kierownik = $request->czy_kierownik;
-        if($pracownicy->id_wydzialu==1 and $pracownicy->czy_kierownik==1 and $count1>0)
+        if($pracownicy->id_wydzialu==1 and $pracownicy->czy_kierownik==1 and $count1>0 and $sprawdz_czy_kierownik==0)
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
             ]);
         }
-        elseif($pracownicy->id_wydzialu==2 and $pracownicy->czy_kierownik==1 and $count2>0)
+        elseif($pracownicy->id_wydzialu==2 and $pracownicy->czy_kierownik==1 and $count2>0 and $sprawdz_czy_kierownik==0)
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
             ]);
         }
-        elseif($pracownicy->id_wydzialu==3 and $pracownicy->czy_kierownik==1 and $count3>0)
+        elseif($pracownicy->id_wydzialu==3 and $pracownicy->czy_kierownik==1 and $count3>0 and $sprawdz_czy_kierownik==0)
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
             ]);
         }
-        elseif($pracownicy->id_wydzialu==4 and $pracownicy->czy_kierownik==1 and $count4>0)
+        elseif($pracownicy->id_wydzialu==4 and $pracownicy->czy_kierownik==1 and $count4>0 and $sprawdz_czy_kierownik==0)
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
             ]);
         }
-        elseif($pracownicy->id_wydzialu==5 and $pracownicy->czy_kierownik==1 and $count5>0)
+        elseif($pracownicy->id_wydzialu==5 and $pracownicy->czy_kierownik==1 and $count5>0 and $sprawdz_czy_kierownik==0)
         {
             $this->validate($request,[
                 'czy_kierownik' => 'required|unique:users,czy_kierownik',
