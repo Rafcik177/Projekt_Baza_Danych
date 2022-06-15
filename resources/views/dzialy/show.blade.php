@@ -84,7 +84,7 @@
 
                 </div>
             </div>
-            {{$dzial->links()}}
+            
         </div>
     </div>
 </div>

@@ -16,7 +16,7 @@ class DzialyController extends Controller
      */
     public function index()
     {
-        $dzialy = Dzialy::all();
+        $dzialy = DB::select('SELECT * FROM dzialy');
         return view('dzialy.index', compact('dzialy'));
     }
 
@@ -42,10 +42,7 @@ class DzialyController extends Controller
             'nazwa' => 'required',
         ]);
 
-        $dzialy = new Dzialy;
-        $dzialy->nazwa = $request->nazwa;
-
-        $dzialy->save();
+        DB::statement('INSERT INTO dzialy(nazwa) VALUES (?)', [$request->nazwa]);
 
         return redirect(route('dzialy.index'));
     }
@@ -60,32 +57,32 @@ class DzialyController extends Controller
     {
         if($id==1)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 1')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=1');
             $nazwa='Dział administracji - lista pracowników';
         }
         elseif($id==2)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 2')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=2');
             $nazwa='Dział zamówień - lista pracowników';
         }
         elseif($id==3)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 3')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=3');
             $nazwa='Dział HR - lista pracowników';
         }
         elseif($id==4)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 4')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=4');
             $nazwa='Dział produkcji - lista pracowników';
         }
         elseif($id==5)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 5')->orderby('czy_kierownik', 'DESC')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=5');
             $nazwa='Dział Magazyn - lista pracowników';
         }
         elseif($id==6)
         {
-            $dzial = DB::table('users')->whereRaw('id_wydzialu = 6')->paginate(10);
+            $dzial = DB::select('SELECT * FROM users WHERE id_wydzialu=6');
             $nazwa='Lista pracowników bez przypisanego działu';
         }
 
