@@ -18,7 +18,7 @@ class HistoriaController extends Controller
 
     public function index()
     {
-        $historia=DB::table('users')->select('*')->where('role', '<>', 'klient')->get();
+        $historia = DB::select('SELECT * FROM users WHERE role<>"klient"');
         return view('historia.index', compact('historia'));
     }
 
@@ -48,14 +48,9 @@ class HistoriaController extends Controller
             'stanowisko' => 'required',
         ]);
 
-
-        $historia = new Historia;
-        $historia->id_pracownika = $request->id_pracownika;
-        $historia->data_start = $request->data_start;
-        $historia->data_koniec = $request->data_koniec;
-        $historia->wydzial = $request->wydzial;
-        $historia->stanowisko = $request->stanowisko;
-        $historia->save();
+        DB::statement('INSERT INTO historia(id_pracownika, data_start, data_koniec, wydzial, stanowisko) 
+        VALUES (?,?,?,?,?)', [$request->id_pracownika, $request->data_start, $request->data_koniec,
+        $request->wydzial, $request->stanowisko]);
 
         return redirect(route('historia.index'));
 
@@ -69,8 +64,9 @@ class HistoriaController extends Controller
      */
     public function show($id_pracownika)
     {
-        $historia=DB::table('historia')->select('*')->where('id_pracownika', $id_pracownika)->get();
-        $pracownicy=DB::table('users')->select('*')->where('id', $id_pracownika)->get();
+        $historia = DB::select('SELECT * FROM historia WHERE id_pracownika=?', [$id_pracownika]);
+        $pracownicy = DB::select('SELECT * FROM users WHERE id=?', [$id_pracownika]);
+
         return view('historia.show', compact('historia', 'pracownicy'));
     }
 
