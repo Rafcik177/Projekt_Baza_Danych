@@ -68,6 +68,6 @@
 
             </div>
         </div>
-        {{$magazyn->links()}}
+        
     </div>
     @endsection

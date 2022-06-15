@@ -16,7 +16,7 @@ class MagazynController extends Controller
      */
     public function index()
     {
-        $magazyn=DB::table('magazyn')->paginate(10);
+        $magazyn = DB::select('SELECT * FROM magazyn');
         return view('magazyn.index', compact('magazyn'));
     }
 
@@ -49,17 +49,9 @@ class MagazynController extends Controller
             'prog_niskiego_stanu' => 'required|numeric',
         ]);
 
-        $magazyn = new Magazyn;
-        $magazyn->id_czesci = $request->id_czesci;
-        $magazyn->opis = $request->opis;
-        $magazyn->dlugosc = $request->dlugosc;
-        $magazyn->szerokosc = $request->szerokosc;
-        $magazyn->wysokosc = $request->wysokosc;
-        $magazyn->waga = $request->waga;
-        $magazyn->ilosc = $request->ilosc;
-        $magazyn->prog_niskiego_stanu = $request->prog_niskiego_stanu;
-        $magazyn->zarezerwowano_ilosc = null;
-        $magazyn->save();
+        DB::statement('INSERT INTO magazyn(id_czesci, opis, dlugosc, szerokosc, wysokosc,
+        waga, ilosc, prog_niskiego_stanu, zarezerwowano_ilosc) VALUES (?,?,?,?,?,?,?,?,?)', [$request->id_czesci, $request->opis, $request->dlugosc,
+        $request->szerokosc, $request->wysokosc, $request->waga, $request->ilosc, $request->prog_niskiego_stanu, NULL]);
 
         return redirect(route('magazyn.index'));
     }
@@ -72,9 +64,10 @@ class MagazynController extends Controller
      */
     public function show($id)
     {
-        $magazyn = DB::table('magazyn')->where('id_czesci',$id)->first();
-        $czesci = DB::table('czesci')->where('id',$id)->first();
-        return view('magazyn.show', ['magazyn' => $magazyn, 'czesci'=>$czesci]);
+        $magazyn = DB::select('SELECT * FROM magazyn WHERE id_czesci=?', [$id])[0];
+        $czesci = DB::select('SELECT * FROM czesci WHERE id=?', [$id])[0];
+
+        return view('magazyn.show', compact('magazyn', 'czesci'));
     }
 
     /**
@@ -85,7 +78,7 @@ class MagazynController extends Controller
      */
     public function edit($id)
     {
-        $magazyn = Magazyn::find($id);
+        $magazyn = DB::select('SELECT * FROM magazyn WHERE id=?', [$id])[0];
         return view('magazyn.edit', compact('magazyn'));
     }
 
@@ -99,7 +92,6 @@ class MagazynController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'id_czesci' => 'required|max:45',
             'opis' => 'required|max:45',
             'dlugosc' => 'required|numeric',
             'szerokosc' => 'required|numeric',
@@ -108,17 +100,11 @@ class MagazynController extends Controller
             'ilosc' => 'required|numeric',
             'prog_niskiego_stanu' => 'required|numeric',
             ]);
-            
-        $magazyn = Magazyn::find($id);
-        $magazyn->id_czesci = $request->id_czesci;
-        $magazyn->opis = $request->opis;
-        $magazyn->dlugosc = $request->dlugosc;
-        $magazyn->szerokosc = $request->szerokosc;
-        $magazyn->wysokosc = $request->wysokosc;
-        $magazyn->waga = $request->waga;
-        $magazyn->ilosc = $request->ilosc;
-        $magazyn->prog_niskiego_stanu = $request->prog_niskiego_stanu;
-        $magazyn->save();  
+        
+        DB::statement('UPDATE magazyn SET opis=?, dlugosc=?, szerokosc=?,
+        wysokosc=?, waga=?, ilosc=?, prog_niskiego_stanu=? WHERE id=?', [$request->opis, $request->dlugosc,
+        $request->szerokosc, $request->wysokosc, $request->waga, $request->ilosc, $request->prog_niskiego_stanu, $id]);
+        
         return redirect(route('magazyn.index'));
     }
 
@@ -130,7 +116,7 @@ class MagazynController extends Controller
      */
     public function destroy($id)
     {
-        Magazyn::where('id', $id)->delete();
+        DB::statement('DELETE FROM magazyn WHERE id = ?', [$id]);
         return redirect()->back();
     }
 
