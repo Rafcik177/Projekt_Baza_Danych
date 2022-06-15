@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('odnosnie_id_zamowienia')->nullable();
             $table->foreign('id_zamawiajacego')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_modelu')->references('id')->on('modele')->nullable()->onDelete('cascade');
+            $table->integer('staty')->references('id')->on('statusy')->nullable();
         });
 
     }

@@ -36,12 +36,51 @@ Route::get('/', function () {
 Route::get('/oferta', [OfertaController::class, 'index']);
 Route::resource('/oferta', OfertaController::class);
 
+//Dla magazynu
+
+
+Route::get('/magazyn', [MagazynController::class, 'index']);
+Route::resource('magazyn', MagazynController::class);
+
+Route::get('/pracownicy', [PracownicyController::class, 'index']);
+Route::resource('pracownicy', PracownicyController::class);
+
+Route::get('/produkcja', [ProdukcjaController::class, 'index']);
+Route::resource('produkcja', ProdukcjaController::class);
+
 //Route::get('autocomplete_nr_zam', [ProdukcjaController::class, 'autocomplete_nr_zam'])->name('autocomplete_nr_zam');
 /*Route::get('/autocomplete/nr_zam', function(){
     $col = 'nr_zam';
     return AutocompleteController->$col();
 });*/
 
+Route::controller(AutocompleteController::class)->group(function(){
+    $allowedColNames = ['nr_zam', 'n_model'];
+    foreach($allowedColNames as $col){
+        Route::get('/autocomplete/'.$col, $col);
+    }
+    //Route::get('/autocomplete/nr_zam', 'nr_zam');
+    //Route::get('/autocomplete/n_model', 'n_model');
+});
+
+
+Route::get('/zamowienia', [ZamowieniaKlientController::class, 'index']);
+Route::resource('zamowienia', ZamowieniaKlientController::class);
+
+Route::get('/zamadmin', [ZamAdminController::class, 'wypisz']);
+Route::resource('zamadmin', ZamAdminController::class);
+
+Route::get('/search',[ZamAdminController::class, 'search']);
+
+Route::get('/historia', [HistoriaController::class, 'index']);
+Route::resource('historia', HistoriaController::class);
+
+
+Route::get('/admin', [AdminController::class, 'index']);
+Route::resource('admin', AdminController::class);
+
+Route::get('/modele', [ModeleController::class, 'index']);
+Route::resource('/modele', ModeleController::class);
 Auth::routes();
 
 Route::middleware(['auth', 'verified'])->group(function () {

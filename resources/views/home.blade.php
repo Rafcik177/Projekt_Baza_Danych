@@ -13,8 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        @if (Auth::user()->role == 'dzial_magazyn' or 'admin')
+                        @if (Auth::user()->role == 'dzial_magazyn' || Auth::user()->role == 'admin')
                             @php
                                 $liczba = App\Http\Controllers\NiskiStan::stanczesci();
                             @endphp
@@ -38,12 +37,17 @@
                                     <a href="{{url('zamadmin')}}">Kliknij by wejść w zamówienia !</a>
                                 </div>
 
-                                
-                                
-                            
-
+                                @if (Auth::user()->role == 'admin' )
+                                    <div id="app">
+                                       @include('flash-message')
+                                       
+                                        @yield('content')
+                                    </div>
+                                 @endif
                             @endif
                         @endif
+                        
+                        
 
 
                         {{ __('Zostałeś poprawnie zalogowany!') }}

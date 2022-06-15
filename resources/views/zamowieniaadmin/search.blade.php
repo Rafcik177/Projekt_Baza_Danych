@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
@@ -28,7 +29,7 @@
                                     <th class="text-center">Id Zamawiającego</th>
                                     <th class="text-center">Firma</th>
                                     <th class="text-center">Szczegóły Zamówienia</th>
-                                    <!--<th class="text-center">Edytuj</th> -->
+                                    <th class="text-center">Edytuj</th>
                                     
                             </thead>
                             <tbody >
@@ -38,26 +39,23 @@
                                     <td class="text-center">{{$za->id_zamowienia}}</td> 
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
                                     <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
+                                    
                                     <td class="text-center">
-                                        <form action="insert.php" method="POST">
+                                        <form action="" method="POST">
                                             <select name="status">
                                                 <option value={{$za->status}}> Złożono</option>
                                                 <option value={{$za->status}}> Anulowane - klient</option>
                                                 <option value={{$za->status}}> Anulowane - NZTK</option>
                                                 <option value={{$za->status}}> Produkcja</option>
                                                 <option value={{$za->status}}> Gotowe</option>
-                                                <option value={{$za->status}}> Usunięto</option> 
-                                                <input type="submit" value="Zapisz">
+                                                <option value={{$za->status}}> Usunięto</option>
                                             </select>
-                                            
                                         </form>    
                                     </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>
                                     <td class="text-center">{{$kupujacy->firma}}</td>
-                                    
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
-                                    <!-- <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td> -->
-                                    
+                                    <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td>
                                     
                                 </tr>
                                 @endforeach
@@ -75,4 +73,4 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection

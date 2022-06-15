@@ -47,7 +47,8 @@
                 <table class="table table-striped">
                     <div class="card-header">Razem:</div>
                     <tbody>
-                        <td class="text-center">Łączna cena: {{number_format((int)$laczna_cena,0,"."," ")}} zł</td>
+                        <!--<td class="text-center">Łączna cena: number_format((int)$laczna_cena,0,"."," ") zł</td>-->
+                        <td class="text-center">Łączna cena: {{$laczna_cena}} zł</td>
                         <td class="text-center">Status: {{$g->status}}</td>
                         <td class="text-center">Data złożenia: {{$g->data_zlozenia}}</td>
                     </tbody>

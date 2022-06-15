@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('UWAGA - Niski stan części w nsazynie') }} </div>
+                <div class="card-header">{{ __('UWAGA - Niski stan części w niskistanazynie') }} </div>
                 <div class="row text center">
-                    <div class="table-responsive">
+                    <div class="table-responiskistanive">
                         <style>
                             td{border:0.5px solid black;}
                         </style>
@@ -16,6 +16,7 @@
                             <thead>
                                 <tr class="bg-danger">
                                     <th class="text-center">Lp.</th>
+                                    <th class="text-center">Nazwa części</th>
                                     <th class="text-center">Id części</th>
                                     <th class="text-center">Ilość</th>
                                     <th class="text-center">Próg niskiego stanu</th>
@@ -23,7 +24,8 @@
                             <tbody>
                                 @foreach($niskistan as $ns)
                                 <tr class="table-danger">
-                                    <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$ns->id}}</td> -->
+                                    <td class="text-center">{{ $loop->index + 1 }}</td> <!-- <td class="text-center"> {{$ns->id}}</td> --> 
+                                    <td class="text-center">{{$ns->opis}}</td>
                                     <td class="text-center">{{$ns->id_czesci}}</td> 
                                     <td class="text-center">{{$ns->ilosc}}</td>
                                     <td class="text-center">{{$ns->prog_niskiego_stanu}}</td>
