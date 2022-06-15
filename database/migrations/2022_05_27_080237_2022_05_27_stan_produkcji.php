@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('stanprodukcji', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_zamowienia')->references('id')->on('zamowienia');
-            $table->integer('id_modelu')->references('id')->on('modele');
+            $table->unsignedBigInteger('id_zamowienia');
+            $table->unsignedBigInteger('id_modelu');
             $table->integer('ilosc_obecna')->default(0);
             $table->integer('ilosc_docelowa');
+            $table->foreign('id_zamowienia')->references('id')->on('zamowienia')->onDelete('cascade');
+            $table->foreign('id_modelu')->references('id')->on('modele')->onDelete('cascade');
         });
     }
 
