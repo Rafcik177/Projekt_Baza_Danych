@@ -18,22 +18,26 @@ class ZamAdminController extends Controller
     
     public static function zamowieniaadmin()
     {
-        $glowne = DB::table('zamowienia')->whereRaw('id_zamowienia > 0 ')->count();
+        //$glowne = DB::table('zamowienia')->whereRaw('id_zamowienia > 0 ')->count();
+        $glowne = DB::select('SELECT * FROM zamowienia WHERE id_zamowienia > 0');
         return $glowne;
     }
 
     public function index()
     {
-        $zamadmin = DB::table('zamowienia AS zz')
-        ->select("id_zamawiajacego","status", "data_zlozenia", "id_zamowienia", DB::raw('(SELECT  sum(ilosc*cena_pojedyncza) FROM `zamowienia` AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena'))
-        ->where('id_zamowienia', '<>', '')
-        ->paginate(10);
+       // $zamadmin = DB::table('zamowienia AS zz')
+       // ->select("id_zamawiajacego","status", "data_zlozenia", "id_zamowienia", DB::raw('(SELECT  sum(ilosc*cena_pojedyncza) FROM `zamowienia` AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena'))
+       //->where('id_zamowienia', '<>', '')
+       //->get();
 
-        $kupujacy=DB::table('users')
-            ->select('imie', 'nazwisko', 'firma', 'email')
-            ->where('id', Auth::user()->id)->first();
 
-       
+        $zamadmin = DB::select ('SELECT *, (SELECT  sum(ilosc*cena_pojedyncza) FROM zamowienia AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena FROM zamowienia as zz WHERE id_zamowienia!=0 GROUP BY id, id_zamawiajacego, id_zamowienia, id_modelu, nazwa_modelu, ilosc, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia, staty');
+
+        //$kupujacy=DB::table('users')
+           // ->select('imie', 'nazwisko', 'firma', 'email')
+            //->where('id', Auth::user()->id)->first();
+
+        $kupujacy=DB::select ('SELECT imie, nazwisko, firma, email FROM users WHERE id=?', [Auth::user()->id]) [0];
 
         return view('zamowieniaadmin/index', compact('zamadmin','kupujacy'));
     }
@@ -41,28 +45,34 @@ class ZamAdminController extends Controller
     public function show($id)
     {
         $glowne = DB::table('zamowienia')->where('id_zamowienia', '=', $id)->get();
+        //$glowne = DB::select('SELECT * FROM zamowienia WHERE id_zamowienia =?',[$id]);
         if ($glowne->isEmpty()) {
            
             return redirect()->action([ZamAdminController::class, 'wypisz']);
          }
          else
          {
-            $pokaz = DB::table('zamowienia')
-            ->select('id_modelu','nazwa_modelu','ilosc','cena_pojedyncza', DB::raw('ilosc*cena_pojedyncza as laczna_cena',)) 
-            ->where('id_zamawiajacego', Auth::user()->id)
-            ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
+            //$pokaz = DB::table('zamowienia')
+            //->select('id_modelu','nazwa_modelu','ilosc','cena_pojedyncza', DB::raw('ilosc*cena_pojedyncza as laczna_cena',)) 
+            //->where('id_zamawiajacego', Auth::user()->id)
+            //->where('odnosnie_id_zamowienia', '=', $id)->get();
 
-            $laczna_cena=DB::table('zamowienia')
-            ->where('id_zamawiajacego', Auth::user()->id)
-            ->where('odnosnie_id_zamowienia', $id)
-            ->sum(DB::raw('ilosc*cena_pojedyncza'));
+            $pokaz = DB::select('SELECT *, SUM(ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? GROUP BY id, id_zamawiajacego, id_zamowienia, id_modelu, nazwa_modelu, ilosc, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia, staty',[Auth::user()->id,$id]);
+
+            //$laczna_cena=DB::table('zamowienia')
+            //->where('id_zamawiajacego', Auth::user()->id)
+            //->where('odnosnie_id_zamowienia', $id)
+            //->sum(DB::raw('ilosc*cena_pojedyncza'));
+
+            //DO POPRAWIENIA BO POKAZUJE 1ZL PRZY ŁĄCZNEJ CENIE 
+            $laczna_cena=DB::select('SELECT id_zamawiajacego, odnosnie_id_zamowienia, SUM(ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? GROUP BY id_zamawiajacego, odnosnie_id_zamowienia',[Auth::user()->id,$id]);
             
-            $kupujacy=DB::table('users')
-            ->select('imie', 'nazwisko', 'firma', 'email')
-            ->where('id', Auth::user()->id)->first();
+           //$kupujacy=DB::table('users')
+            //->select('imie', 'nazwisko', 'firma', 'email')
+            //->where('id', Auth::user()->id)->first();
 
+            $kupujacy=DB::select ('SELECT imie, nazwisko, firma, email FROM users WHERE id=?', [Auth::user()->id]) [0];
 
-            
             return view('zamowieniaadmin/show', compact('pokaz', 'id','glowne','laczna_cena', 'kupujacy'));
          }
         
@@ -78,22 +88,32 @@ class ZamAdminController extends Controller
         ->where('id_zamowienia','LIKE', '%'.$search_text.'%')
         ->get();
 
-        return view('zamowieniaadmin/search', compact('zamadmin'));
+        //nie mam pojecia jak wsadzic "LIKE z wpisywanymi danymi"
+        //$zamadmin = DB::select ('SELECT *, (SELECT  sum(ilosc*cena_pojedyncza) FROM zamowienia AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena FROM zamowienia as zz WHERE id_zamowienia!=0 GROUP BY id, id_zamawiajacego, id_zamowienia, id_modelu, nazwa_modelu, ilosc, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia, staty');
+        //->where('id_zamowienia','LIKE', '%'.$search_text.'%')
+        //->get();
+
+        $kupujacy=DB::select ('SELECT imie, nazwisko, firma, email FROM users WHERE id=?', [Auth::user()->id]) [0];
+
+        return view('zamowieniaadmin/search', compact('zamadmin','kupujacy'));
 
     }
     
     public function edit($id)
     {
         
-        $edycja = DB::table('zamowienia')
-        ->select('id_modelu','nazwa_modelu','cena_pojedyncza','id','ilosc')
-        ->where('id_zamawiajacego', Auth::user()->id)
-        ->where('odnosnie_id_zamowienia', '=', $id)->get() ;
+        //$edycja = DB::table('zamowienia')
+        //->select('id_modelu','nazwa_modelu','cena_pojedyncza','id','ilosc')
+        //->where('id_zamawiajacego', Auth::user()->id)
+        //->where('odnosnie_id_zamowienia', '=', $id)->get();
+
+        $edycja = DB::select('SELECT * FROM zamowienia where id_zamawiajacego=? AND odnosnie_id_zamowienia=?',[Auth::user()->id,$id]);
         if ($edycja === null) {
             $error="Nie ma takiego zamówienia";
             return redirect()->action([ZamowieniaKlientController::class, 'index']);
          }
-        $g_data = DB::table('zamowienia')->where('id_zamowienia', $id)->first();
+        //$g_data = DB::table('zamowienia')->where('id_zamowienia', $id)->first();
+        $g_data = DB::select('SELECT * FROM zamowienia WHERE id_zamowienia=?',[$id])[0];
         $data=$g_data->data_zlozenia;
         
         $nowa=new \DateTime();
@@ -107,6 +127,3 @@ class ZamAdminController extends Controller
     }
 
 }
-
-
-

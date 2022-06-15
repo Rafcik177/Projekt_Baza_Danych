@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Notifications\TestStanu;
+use App\Controllers\Auth;
 use DB;
 
 
@@ -31,13 +32,19 @@ class NiskiStan extends Controller
 
     public static function stanczesci()
     {
-        $glowne = DB::table('magazyn')->whereRaw('ilosc <= prog_niskiego_stanu')->count();
+        //$glowne = DB::table('magazyn')->whereRaw('ilosc <= prog_niskiego_stanu')->count();
+        //return $glowne;
+
+        $glowne = DB::select ('SELECT ilosc, prog_niskiego_stanu FROM magazyn WHERE ilosc <= prog_niskiego_stanu');
         return $glowne;
     }
 
     public function wypisz()
     {
-        $niskistan = DB::table('magazyn')->whereRaw('ilosc <= prog_niskiego_stanu')->get();
-        return view('magazyn/niskistan', ['niskistan'=>$niskistan]);
+        //$niskistan = DB::table('magazyn')->whereRaw('ilosc <= prog_niskiego_stanu')->get();
+        //return view('magazyn/niskistan', compact('niskistan'));
+
+        $niskistan = DB::select('SELECT ilosc, prog_niskiego_stanu, id_czesci, opis, id FROM magazyn WHERE ilosc <= prog_niskiego_stanu');
+        return view('magazyn/niskistan', compact('niskistan'));
     }
 }

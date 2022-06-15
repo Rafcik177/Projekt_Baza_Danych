@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-12">
             <div class="card">
-                <div class="card-header">{{ __('UWAGA - Niski stan części w nsazynie') }} </div>
+                <div class="card-header">{{ __('UWAGA - Niski stan części w niskistanazynie') }} </div>
                 <div class="row text center">
-                    <div class="table-responsive">
+                    <div class="table-responiskistanive">
                         <style>
                             td{border:0.5px solid black;}
                         </style>
