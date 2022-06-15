@@ -37,7 +37,7 @@
                                 @endif
 
                             </td>
-                            <td class="text-center">
+                             <td class="text-center">
                                 <form action="{{ route('zamowienia.destroy', $zam->id_zamowienia) }}" method="post" id="delete-form-{{$zam->id_zamowienia}}" style="display: none;">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
@@ -51,6 +51,7 @@
                                         }">
                                     Usuń
                                 </a>
+                            
 
                             </td>
                             <td class="text-center"><a href="{{ route('zamowienia.show', $zam->id_zamowienia) }}">Pokaż</a></td>

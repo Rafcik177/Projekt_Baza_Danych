@@ -28,7 +28,7 @@
                                     <th class="text-center">Id Zamawiającego</th>
                                     <th class="text-center">Firma</th>
                                     <th class="text-center">Szczegóły Zamówienia</th>
-                                    <th class="text-center">Edytuj</th>
+                                    <!--<th class="text-center">Edytuj</th> -->
                                     
                             </thead>
                             <tbody >
@@ -47,7 +47,7 @@
                                                 <option value={{$za->status}}> Produkcja</option>
                                                 <option value={{$za->status}}> Gotowe</option>
                                                 <option value={{$za->status}}> Usunięto</option> 
-                                                <input type="submit" value="Submit">
+                                                <input type="submit" value="Zapisz">
                                             </select>
                                             
                                         </form>    
@@ -56,7 +56,8 @@
                                     <td class="text-center">{{$kupujacy->firma}}</td>
                                     
                                     <td class="text-center"><a href="{{route('zamadmin.show', $za->id_zamowienia) }}">Pokaż</a></td>
-                                    <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td>
+                                    <!-- <td class="text-center"><a href="{{ route('zamadmin.edit', $za->id_zamowienia) }}">Edytuj</a></td> -->
+                                    
                                     
                                 </tr>
                                 @endforeach
