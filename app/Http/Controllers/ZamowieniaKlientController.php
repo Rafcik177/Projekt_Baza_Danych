@@ -37,7 +37,8 @@ class ZamowieniaKlientController extends Controller
      */
     public function create()
     {
-        $modele = DB::table('modele')->orderBy('kategoria')->paginate(30);
+        //$modele = DB::table('modele')->orderBy('kategoria')->paginate(30);
+        $modele=DB::select('SELECT * FROM modele ORDER BY kategoria');
         return view('/zamowieniaKlient/dodajZamowienie', ['modele' => $modele]);
     }
     
@@ -67,6 +68,7 @@ class ZamowieniaKlientController extends Controller
             $zamowienie->data_zlozenia= $datatime;
             $zamowienie->realizacja= 0;
             $model = DB::table('modele')->where('id', $request->pojazd[$i])->first();
+
             $zamowienie->nazwa_modelu= $model->nazwa;
             $cenapojazdu=$model->cena;
             $zamowienie->cena_pojedyncza= $cenapojazdu;
