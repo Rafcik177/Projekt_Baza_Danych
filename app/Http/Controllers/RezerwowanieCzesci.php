@@ -10,12 +10,14 @@ class RezerwowanieCzesci extends Controller
     public static function wyliczanie_ilosci_modeli($id_modelu)
     {
         $max_ilosc_modeli = array();
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $pobierz_liczbe_czesci=DB::select("Select * from czesci WHERE id_modelu=$id_modelu");
+        //$pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
         $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
         if ($policz_wszystkie_czesci_do_modelu > 0) {
             foreach ($pobierz_liczbe_czesci as $czesc) {
 
                 $zapytaj = DB::table('magazyn')->where('id_czesci', '=', $czesc->id)->first();
+                
                 $max_ilosc_modeli[] = (int)((($zapytaj->ilosc) - ($zapytaj->zarezerwowano_ilosc)) / $czesc->ilosc_do_wykonania);
             }
             //print_r($max_ilosc_modeli);
@@ -46,7 +48,8 @@ class RezerwowanieCzesci extends Controller
     public static function wyliczanie_ilosci_modeli_edycja($id_modelu, $ilosc)
     {
         $max_ilosc_modeli = array();
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $pobierz_liczbe_czesci=DB::select("Select * from czesci WHERE id_modelu=$id_modelu");
+       
         $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
         if ($policz_wszystkie_czesci_do_modelu > 0) {
             foreach ($pobierz_liczbe_czesci as $czesc) {
@@ -65,7 +68,8 @@ class RezerwowanieCzesci extends Controller
 
     public static function zarezerwuj_czesci_do_modelu($id_modelu, $liczba_modeli)
     {
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        //$pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $pobierz_liczbe_czesci=DB::select("Select * from czesci WHERE id_modelu=$id_modelu");
         $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
         if ($policz_wszystkie_czesci_do_modelu > 0) {
             foreach ($pobierz_liczbe_czesci as $czesc) {
@@ -81,7 +85,8 @@ class RezerwowanieCzesci extends Controller
     public static function zarezerwuj_czesci_do_modelu_edycja($id_modelu, $liczba_modeli, $id_zam)
     {
         $ilosc_obecna = DB::table('zamowienia')->where('id', '=', $id_zam)->first();
-        $pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        //$pobierz_liczbe_czesci = DB::table('czesci')->where('id_modelu', $id_modelu)->get();
+        $pobierz_liczbe_czesci=DB::select("Select * from czesci WHERE id_modelu=$id_modelu");
         $policz_wszystkie_czesci_do_modelu = count($pobierz_liczbe_czesci);
         if ($policz_wszystkie_czesci_do_modelu > 0) {
             foreach ($pobierz_liczbe_czesci as $czesc) {
