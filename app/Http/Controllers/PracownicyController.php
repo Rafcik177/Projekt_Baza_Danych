@@ -17,7 +17,7 @@ class PracownicyController extends Controller
 
     public function index()
     {
-        $pracownicy=DB::table('users')->where('role','<>', 'klient')->paginate(10);
+        $pracownicy = DB::select('SELECT * FROM users WHERE role<>"klient"');
         return view('pracownicy.index', compact('pracownicy'));
     }
 
@@ -453,7 +453,7 @@ class PracownicyController extends Controller
      */
     public function destroy($id)
     {
-        User::where('id', $id)->delete();
+        DB::statement('DELETE FROM users WHERE id = ?', [$id]);
         return redirect()->back();
     }
 }
