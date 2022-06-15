@@ -39,15 +39,17 @@
                                     <td class="text-center">{{$za->data_zlozenia}}</td>
                                     <td class="text-center">{{number_format((int)$za->cena,0,"."," ")}} zł</td>
                                     <td class="text-center">
-                                        <form action="" method="POST">
+                                        <form action="insert.php" method="POST">
                                             <select name="status">
                                                 <option value={{$za->status}}> Złożono</option>
                                                 <option value={{$za->status}}> Anulowane - klient</option>
                                                 <option value={{$za->status}}> Anulowane - NZTK</option>
                                                 <option value={{$za->status}}> Produkcja</option>
                                                 <option value={{$za->status}}> Gotowe</option>
-                                                <option value={{$za->status}}> Usunięto</option>
+                                                <option value={{$za->status}}> Usunięto</option> 
+                                                <input type="submit" value="Submit">
                                             </select>
+                                            
                                         </form>    
                                     </td>
                                     <td class="text-center">{{$za->id_zamawiajacego}}</td>

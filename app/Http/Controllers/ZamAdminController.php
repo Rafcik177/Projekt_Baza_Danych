@@ -44,9 +44,9 @@ class ZamAdminController extends Controller
 
     public function show($id)
     {
-        $glowne = DB::table('zamowienia')->where('id_zamowienia', '=', $id)->get();
-        //$glowne = DB::select('SELECT * FROM zamowienia WHERE id_zamowienia =?',[$id]);
-        if ($glowne->isEmpty()) {
+        //$glowne = DB::table('zamowienia')->where('id_zamowienia', '=', $id)->get();
+        $glowne = DB::select('SELECT * FROM zamowienia WHERE id_zamowienia =?',[$id]);
+        if (count($glowne)==0) {
            
             return redirect()->action([ZamAdminController::class, 'wypisz']);
          }
@@ -57,16 +57,16 @@ class ZamAdminController extends Controller
             //->where('id_zamawiajacego', Auth::user()->id)
             //->where('odnosnie_id_zamowienia', '=', $id)->get();
 
-            $pokaz = DB::select('SELECT *, SUM(ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? GROUP BY id, id_zamawiajacego, id_zamowienia, id_modelu, nazwa_modelu, ilosc, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia, staty',[Auth::user()->id,$id]);
+            $pokaz = DB::select('SELECT *, (ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? ',[Auth::user()->id,$id]);
 
             //$laczna_cena=DB::table('zamowienia')
             //->where('id_zamawiajacego', Auth::user()->id)
             //->where('odnosnie_id_zamowienia', $id)
-            //->sum(DB::raw('ilosc*cena_pojedyncza'));
+           // ->sum(DB::raw('ilosc*cena_pojedyncza'));
 
             //DO POPRAWIENIA BO POKAZUJE 1ZL PRZY ŁĄCZNEJ CENIE 
-            $laczna_cena=DB::select('SELECT id_zamawiajacego, odnosnie_id_zamowienia, SUM(ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? GROUP BY id_zamawiajacego, odnosnie_id_zamowienia',[Auth::user()->id,$id]);
-            
+           // $laczna_cena=DB::select('SELECT id_zamawiajacego, odnosnie_id_zamowienia, (ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=?',[Auth::user()->id,$id]);
+            $laczna_cena = DB::select('SELECT SUM(ilosc*cena_pojedyncza) AS laczna_cena FROM zamowienia WHERE id_zamawiajacego=? AND odnosnie_id_zamowienia=? ',[Auth::user()->id,$id])[0]->laczna_cena;
            //$kupujacy=DB::table('users')
             //->select('imie', 'nazwisko', 'firma', 'email')
             //->where('id', Auth::user()->id)->first();
@@ -89,7 +89,7 @@ class ZamAdminController extends Controller
         ->get();
 
         //nie mam pojecia jak wsadzic "LIKE z wpisywanymi danymi"
-        //$zamadmin = DB::select ('SELECT *, (SELECT  sum(ilosc*cena_pojedyncza) FROM zamowienia AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena FROM zamowienia as zz WHERE id_zamowienia!=0 GROUP BY id, id_zamawiajacego, id_zamowienia, id_modelu, nazwa_modelu, ilosc, status, data_zlozenia, realizacja, cena_pojedyncza, odnosnie_id_zamowienia, staty');
+        //$zamadmin = DB::select ('SELECT *, (SELECT  sum(ilosc*cena_pojedyncza) FROM zamowienia AS aa WHERE zz.id_zamowienia=aa.odnosnie_id_zamowienia) as cena FROM zamowienia as zz WHERE id_zamowienia!=0 AND id_zamowienia LIKE "%?%"',[$search_text]);
         //->where('id_zamowienia','LIKE', '%'.$search_text.'%')
         //->get();
 
