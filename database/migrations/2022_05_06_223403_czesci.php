@@ -17,8 +17,9 @@ return new class extends Migration
         Schema::create('czesci', function (Blueprint $table) {
             $table->id();
             $table->string('nazwa_czesci');
-            $table->integer('id_modelu')->references('id')->on('modele');
+            $table->unsignedBigInteger('id_modelu');
             $table->string('ilosc_do_wykonania');
+            $table->foreign('id_modelu')->references('id')->on('modele')->onDelete('cascade');
         });
 
         //Theoretical insertions

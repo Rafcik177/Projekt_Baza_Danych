@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('zamowienia', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_zamawiajacego')->references('id')->on('users');
+            $table->unsignedBigInteger('id_zamawiajacego');
             $table->string('id_zamowienia')->nullable();
-            $table->integer('id_modelu')->references('id')->on('modele')->nullable();
+            $table->unsignedBigInteger('id_modelu');
             $table->string('nazwa_modelu')->nullable();
             $table->integer('ilosc')->nullable();
             $table->enum('status', ["Złożono", "Anulowano-klient","Anulowano-NZTK", "Produkcja", "Gotowe", "Usunięto"])->nullable();
@@ -25,6 +25,8 @@ return new class extends Migration
             $table->boolean('realizacja')->nullable();
             $table->string('cena_pojedyncza')->nullable();
             $table->string('odnosnie_id_zamowienia')->nullable();
+            $table->foreign('id_zamawiajacego')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_modelu')->references('id')->on('modele')->nullable()->onDelete('cascade');
         });
 
     }
