@@ -16,7 +16,7 @@ class UrlopyController extends Controller
      */
     public function index()
     {
-        $urlopy = Urlopy::all();
+        $urlopy = DB::select('SELECT * FROM urlopy');
         return view('urlopy.index', compact('urlopy'));
     }
 
@@ -45,12 +45,9 @@ class UrlopyController extends Controller
             'dni_max' => 'required',
         ]);
 
-        $urlopy = new Urlopy;
-        $urlopy->id_pracownika = $request->id_pracownika;
-        $urlopy->rok = $request->rok;
-        $urlopy->dni_wykorzystane = $request->dni_wykorzystane;
-        $urlopy->dni_max = $request->dni_max;
-        $urlopy->save();
+        DB::statement('INSERT INTO urlopy(id_pracownika, rok, dni_wykorzystane, dni_max) 
+        VALUES (?,?,?,?)', [$request->id_pracownika, $request->rok, $request->dni_wykorzystane,
+        $request->dni_max]);
 
         return redirect(route('pracownicy.index'));
     }
@@ -63,8 +60,9 @@ class UrlopyController extends Controller
      */
     public function show($id_pracownika)
     {
-        $urlopy=DB::table('urlopy')->select('*')->where('id_pracownika', $id_pracownika)->get();
-        $pracownicy=DB::table('users')->select('*')->where('id', $id_pracownika)->get();
+        $urlopy = DB::select('SELECT * FROM urlopy WHERE id_pracownika=?', [$id_pracownika]);
+        $pracownicy = DB::select('SELECT * FROM users WHERE id=?', [$id_pracownika]);
+
         return view('urlopy.show', compact('urlopy', 'pracownicy'));
     }
 
@@ -76,7 +74,7 @@ class UrlopyController extends Controller
      */
     public function edit($id)
     {
-        $urlopy = Urlopy::find($id);
+        $urlopy = DB::select('SELECT * FROM urlopy WHERE id=?', [$id])[0];
         return view('urlopy.edit', compact('urlopy'));
     }
 
@@ -90,20 +88,16 @@ class UrlopyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'id_pracownika' => 'required',
-            'rok' => 'required',
             'dni_wykorzystane' => 'required',
             'dni_max' => 'required',
             ]);
 
+        DB::statement('UPDATE urlopy SET dni_wykorzystane=?, dni_max=?
+        WHERE id=?', [$request->dni_wykorzystane, $request->dni_max, $id]);
+
         $urlopy = Urlopy::find($id);
-        $urlopy->id_pracownika = $request->id_pracownika;
-        $urlopy->rok = $request->rok;
-        $urlopy->dni_wykorzystane = $request->dni_wykorzystane;
-        $urlopy->dni_max = $request->dni_max;
         $urlopy->save();  
 
-        //return redirect(route('urlopy.index'));
         return redirect(route('urlopy.show', $urlopy->id_pracownika));
     }
 
@@ -115,7 +109,7 @@ class UrlopyController extends Controller
      */
     public function destroy($id)
     {
-        Urlopy::where('id', $id)->delete();
+        DB::statement('DELETE FROM urlopy WHERE id = ?', [$id]);
         return redirect()->back();
     }
 }

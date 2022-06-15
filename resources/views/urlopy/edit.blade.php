@@ -12,7 +12,7 @@
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
 
-                        <div class="row mb-3">
+                        <!--<div class="row mb-3">
                             <label for="id_pracownika" class="col-md-4 col-form-label text-md-end">{{ __('ID pracownika') }}</label>
 
                             <div class="col-md-6">
@@ -24,10 +24,10 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div>-->
 
 
-                        <div class="row mb-3">
+                        <!--<div class="row mb-3">
                             <label for="rok" class="col-md-4 col-form-label text-md-end">{{ __('Rok') }}</label>
 
                             <div class="col-md-6">
@@ -39,7 +39,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div>-->
 
 
                         <div class="row mb-3">
